@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "icarus",
+  "version": "${version}",
+  "name": "Icarus",
+  "description": "Adds a pair of wings. Yeah.",
+  "authors": [
+    "Cammie"
+  ],
+  "contact": {
+    "repo": "https://github.com/CammiePone/Icarus"
+  },
+  "license": "MIT",
+  "icon": "assets/icarus/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.camscorner.icarus.client.IcarusClient"
+    ],
+    "main": [
+      "com.camscorner.icarus.Icarus"
+    ]
+  },
+  "mixins": [
+    "icarus.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.10.8",
+    "fabric": "*",
+    "minecraft": "1.16.4"
+  }
+}
