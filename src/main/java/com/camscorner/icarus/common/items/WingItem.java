@@ -19,7 +19,6 @@ import java.util.UUID;
 
 public class WingItem extends TrinketItem
 {
-	private final EntityAttributeModifier FLIGHT_MODIFIER = new EntityAttributeModifier(UUID.fromString("7d9704a0-383f-11eb-adc1-0242ac120002"), "Flight", 1, EntityAttributeModifier.Operation.ADDITION);
 	private Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 	private ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
 	private double speed;
@@ -33,7 +32,8 @@ public class WingItem extends TrinketItem
 	public WingItem(double speed, double acceleration)
 	{
 		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1));
-		this.builder.put(CaelusApi.ELYTRA_FLIGHT, FLIGHT_MODIFIER);
+		this.builder.put(CaelusApi.ELYTRA_FLIGHT, new EntityAttributeModifier(UUID.fromString("7d9704a0-383f-11eb-adc1-0242ac120002"),
+				"Flight", 1, EntityAttributeModifier.Operation.ADDITION));
 		this.attributeModifiers = this.builder.build();
 		this.speed = speed;
 		this.acceleration = acceleration;
@@ -52,10 +52,10 @@ public class WingItem extends TrinketItem
 		}
 		else
 		{
-			if(player.isOnGround())
+			if(player.isOnGround() || player.isTouchingWater())
 				shouldSlowfall = false;
 
-			if(!shouldSlowfall)
+			if(shouldSlowfall)
 			{
 				player.fallDistance = 0F;
 				player.setVelocity(player.getVelocity().x, -0.4, player.getVelocity().z);
