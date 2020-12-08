@@ -4,6 +4,7 @@ import com.camscorner.icarus.core.registry.ModItems;
 import com.camscorner.icarus.core.util.CameraSystem;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -17,7 +18,9 @@ public class Icarus implements ModInitializer
 	@Override
 	public void onInitialize()
 	{
-		cameraSystem = new CameraSystem();
+		if(!FabricLoader.getInstance().isModLoaded("cameraoverhaul"))
+			cameraSystem = new CameraSystem();
+
 		ModItems.register();
 	}
 }
