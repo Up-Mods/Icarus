@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values":
+  [
+    "icarus:white_light_wings",
+    "icarus:orange_light_wings",
+    "icarus:magenta_light_wings",
+    "icarus:light_blue_light_wings",
+    "icarus:yellow_light_wings",
+    "icarus:lime_light_wings",
+    "icarus:pink_light_wings",
+    "icarus:grey_light_wings",
+    "icarus:light_grey_light_wings",
+    "icarus:cyan_light_wings",
+    "icarus:purple_light_wings",
+    "icarus:blue_light_wings",
+    "icarus:brown_light_wings",
+    "icarus:green_light_wings",
+    "icarus:red_light_wings",
+    "icarus:black_light_wings"
+  ]
+}

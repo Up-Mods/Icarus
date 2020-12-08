@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "tag": "icarus:mechanical_feathered_wings"
+    },
+    {
+      "tag": "c:purple_dyes"
+    }
+  ],
+  "result":
+  {
+    "item": "icarus:purple_mechanical_feathered_wings"
+  }
+}

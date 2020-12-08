@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values":
+  [
+    "icarus:white_dragon_wings",
+    "icarus:orange_dragon_wings",
+    "icarus:magenta_dragon_wings",
+    "icarus:light_blue_dragon_wings",
+    "icarus:yellow_dragon_wings",
+    "icarus:lime_dragon_wings",
+    "icarus:pink_dragon_wings",
+    "icarus:grey_dragon_wings",
+    "icarus:light_grey_dragon_wings",
+    "icarus:cyan_dragon_wings",
+    "icarus:purple_dragon_wings",
+    "icarus:blue_dragon_wings",
+    "icarus:brown_dragon_wings",
+    "icarus:green_dragon_wings",
+    "icarus:red_dragon_wings",
+    "icarus:black_dragon_wings"
+  ]
+}

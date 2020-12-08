@@ -21,13 +21,20 @@ public class WingItem extends TrinketItem
 {
 	private Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 	private ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-	private double speed;
-	private double acceleration;
 	private boolean shouldSlowfall;
 
 	/**
-	 * @param speed The speed the wings allow the player to travel at. Recommended: 0.05D.
-	 * @param acceleration The speed at which the player will accelerate. Also controls turn radius. Recommended 0.05D.
+	 * The speed the wings allow the player to travel at. Default: 0.05D.
+	 */
+	private double speed;
+	/**
+	 * The speed at which the player will accelerate. Also controls turn radius. Default 0.05D.
+	 */
+	private double acceleration;
+
+	/**
+	 * @param speed The speed the wings allow the player to travel at. Default: 0.05D.
+	 * @param acceleration The speed at which the player will accelerate. Also controls turn radius. Default 0.05D.
 	 */
 	public WingItem(double speed, double acceleration)
 	{
@@ -37,6 +44,19 @@ public class WingItem extends TrinketItem
 		this.attributeModifiers = this.builder.build();
 		this.speed = speed;
 		this.acceleration = acceleration;
+	}
+
+	/**
+	 * The default constructor. It sets {@link WingItem#speed} and {@link WingItem#acceleration} to 0.05D.
+	 */
+	public WingItem()
+	{
+		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1));
+		this.builder.put(CaelusApi.ELYTRA_FLIGHT, new EntityAttributeModifier(UUID.fromString("7d9704a0-383f-11eb-adc1-0242ac120002"),
+				"Flight", 1, EntityAttributeModifier.Operation.ADDITION));
+		this.attributeModifiers = this.builder.build();
+		this.speed = 0.05D;
+		this.acceleration = 0.05D;
 	}
 
 	@Override

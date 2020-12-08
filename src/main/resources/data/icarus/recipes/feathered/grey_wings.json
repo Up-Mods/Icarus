@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "tag": "icarus:feathered_wings"
+    },
+    {
+      "tag": "c:gray_dyes"
+    }
+  ],
+  "result":
+  {
+    "item": "icarus:grey_feathered_wings"
+  }
+}

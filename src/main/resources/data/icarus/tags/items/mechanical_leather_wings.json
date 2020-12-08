@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values":
+  [
+    "icarus:white_mechanical_leather_wings",
+    "icarus:orange_mechanical_leather_wings",
+    "icarus:magenta_mechanical_leather_wings",
+    "icarus:light_blue_mechanical_leather_wings",
+    "icarus:yellow_mechanical_leather_wings",
+    "icarus:lime_mechanical_leather_wings",
+    "icarus:pink_mechanical_leather_wings",
+    "icarus:grey_mechanical_leather_wings",
+    "icarus:light_grey_mechanical_leather_wings",
+    "icarus:cyan_mechanical_leather_wings",
+    "icarus:purple_mechanical_leather_wings",
+    "icarus:blue_mechanical_leather_wings",
+    "icarus:brown_mechanical_leather_wings",
+    "icarus:green_mechanical_leather_wings",
+    "icarus:red_mechanical_leather_wings",
+    "icarus:black_mechanical_leather_wings"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values":
+  [
+    "icarus:white_mechanical_feathered_wings",
+    "icarus:orange_mechanical_feathered_wings",
+    "icarus:magenta_mechanical_feathered_wings",
+    "icarus:light_blue_mechanical_feathered_wings",
+    "icarus:yellow_mechanical_feathered_wings",
+    "icarus:lime_mechanical_feathered_wings",
+    "icarus:pink_mechanical_feathered_wings",
+    "icarus:grey_mechanical_feathered_wings",
+    "icarus:light_grey_mechanical_feathered_wings",
+    "icarus:cyan_mechanical_feathered_wings",
+    "icarus:purple_mechanical_feathered_wings",
+    "icarus:blue_mechanical_feathered_wings",
+    "icarus:brown_mechanical_feathered_wings",
+    "icarus:green_mechanical_feathered_wings",
+    "icarus:red_mechanical_feathered_wings",
+    "icarus:black_mechanical_feathered_wings"
+  ]
+}

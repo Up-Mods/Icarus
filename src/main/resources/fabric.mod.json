@@ -11,7 +11,7 @@
     "repo": "https://github.com/CammiePone/Icarus"
   },
   "license": "MIT",
-  "icon": "assets/icarus/icon.png",
+  "icon": "assets/icarus/textures/item/white_feathered_wings.png",
   "environment": "*",
   "entrypoints": {
     "client": [
@@ -27,6 +27,8 @@
   "depends": {
     "fabricloader": ">=0.10.8",
     "fabric": "*",
-    "minecraft": "1.16.4"
+    "minecraft": "1.16.4",
+    "caelus": ">=0.0.14-1.16.4",
+    "trinkets": ">=2.6.7"
   }
 }

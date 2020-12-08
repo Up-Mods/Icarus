@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "tag": "icarus:light_wings"
+    },
+    {
+      "tag": "c:cyan_dyes"
+    }
+  ],
+  "result":
+  {
+    "item": "icarus:cyan_light_wings"
+  }
+}

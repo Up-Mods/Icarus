@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
 public class Icarus implements ModInitializer
 {
 	public static final String MOD_ID = "icarus";
-	public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "general"), () -> new ItemStack(ModItems.BASIC_WINGS));
+	public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "general"), () -> new ItemStack(ModItems.WHITE_FEATHERED_WINGS));
 
 	@Override
 	public void onInitialize()

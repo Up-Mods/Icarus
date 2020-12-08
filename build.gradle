@@ -25,6 +25,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "top.theillusivec4.caelus:caelus-fabric:${project.caelus_version}"
     modImplementation "com.github.emilyploszaj:trinkets:${project.trinkets_version}"
+    modRuntime "me.shedaniel:RoughlyEnoughItems:${project.rei_version}"
 
     include "top.theillusivec4.caelus:caelus-fabric:${project.caelus_version}"
 }

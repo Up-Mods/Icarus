@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "tag": "icarus:dragon_wings"
+    },
+    {
+      "tag": "c:black_dyes"
+    }
+  ],
+  "result":
+  {
+    "item": "icarus:black_dragon_wings"
+  }
+}
