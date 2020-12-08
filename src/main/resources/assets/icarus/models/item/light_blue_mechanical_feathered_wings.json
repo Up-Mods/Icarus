@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures":
+  {
+    "layer0": "icarus:item/light_blue_mechanical_feathered_wings"
+  }
+}
