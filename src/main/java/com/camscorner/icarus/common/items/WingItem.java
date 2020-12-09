@@ -21,8 +21,9 @@ public class WingItem extends TrinketItem
 {
 	private Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 	private ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
+	private WingColour primaryColour;
+	private WingColour secondaryColour;
 	private boolean shouldSlowfall;
-
 	/**
 	 * The speed the wings allow the player to travel at. Default: 0.05D.
 	 */
@@ -36,7 +37,7 @@ public class WingItem extends TrinketItem
 	 * @param speed The speed the wings allow the player to travel at. Default: 0.05D.
 	 * @param acceleration The speed at which the player will accelerate. Also controls turn radius. Default 0.05D.
 	 */
-	public WingItem(double speed, double acceleration)
+	public WingItem(double speed, double acceleration, WingColour primaryColour, WingColour secondaryColour)
 	{
 		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1));
 		this.builder.put(CaelusApi.ELYTRA_FLIGHT, new EntityAttributeModifier(UUID.fromString("7d9704a0-383f-11eb-adc1-0242ac120002"),
@@ -44,12 +45,14 @@ public class WingItem extends TrinketItem
 		this.attributeModifiers = this.builder.build();
 		this.speed = speed;
 		this.acceleration = acceleration;
+		this.primaryColour = primaryColour;
+		this.secondaryColour = secondaryColour;
 	}
 
 	/**
 	 * The default constructor. It sets {@link WingItem#speed} and {@link WingItem#acceleration} to 0.05D.
 	 */
-	public WingItem()
+	public WingItem(WingColour primaryColour, WingColour secondaryColour)
 	{
 		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1));
 		this.builder.put(CaelusApi.ELYTRA_FLIGHT, new EntityAttributeModifier(UUID.fromString("7d9704a0-383f-11eb-adc1-0242ac120002"),
@@ -57,6 +60,8 @@ public class WingItem extends TrinketItem
 		this.attributeModifiers = this.builder.build();
 		this.speed = 0.05D;
 		this.acceleration = 0.05D;
+		this.primaryColour = primaryColour;
+		this.secondaryColour = secondaryColour;
 	}
 
 	@Override
@@ -95,6 +100,25 @@ public class WingItem extends TrinketItem
 		return this.attributeModifiers;
 	}
 
+	/* TODO
+	 * PlayerEntity player;
+	 * Item item = TrinketsAPI.getTrinketComponent(player).getStack("chest", "cape").getItem();
+	 *
+	 * if(item instanceof WingItem)
+	 *     item = (WingItem) item;
+	 *     item.getPrimaryColour();
+	 */
+
+	public WingColour getPrimaryColour()
+	{
+		return this.primaryColour;
+	}
+
+	public WingColour getSecondaryColour()
+	{
+		return this.secondaryColour;
+	}
+
 	public void stopFlying(PlayerEntity player)
 	{
 		shouldSlowfall = true;
@@ -110,5 +134,14 @@ public class WingItem extends TrinketItem
 		entity.setVelocity(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * acceleration,
 										rotation.y * speed + (rotation.y * 1.5D - velocity.y) * acceleration,
 										rotation.z * speed + (rotation.z * 1.5D - velocity.z) * acceleration));
+	}
+
+	public enum WingColour
+	{
+		WHITE, ORANGE, MAGENTA, LIGHT_BLUE,
+		YELLOW, LIME, PINK, GREY,
+		LIGHT_GREY, CYAN, PURPLE, BLUE,
+		BROWN, GREEN, RED, BLACK,
+		NONE
 	}
 }
