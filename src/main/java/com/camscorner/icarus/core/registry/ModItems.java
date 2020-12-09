@@ -100,6 +100,7 @@ public class ModItems
 	public static final Item BLACK_LIGHT_WINGS = create("black_light_wings", new WingItem());
 	
 	public static final Item FLANDRES_WINGS = create("flandres_wings", new WingItem());
+	public static final Item DISCORDS_WINGS = create("discords_wings", new WingItem());
 
 	//-----Registry-----//
 	public static void register()
