@@ -47,7 +47,7 @@ public class ModItems
 	public static final Item BROWN_DRAGON_WINGS = create("brown_dragon_wings", new WingItem(WingColour.BROWN, WingColour.ORANGE));
 	public static final Item GREEN_DRAGON_WINGS = create("green_dragon_wings", new WingItem(WingColour.GREEN, WingColour.LIME));
 	public static final Item RED_DRAGON_WINGS = create("red_dragon_wings", new WingItem(WingColour.RED, WingColour.YELLOW));
-	public static final Item BLACK_DRAGON_WINGS = create("black_dragon_wings", new WingItem(WingColour.BLACK, WingColour.GREY));
+	public static final Item BLACK_DRAGON_WINGS = create("black_dragon_wings", new WingItem(WingColour.BLACK, WingColour.PURPLE));
 
 	public static final Item WHITE_MECHANICAL_FEATHERED_WINGS = create("white_mechanical_feathered_wings", new WingItem(WingColour.NONE, WingColour.WHITE));
 	public static final Item ORANGE_MECHANICAL_FEATHERED_WINGS = create("orange_mechanical_feathered_wings", new WingItem(WingColour.NONE, WingColour.ORANGE));
@@ -102,6 +102,7 @@ public class ModItems
 	
 	public static final Item FLANDRES_WINGS = create("flandres_wings", new WingItem(WingColour.NONE, WingColour.NONE));
 	public static final Item DISCORDS_WINGS = create("discords_wings", new WingItem(WingColour.NONE, WingColour.NONE));
+	public static final Item ZANZAS_WINGS = create("zanzas_wings", new WingItem(WingColour.NONE, WingColour.NONE));
 
 	//-----Registry-----//
 	public static void register()

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.camscorner.icarus.core.callbacks;
+package com.camscorner.icarus.core.events.callbacks;
 
 import com.camscorner.icarus.core.events.Event;
 import com.camscorner.icarus.core.events.EventHelper;

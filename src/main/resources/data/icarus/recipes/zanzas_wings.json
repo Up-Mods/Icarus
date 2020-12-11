@@ -3,7 +3,7 @@
   "pattern":
   [
     "WWW",
-    "IEI",
+    "FEF",
     "F F"
   ],
   "key":
@@ -14,11 +14,7 @@
     },
     "F":
     {
-      "tag": "c:leather"
-    },
-    "I":
-    {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:nether_star"
     },
     "W":
     {
@@ -27,7 +23,7 @@
   },
   "result":
   {
-    "item": "icarus:orange_mechanical_leather_wings"
+    "item": "icarus:zanzas_wings"
   }
 }
 

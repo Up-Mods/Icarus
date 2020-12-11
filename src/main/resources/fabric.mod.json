@@ -3,7 +3,7 @@
   "id": "icarus",
   "version": "${version}",
   "name": "Icarus",
-  "description": "Adds a pair of wings. Yeah.",
+  "description": "Adds wings.",
   "authors": [
     "Cammie"
   ],

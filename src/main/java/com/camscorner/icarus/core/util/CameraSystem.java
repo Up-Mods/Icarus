@@ -24,7 +24,8 @@
 
 package com.camscorner.icarus.core.util;
 
-import com.camscorner.icarus.core.callbacks.CameraUpdateCallback;
+import com.camscorner.icarus.Icarus;
+import com.camscorner.icarus.core.events.callbacks.CameraUpdateCallback;
 import net.minecraft.client.render.Camera;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
@@ -45,7 +46,7 @@ public final class CameraSystem implements CameraUpdateCallback
 		Vec3d velocity = camera.getFocusedEntity().getVelocity();
 		Vec2f relativeXZVelocity = rotate(new Vec2f((float)velocity.x, (float)velocity.z), 360.0F - (float)cameraTransform.eulerRot.y);
 
-		rollOffset(cameraTransform, relativeXZVelocity, deltaTime, -1.0F);
+		rollOffset(cameraTransform, relativeXZVelocity, deltaTime, -Icarus.config.rollAmount);
 
 		return cameraTransform;
 	}

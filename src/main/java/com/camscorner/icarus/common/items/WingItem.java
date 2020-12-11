@@ -1,12 +1,12 @@
 package com.camscorner.icarus.common.items;
 
 import com.camscorner.icarus.Icarus;
+import com.camscorner.icarus.core.network.client.DeleteHungerMessage;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotGroups;
 import dev.emi.trinkets.api.Slots;
 import dev.emi.trinkets.api.TrinketItem;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
@@ -58,8 +58,8 @@ public class WingItem extends TrinketItem
 		this.builder.put(CaelusApi.ELYTRA_FLIGHT, new EntityAttributeModifier(UUID.fromString("7d9704a0-383f-11eb-adc1-0242ac120002"),
 				"Flight", 1, EntityAttributeModifier.Operation.ADDITION));
 		this.attributeModifiers = this.builder.build();
-		this.speed = 0.05D;
-		this.acceleration = 0.05D;
+		this.speed = Icarus.config.wingsSpeed;
+		this.acceleration = Icarus.config.wingsAcceleration;
 		this.primaryColour = primaryColour;
 		this.secondaryColour = secondaryColour;
 	}
@@ -67,6 +67,9 @@ public class WingItem extends TrinketItem
 	@Override
 	public void tick(PlayerEntity player, ItemStack stack)
 	{
+		if(player.getHungerManager().getFoodLevel() <= 6)
+			return;
+
 		if(player.isFallFlying())
 		{
 			if(player.forwardSpeed > 0)
@@ -102,7 +105,7 @@ public class WingItem extends TrinketItem
 
 	/* TODO
 	 * PlayerEntity player;
-	 * Item item = TrinketsAPI.getTrinketComponent(player).getStack("chest", "cape").getItem();
+	 * Item item = TrinketsApi.getTrinketComponent(player).getStack("chest", "cape").getItem();
 	 *
 	 * if(item instanceof WingItem)
 	 *     item = (WingItem) item;
@@ -125,15 +128,17 @@ public class WingItem extends TrinketItem
 		player.stopFallFlying();
 	}
 
-	public void applySpeed(LivingEntity entity)
+	public void applySpeed(PlayerEntity player)
 	{
 		shouldSlowfall = false;
-		Vec3d rotation = entity.getRotationVector();
-		Vec3d velocity = entity.getVelocity();
+		Vec3d rotation = player.getRotationVector();
+		Vec3d velocity = player.getVelocity();
 
-		entity.setVelocity(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * acceleration,
+		player.setVelocity(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * acceleration,
 										rotation.y * speed + (rotation.y * 1.5D - velocity.y) * acceleration,
 										rotation.z * speed + (rotation.z * 1.5D - velocity.z) * acceleration));
+
+		DeleteHungerMessage.send();
 	}
 
 	public enum WingColour

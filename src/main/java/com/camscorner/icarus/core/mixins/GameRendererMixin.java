@@ -24,13 +24,16 @@
 
 package com.camscorner.icarus.core.mixins;
 
-import com.camscorner.icarus.core.callbacks.CameraUpdateCallback;
+import com.camscorner.icarus.common.items.WingItem;
+import com.camscorner.icarus.core.events.callbacks.CameraUpdateCallback;
 import com.camscorner.icarus.core.util.Transform;
+import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
+import net.minecraft.item.Item;
 import net.minecraft.resource.SynchronousResourceReloadListener;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Final;
@@ -54,7 +57,9 @@ public abstract class GameRendererMixin implements SynchronousResourceReloadList
 	@Inject(method = "renderWorld", at = @At(value = "INVOKE", shift = At.Shift.BEFORE, target = "Lnet/minecraft/client/render/WorldRenderer;render(Lnet/minecraft/client/util/math/MatrixStack;FJZLnet/minecraft/client/render/Camera;Lnet/minecraft/client/render/GameRenderer;Lnet/minecraft/client/render/LightmapTextureManager;Lnet/minecraft/util/math/Matrix4f;)V"))
 	private void PostCameraUpdate(float tickDelta, long limitTime, MatrixStack matrix, CallbackInfo info)
 	{
-		if(client.player.isFallFlying())
+		Item item = TrinketsApi.getTrinketComponent(client.player).getStack("chest", "cape").getItem();
+
+		if(client.player.isFallFlying() && item instanceof WingItem)
 		{
 			Transform cameraTransform = new Transform(camera.getPos(), new Vec3d(camera.getPitch(), camera.getYaw(), 0D));
 
