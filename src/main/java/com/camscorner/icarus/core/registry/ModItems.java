@@ -32,7 +32,7 @@ public class ModItems
 	public static final Item RED_FEATHERED_WINGS = create("red_feathered_wings", new WingItem(WingColour.RED, WingColour.NONE));
 	public static final Item BLACK_FEATHERED_WINGS = create("black_feathered_wings", new WingItem(WingColour.BLACK, WingColour.NONE));
 
-	public static final Item WHITE_DRAGON_WINGS = create("white_dragon_wings", new WingItem(WingColour.WHITE, WingColour.BLACK));
+	public static final Item WHITE_DRAGON_WINGS = create("white_dragon_wings", new WingItem(WingColour.WHITE, WingColour.WHITE));
 	public static final Item ORANGE_DRAGON_WINGS = create("orange_dragon_wings", new WingItem(WingColour.ORANGE, WingColour.ORANGE));
 	public static final Item MAGENTA_DRAGON_WINGS = create("magenta_dragon_wings", new WingItem(WingColour.MAGENTA, WingColour.PINK));
 	public static final Item LIGHT_BLUE_DRAGON_WINGS = create("light_blue_dragon_wings", new WingItem(WingColour.LIGHT_BLUE, WingColour.WHITE));
@@ -43,7 +43,7 @@ public class ModItems
 	public static final Item LIGHT_GREY_DRAGON_WINGS = create("light_grey_dragon_wings", new WingItem(WingColour.LIGHT_GREY, WingColour.WHITE));
 	public static final Item CYAN_DRAGON_WINGS = create("cyan_dragon_wings", new WingItem(WingColour.CYAN, WingColour.LIGHT_BLUE));
 	public static final Item PURPLE_DRAGON_WINGS = create("purple_dragon_wings", new WingItem(WingColour.PURPLE, WingColour.MAGENTA));
-	public static final Item BLUE_DRAGON_WINGS = create("blue_dragon_wings", new WingItem(WingColour.BLUE, WingColour.ORANGE));
+	public static final Item BLUE_DRAGON_WINGS = create("blue_dragon_wings", new WingItem(WingColour.BLUE, WingColour.LIGHT_BLUE));
 	public static final Item BROWN_DRAGON_WINGS = create("brown_dragon_wings", new WingItem(WingColour.BROWN, WingColour.ORANGE));
 	public static final Item GREEN_DRAGON_WINGS = create("green_dragon_wings", new WingItem(WingColour.GREEN, WingColour.LIME));
 	public static final Item RED_DRAGON_WINGS = create("red_dragon_wings", new WingItem(WingColour.RED, WingColour.YELLOW));
