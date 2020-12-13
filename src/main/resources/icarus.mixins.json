@@ -6,7 +6,9 @@
   "mixins": [
   ],
   "client": [
-    "GameRendererMixin"
+    "GameRendererMixin",
+    "PlayerEntityRendererMixin",
+    "DyeColourAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

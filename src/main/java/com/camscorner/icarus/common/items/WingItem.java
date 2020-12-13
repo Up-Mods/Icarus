@@ -12,6 +12,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.Vec3d;
 import top.theillusivec4.caelus.api.CaelusApi;
 
@@ -21,8 +22,9 @@ public class WingItem extends TrinketItem
 {
 	private Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 	private ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-	private WingColour primaryColour;
-	private WingColour secondaryColour;
+	private DyeColor primaryColour;
+	private DyeColor secondaryColour;
+	private WingType wingType;
 	private boolean shouldSlowfall;
 	/**
 	 * The speed the wings allow the player to travel at. Default: 0.05D.
@@ -37,7 +39,7 @@ public class WingItem extends TrinketItem
 	 * @param speed The speed the wings allow the player to travel at. Default: 0.05D.
 	 * @param acceleration The speed at which the player will accelerate. Also controls turn radius. Default 0.05D.
 	 */
-	public WingItem(double speed, double acceleration, WingColour primaryColour, WingColour secondaryColour)
+	public WingItem(double speed, double acceleration, DyeColor primaryColour, DyeColor secondaryColour, WingType wingType)
 	{
 		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1));
 		this.builder.put(CaelusApi.ELYTRA_FLIGHT, new EntityAttributeModifier(UUID.fromString("7d9704a0-383f-11eb-adc1-0242ac120002"),
@@ -47,12 +49,13 @@ public class WingItem extends TrinketItem
 		this.acceleration = acceleration;
 		this.primaryColour = primaryColour;
 		this.secondaryColour = secondaryColour;
+		this.wingType = wingType;
 	}
 
 	/**
 	 * The default constructor. It sets {@link WingItem#speed} and {@link WingItem#acceleration} to 0.05D.
 	 */
-	public WingItem(WingColour primaryColour, WingColour secondaryColour)
+	public WingItem(DyeColor primaryColour, DyeColor secondaryColour, WingType wingType)
 	{
 		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1));
 		this.builder.put(CaelusApi.ELYTRA_FLIGHT, new EntityAttributeModifier(UUID.fromString("7d9704a0-383f-11eb-adc1-0242ac120002"),
@@ -62,6 +65,7 @@ public class WingItem extends TrinketItem
 		this.acceleration = Icarus.config.wingsAcceleration;
 		this.primaryColour = primaryColour;
 		this.secondaryColour = secondaryColour;
+		this.wingType = wingType;
 	}
 
 	@Override
@@ -103,23 +107,19 @@ public class WingItem extends TrinketItem
 		return this.attributeModifiers;
 	}
 
-	/* TODO
-	 * PlayerEntity player;
-	 * Item item = TrinketsApi.getTrinketComponent(player).getStack("chest", "cape").getItem();
-	 *
-	 * if(item instanceof WingItem)
-	 *     item = (WingItem) item;
-	 *     item.getPrimaryColour();
-	 */
-
-	public WingColour getPrimaryColour()
+	public DyeColor getPrimaryColour()
 	{
 		return this.primaryColour;
 	}
 
-	public WingColour getSecondaryColour()
+	public DyeColor getSecondaryColour()
 	{
 		return this.secondaryColour;
+	}
+
+	public WingType getWingType()
+	{
+		return this.wingType;
 	}
 
 	public void stopFlying(PlayerEntity player)
@@ -141,12 +141,8 @@ public class WingItem extends TrinketItem
 		DeleteHungerMessage.send();
 	}
 
-	public enum WingColour
+	public enum WingType
 	{
-		WHITE, ORANGE, MAGENTA, LIGHT_BLUE,
-		YELLOW, LIME, PINK, GREY,
-		LIGHT_GREY, CYAN, PURPLE, BLUE,
-		BROWN, GREEN, RED, BLACK,
-		NONE
+		FEATHERED, DRAGON, MECHANICAL_FEATHERED, MECHANICAL_LEATHER, LIGHT, UNIQUE
 	}
 }
