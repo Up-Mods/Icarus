@@ -11,7 +11,7 @@
     "repo": "https://github.com/CammiePone/Icarus"
   },
   "license": "MIT",
-  "icon": "assets/icarus/textures/item/white_feathered_wings.png",
+  "icon": "assets/icarus/textures/item/feathered_wings.png",
   "environment": "*",
   "entrypoints": {
     "client": [
