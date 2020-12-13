@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DyeColor;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import top.theillusivec4.caelus.api.CaelusApi;
 
@@ -133,10 +134,11 @@ public class WingItem extends TrinketItem
 		shouldSlowfall = false;
 		Vec3d rotation = player.getRotationVector();
 		Vec3d velocity = player.getVelocity();
+		float modifier = Icarus.config.armourSlows ? MathHelper.clamp(player.getArmor() / 10F, 1F, Icarus.config.maxSlowedMultiplier) : 1F;
 
-		player.setVelocity(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * acceleration,
-										rotation.y * speed + (rotation.y * 1.5D - velocity.y) * acceleration,
-										rotation.z * speed + (rotation.z * 1.5D - velocity.z) * acceleration));
+		player.setVelocity(velocity.add(rotation.x * (speed / modifier) + (rotation.x * 1.5D - velocity.x) * acceleration,
+										rotation.y * (speed / modifier) + (rotation.y * 1.5D - velocity.y) * acceleration,
+										rotation.z * (speed / modifier) + (rotation.z * 1.5D - velocity.z) * acceleration));
 
 		DeleteHungerMessage.send();
 	}

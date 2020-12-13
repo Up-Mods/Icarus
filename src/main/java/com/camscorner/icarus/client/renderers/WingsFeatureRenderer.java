@@ -41,20 +41,34 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 			if(stack.getItem() instanceof WingItem)
 			{
 				WingItem wingItem = (WingItem) stack.getItem();
-				int colour = ((DyeColourAccessor) (Object) wingItem.getPrimaryColour()).getColour();
-				float r = (float) (colour >> 16 & 255) / 255F;
-				float g = (float) (colour >> 8 & 255) / 255F;
-				float b = (float) (colour & 255) / 255F;
+				int primaryColour = ((DyeColourAccessor) (Object) wingItem.getPrimaryColour()).getColour();
+				int secondaryColour = ((DyeColourAccessor) (Object) wingItem.getSecondaryColour()).getColour();
+				float r1 = (float) (primaryColour >> 16 & 255) / 255F;
+				float g1 = (float) (primaryColour >> 8 & 255) / 255F;
+				float b1 = (float) (primaryColour & 255) / 255F;
+				float r2 = (float) (secondaryColour >> 16 & 255) / 255F;
+				float g2 = (float) (secondaryColour >> 8 & 255) / 255F;
+				float b2 = (float) (secondaryColour & 255) / 255F;
+
 				wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase() : Registry.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
+
+				Identifier layer1 = new Identifier(Icarus.MOD_ID, texturePath + wingType + "_wings.png");
+				Identifier layer2 = new Identifier(Icarus.MOD_ID, texturePath + wingType + "_wings_2.png");
 
 				matrices.push();
 				matrices.translate(0.0D, 0.0D, 0.125D);
 				this.getContextModel().copyStateTo(this.wings);
 				this.wings.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
-				VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(new Identifier(Icarus.MOD_ID, texturePath + wingType + "_wings.png")), false, stack.hasGlint());
-				this.wings.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0F);
+				this.renderWings(matrices, vertexConsumers, stack, layer1, light, r1, g1, b1);
+				this.renderWings(matrices, vertexConsumers, stack, layer2, light, r2, g2, b2);
 				matrices.pop();
 			}
 		}
+	}
+
+	public void renderWings(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, Identifier layerName, int light, float r, float g, float b)
+	{
+		VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(layerName), false, stack.hasGlint());
+		this.wings.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0F);
 	}
 }
