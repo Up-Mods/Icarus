@@ -7,12 +7,15 @@ import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotGroups;
 import dev.emi.trinkets.api.Slots;
 import dev.emi.trinkets.api.TrinketItem;
+import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.DyeColor;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import top.theillusivec4.caelus.api.CaelusApi;
@@ -27,6 +30,7 @@ public class WingItem extends TrinketItem
 	private DyeColor secondaryColour;
 	private WingType wingType;
 	private boolean shouldSlowfall;
+	private static final Tag<Item> FREE_FLIGHT = TagRegistry.item(new Identifier(Icarus.MOD_ID, "free_flight"));
 	/**
 	 * The speed the wings allow the player to travel at. Default: 0.05D.
 	 */
@@ -140,7 +144,8 @@ public class WingItem extends TrinketItem
 										rotation.y * (speed / modifier) + (rotation.y * 1.5D - velocity.y) * acceleration,
 										rotation.z * (speed / modifier) + (rotation.z * 1.5D - velocity.z) * acceleration));
 
-		DeleteHungerMessage.send();
+		if(!FREE_FLIGHT.contains(this) && !player.isCreative())
+			DeleteHungerMessage.send();
 	}
 
 	public enum WingType

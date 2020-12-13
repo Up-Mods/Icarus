@@ -24,8 +24,7 @@ public class DeleteHungerMessage
 			@Override
 			public void run()
 			{
-				if(!context.getPlayer().isCreative())
-					context.getPlayer().getHungerManager().addExhaustion(Icarus.config.exhaustionAmount);
+				context.getPlayer().getHungerManager().addExhaustion(Icarus.config.exhaustionAmount);
 			}
 		});
 	}
