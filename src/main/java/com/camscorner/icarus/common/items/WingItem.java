@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import top.theillusivec4.caelus.api.CaelusApi;
@@ -46,7 +47,7 @@ public class WingItem extends TrinketItem
 	 */
 	public WingItem(double speed, double acceleration, DyeColor primaryColour, DyeColor secondaryColour, WingType wingType)
 	{
-		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1));
+		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1).rarity(wingType == WingType.UNIQUE ? Rarity.EPIC : Rarity.RARE));
 		this.builder.put(CaelusApi.ELYTRA_FLIGHT, new EntityAttributeModifier(UUID.fromString("7d9704a0-383f-11eb-adc1-0242ac120002"),
 				"Flight", 1, EntityAttributeModifier.Operation.ADDITION));
 		this.attributeModifiers = this.builder.build();
@@ -62,7 +63,7 @@ public class WingItem extends TrinketItem
 	 */
 	public WingItem(DyeColor primaryColour, DyeColor secondaryColour, WingType wingType)
 	{
-		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1));
+		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1).rarity(wingType == WingType.UNIQUE ? Rarity.EPIC : Rarity.RARE));
 		this.builder.put(CaelusApi.ELYTRA_FLIGHT, new EntityAttributeModifier(UUID.fromString("7d9704a0-383f-11eb-adc1-0242ac120002"),
 				"Flight", 1, EntityAttributeModifier.Operation.ADDITION));
 		this.attributeModifiers = this.builder.build();
