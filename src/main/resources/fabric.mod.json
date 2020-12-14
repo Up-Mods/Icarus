@@ -8,6 +8,8 @@
     "Cammie"
   ],
   "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/icarus-fabric",
+    "issues": "https://github.com/CammiePone/Icarus/issues",
     "repo": "https://github.com/CammiePone/Icarus"
   },
   "license": "MIT",
