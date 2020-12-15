@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values":
+  [
+    "#icarus:feathered_wings",
+    "#icarus:dragon_wings",
+    "#icarus:light_wings",
+    "#icarus:mechanical_feathered_wings",
+    "#icarus:mechanical_leather_wings"
+  ]
+}

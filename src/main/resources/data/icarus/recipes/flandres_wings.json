@@ -3,8 +3,8 @@
   "pattern":
   [
     "WWW",
-    "FEF",
-    "F F"
+    "NEN",
+    "F G"
   ],
   "key":
   {
@@ -15,6 +15,14 @@
     "F":
     {
       "item": "minecraft:diamond"
+    },
+    "G":
+    {
+      "item": "minecraft:emerald"
+    },
+    "N":
+    {
+      "item": "minecraft:nether_star"
     },
     "W":
     {

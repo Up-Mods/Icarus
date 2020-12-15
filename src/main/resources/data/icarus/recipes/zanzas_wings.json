@@ -3,7 +3,7 @@
   "pattern":
   [
     "WWW",
-    "FEF",
+    "NEN",
     "F F"
   ],
   "key":
@@ -13,6 +13,10 @@
       "item": "minecraft:elytra"
     },
     "F":
+    {
+      "item": "minecraft:glowstone_dust"
+    },
+    "N":
     {
       "item": "minecraft:nether_star"
     },

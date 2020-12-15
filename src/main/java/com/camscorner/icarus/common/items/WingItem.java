@@ -8,6 +8,7 @@ import dev.emi.trinkets.api.SlotGroups;
 import dev.emi.trinkets.api.Slots;
 import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.tag.TagRegistry;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,6 +33,7 @@ public class WingItem extends TrinketItem
 	private WingType wingType;
 	private boolean shouldSlowfall;
 	private static final Tag<Item> FREE_FLIGHT = TagRegistry.item(new Identifier(Icarus.MOD_ID, "free_flight"));
+	private static final Tag<Item> MELTS = TagRegistry.item(new Identifier(Icarus.MOD_ID, "melts"));
 	/**
 	 * The speed the wings allow the player to travel at. Default: 0.05D.
 	 */
@@ -47,7 +49,7 @@ public class WingItem extends TrinketItem
 	 */
 	public WingItem(double speed, double acceleration, DyeColor primaryColour, DyeColor secondaryColour, WingType wingType)
 	{
-		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1).rarity(wingType == WingType.UNIQUE ? Rarity.EPIC : Rarity.RARE));
+		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1).maxDamage(Icarus.config.wingsDurability).rarity(wingType == WingType.UNIQUE ? Rarity.EPIC : Rarity.RARE));
 		this.builder.put(CaelusApi.ELYTRA_FLIGHT, new EntityAttributeModifier(UUID.fromString("7d9704a0-383f-11eb-adc1-0242ac120002"),
 				"Flight", 1, EntityAttributeModifier.Operation.ADDITION));
 		this.attributeModifiers = this.builder.build();
@@ -63,7 +65,7 @@ public class WingItem extends TrinketItem
 	 */
 	public WingItem(DyeColor primaryColour, DyeColor secondaryColour, WingType wingType)
 	{
-		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1).rarity(wingType == WingType.UNIQUE ? Rarity.EPIC : Rarity.RARE));
+		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1).maxDamage(Icarus.config.wingsDurability).rarity(wingType == WingType.UNIQUE ? Rarity.EPIC : Rarity.RARE));
 		this.builder.put(CaelusApi.ELYTRA_FLIGHT, new EntityAttributeModifier(UUID.fromString("7d9704a0-383f-11eb-adc1-0242ac120002"),
 				"Flight", 1, EntityAttributeModifier.Operation.ADDITION));
 		this.attributeModifiers = this.builder.build();
@@ -87,6 +89,9 @@ public class WingItem extends TrinketItem
 
 			if(player.isSneaking())
 				stopFlying(player);
+
+			if(player.getPos().y > player.world.getHeight() + 64 && player.age % 20 == 0 && MELTS.contains(this))
+				stack.damage(1, player, (p) -> p.sendEquipmentBreakStatus(EquipmentSlot.CHEST));
 		}
 		else
 		{

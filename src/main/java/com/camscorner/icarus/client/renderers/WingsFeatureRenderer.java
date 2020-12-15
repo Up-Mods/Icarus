@@ -68,7 +68,7 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 
 	public void renderWings(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, Identifier layerName, int light, float r, float g, float b)
 	{
-		VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(layerName), false, stack.hasGlint());
+		VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getEntityTranslucent(layerName), false, stack.hasGlint());
 		this.wings.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0F);
 	}
 }

@@ -5,6 +5,7 @@ import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 public class WingEntityModel<T extends LivingEntity> extends AnimalModel<T>
@@ -29,9 +30,11 @@ public class WingEntityModel<T extends LivingEntity> extends AnimalModel<T>
 	@Override
 	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch)
 	{
-		float k = 0.2617994F;
-		float l = -0.2617994F;
-		float m = 0.0F;
+		float a = 0.125F;
+		float b = 0.1F;
+		float k = 0.3F;
+		float l = -0.7F;
+		float m = -2.0F;
 		float n = 0.0F;
 
 		if(entity.isFallFlying())
@@ -45,18 +48,24 @@ public class WingEntityModel<T extends LivingEntity> extends AnimalModel<T>
 				o = 1.0F - (float) Math.pow(-vec3d2.y, 1.5D);
 			}
 
-			k = o * 0.34906584F + (1.0F - o) * k;
+			k = o * 0.35F + (1.0F - o) * k;
 			l = o * -1.5707964F + (1.0F - o) * l;
+
+			if(entity.forwardSpeed > 0)
+			{
+				a = 0.4F;
+				b = 1.0F;
+			}
 		}
 		else if(entity.isInSneakingPose())
 		{
-			k = 0.6981317F;
-			l = -0.7853982F;
-			m = 3.0F;
-			n = 0.08726646F;
+			k = 0.7F;
+			m = 0.0F;
+			n = 0.09F;
 		}
 
-		this.rightWing.pivotX = 5.0F;
+		k += MathHelper.sin(entity.age * a) * b;
+		this.rightWing.pivotX = 7.0F;
 		this.rightWing.pivotY = m;
 
 		if(entity instanceof AbstractClientPlayerEntity)
