@@ -49,7 +49,7 @@ public class WingEntityModel<T extends LivingEntity> extends AnimalModel<T>
 			}
 
 			k = o * 0.35F + (1.0F - o) * k;
-			l = o * -1.5707964F + (1.0F - o) * l;
+			l = o * -1.6F + (0.3F - o) * l;
 
 			if(entity.forwardSpeed > 0)
 			{

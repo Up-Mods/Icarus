@@ -2,10 +2,12 @@ package com.camscorner.icarus.client;
 
 import com.camscorner.icarus.common.items.WingItem;
 import com.camscorner.icarus.core.mixins.DyeColourAccessor;
+import com.camscorner.icarus.core.util.CameraSystem;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.impl.client.rendering.ColorProviderRegistryImpl;
+import net.fabricmc.loader.api.FabricLoader;
 
 import static com.camscorner.icarus.core.registry.ModItems.*;
 
@@ -15,6 +17,9 @@ public class IcarusClient implements ClientModInitializer
 	@Override
 	public void onInitializeClient()
 	{
+		if(!FabricLoader.getInstance().isModLoaded("cameraoverhaul"))
+			new CameraSystem();
+
 		ColorProviderRegistryImpl.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? ((DyeColourAccessor) (Object) ((WingItem) stack.getItem()).getPrimaryColour()).getColour() : ((DyeColourAccessor) (Object) ((WingItem) stack.getItem()).getSecondaryColour()).getColour(),
 				WHITE_FEATHERED_WINGS, ORANGE_FEATHERED_WINGS, MAGENTA_FEATHERED_WINGS, LIGHT_BLUE_FEATHERED_WINGS,
 				YELLOW_FEATHERED_WINGS, LIME_FEATHERED_WINGS, PINK_FEATHERED_WINGS, GREY_FEATHERED_WINGS,
