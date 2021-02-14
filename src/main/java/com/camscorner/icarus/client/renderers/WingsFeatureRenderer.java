@@ -1,6 +1,9 @@
 package com.camscorner.icarus.client.renderers;
 
 import com.camscorner.icarus.Icarus;
+import com.camscorner.icarus.client.models.FeatheredWingModel;
+import com.camscorner.icarus.client.models.FlandresWingsModel;
+import com.camscorner.icarus.client.models.LeatherWingModel;
 import com.camscorner.icarus.client.models.WingEntityModel;
 import com.camscorner.icarus.common.items.WingItem;
 import com.camscorner.icarus.core.mixins.DyeColourAccessor;
@@ -22,7 +25,7 @@ import net.minecraft.util.registry.Registry;
 
 public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M>
 {
-	private final WingEntityModel<T> wings = new WingEntityModel<>();
+	private WingEntityModel<T> wingModel = new FeatheredWingModel();
 	private String texturePath = "textures/entity/";
 	private String wingType;
 
@@ -52,15 +55,22 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 
 				wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase() : Registry.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
 
+				if(wingItem.getWingType() == WingItem.WingType.FEATHERED || wingItem.getWingType() == WingItem.WingType.MECHANICAL_FEATHERED)
+					wingModel = new FeatheredWingModel();
+				if(wingItem.getWingType() == WingItem.WingType.DRAGON || wingItem.getWingType() == WingItem.WingType.MECHANICAL_LEATHER)
+					wingModel = new LeatherWingModel();
+				if(wingType.equals("flandres"))
+					wingModel = new FlandresWingsModel();
+
 				Identifier layer1 = new Identifier(Icarus.MOD_ID, texturePath + wingType + "_wings.png");
 				Identifier layer2 = new Identifier(Icarus.MOD_ID, texturePath + wingType + "_wings_2.png");
 
 				matrices.push();
 				matrices.translate(0.0D, 0.0D, 0.125D);
-				this.getContextModel().copyStateTo(this.wings);
-				this.wings.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
-				this.renderWings(matrices, vertexConsumers, stack, layer1, light, r1, g1, b1);
+				this.getContextModel().copyStateTo(this.wingModel);
+				this.wingModel.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
 				this.renderWings(matrices, vertexConsumers, stack, layer2, light, r2, g2, b2);
+				this.renderWings(matrices, vertexConsumers, stack, layer1, light, r1, g1, b1);
 				matrices.pop();
 			}
 		}
@@ -69,6 +79,6 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 	public void renderWings(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, Identifier layerName, int light, float r, float g, float b)
 	{
 		VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getEntityTranslucent(layerName), false, stack.hasGlint());
-		this.wings.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0F);
+		this.wingModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0F);
 	}
 }

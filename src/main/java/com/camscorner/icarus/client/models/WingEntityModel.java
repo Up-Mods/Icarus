@@ -10,8 +10,9 @@ import net.minecraft.util.math.Vec3d;
 
 public class WingEntityModel<T extends LivingEntity> extends AnimalModel<T>
 {
-	private final ModelPart rightWing;
-	private final ModelPart leftWing;
+	public final ModelPart rightWing;
+	public final ModelPart leftWing;
+	public State state = State.IDLE;
 
 	public WingEntityModel()
 	{
@@ -20,25 +21,27 @@ public class WingEntityModel<T extends LivingEntity> extends AnimalModel<T>
 
 		rightWing = new ModelPart(this);
 		rightWing.setPivot(0.0F, 5.0F, 0.0F);
-		rightWing.setTextureOffset(22, 0).addCuboid(-8.0F, -1.0F, -1.0F, 10.0F, 20.0F, 2.0F, 0.0F, true);
+		//rightWing.setTextureOffset(22, 0).addCuboid(-8.0F, -1.0F, -1.0F, 10.0F, 20.0F, 2.0F, 0.0F, true);
 
 		leftWing = new ModelPart(this);
 		leftWing.setPivot(0.0F, 5.0F, 0.0F);
-		leftWing.setTextureOffset(22, 22).addCuboid(-2.0F, -1.0F, -1.0F, 10.0F, 20.0F, 2.0F, 0.0F, false);
+		//leftWing.setTextureOffset(22, 22).addCuboid(-2.0F, -1.0F, -1.0F, 10.0F, 20.0F, 2.0F, 0.0F, false);
 	}
 
 	@Override
 	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch)
 	{
+		state = State.IDLE;
 		float a = 0.125F;
 		float b = 0.1F;
 		float k = 0.3F;
 		float l = -0.7F;
-		float m = -2.0F;
+		float m = -1.0F;
 		float n = 0.0F;
 
 		if(entity.isFallFlying())
 		{
+			state = State.FLYING;
 			float o = 1.0F;
 			Vec3d vec3d = entity.getVelocity();
 
@@ -59,6 +62,7 @@ public class WingEntityModel<T extends LivingEntity> extends AnimalModel<T>
 		}
 		else if(entity.isInSneakingPose())
 		{
+			state = State.CROUCHING;
 			k = 0.7F;
 			m = 0.0F;
 			n = 0.09F;
@@ -102,5 +106,10 @@ public class WingEntityModel<T extends LivingEntity> extends AnimalModel<T>
 	protected Iterable<ModelPart> getBodyParts()
 	{
 		return ImmutableList.of(this.rightWing, this.leftWing);
+	}
+
+	public enum State
+	{
+		IDLE, CROUCHING, FLYING
 	}
 }
