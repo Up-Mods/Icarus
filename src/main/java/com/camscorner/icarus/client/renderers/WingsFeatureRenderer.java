@@ -1,10 +1,7 @@
 package com.camscorner.icarus.client.renderers;
 
 import com.camscorner.icarus.Icarus;
-import com.camscorner.icarus.client.models.FeatheredWingModel;
-import com.camscorner.icarus.client.models.FlandresWingsModel;
-import com.camscorner.icarus.client.models.LeatherWingModel;
-import com.camscorner.icarus.client.models.WingEntityModel;
+import com.camscorner.icarus.client.models.*;
 import com.camscorner.icarus.common.items.WingItem;
 import com.camscorner.icarus.core.mixins.DyeColourAccessor;
 import dev.emi.trinkets.api.TrinketsApi;
@@ -25,9 +22,7 @@ import net.minecraft.util.registry.Registry;
 
 public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M>
 {
-	private WingEntityModel<T> wingModel = new FeatheredWingModel();
-	private String texturePath = "textures/entity/";
-	private String wingType;
+	private WingEntityModel<T> wingModel = new WingEntityModel<>();
 
 	public WingsFeatureRenderer(FeatureRendererContext<T, M> context)
 	{
@@ -53,17 +48,23 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 				float g2 = (float) (secondaryColour >> 8 & 255) / 255F;
 				float b2 = (float) (secondaryColour & 255) / 255F;
 
-				wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase() : Registry.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
+				String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase() : Registry.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
 
 				if(wingItem.getWingType() == WingItem.WingType.FEATHERED || wingItem.getWingType() == WingItem.WingType.MECHANICAL_FEATHERED)
-					wingModel = new FeatheredWingModel();
+					wingModel = new FeatheredWingModel<>();
 				if(wingItem.getWingType() == WingItem.WingType.DRAGON || wingItem.getWingType() == WingItem.WingType.MECHANICAL_LEATHER)
-					wingModel = new LeatherWingModel();
+					wingModel = new LeatherWingModel<>();
+				if(wingItem.getWingType() == WingItem.WingType.LIGHT)
+					wingModel = new LightWingsModel<>();
 				if(wingType.equals("flandres"))
-					wingModel = new FlandresWingsModel();
-
-				Identifier layer1 = new Identifier(Icarus.MOD_ID, texturePath + wingType + "_wings.png");
-				Identifier layer2 = new Identifier(Icarus.MOD_ID, texturePath + wingType + "_wings_2.png");
+					wingModel = new FlandresWingsModel<>();
+				if(wingType.equals("discords"))
+					wingModel = new DiscordsWingsModel<>();
+				if(wingType.equals("zanzas"))
+					wingModel = new ZanzasWingsModel<>();
+				
+				Identifier layer1 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings.png");
+				Identifier layer2 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings_2.png");
 
 				matrices.push();
 				matrices.translate(0.0D, 0.0D, 0.125D);

@@ -6,7 +6,7 @@ package com.camscorner.icarus.client.models;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.entity.LivingEntity;
 
-public class LeatherWingModel extends WingEntityModel
+public class LeatherWingModel<T extends LivingEntity> extends WingEntityModel<T>
 {
 	private final ModelPart leftWing01;
 	private final ModelPart leftWing02;
@@ -51,7 +51,7 @@ public class LeatherWingModel extends WingEntityModel
 		leftWing02 = new ModelPart(this);
 		leftWing02.setPivot(-0.5F, 0.0F, 3.5F);
 		leftWing01.addChild(leftWing02);
-		setRotationAngle(leftWing02, 0.6109F, 0.48F, 0.0F);
+		setRotationAngle(leftWing02, 0.6109F, 0.0F, 0.0F);
 		leftWing02.setTextureOffset(0, 47).addCuboid(-0.5F, 0.0F, -1.5F, 1.0F, 2.0F, 8.0F, 0.0F, false);
 
 		leftWing03 = new ModelPart(this);
@@ -130,7 +130,7 @@ public class LeatherWingModel extends WingEntityModel
 		rightWing02 = new ModelPart(this);
 		rightWing02.setPivot(0.5F, 0.0F, 3.5F);
 		rightWing01.addChild(rightWing02);
-		setRotationAngle(rightWing02, 0.6109F, -0.48F, 0.0F);
+		setRotationAngle(rightWing02, 0.6109F, 0.0F, 0.0F);
 		rightWing02.setTextureOffset(0, 47).addCuboid(-0.5F, 0.0F, -1.5F, 1.0F, 2.0F, 8.0F, 0.0F, true);
 
 		rightWing03 = new ModelPart(this);
@@ -202,7 +202,7 @@ public class LeatherWingModel extends WingEntityModel
 	}
 
 	@Override
-	public void setAngles(LivingEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch)
+	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch)
 	{
 		super.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
 

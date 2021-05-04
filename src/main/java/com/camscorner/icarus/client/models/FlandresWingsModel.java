@@ -6,7 +6,7 @@ package com.camscorner.icarus.client.models;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.entity.LivingEntity;
 
-public class FlandresWingsModel extends WingEntityModel
+public class FlandresWingsModel<T extends LivingEntity> extends WingEntityModel<T>
 {
 	private final ModelPart leftWing01;
 	private final ModelPart leftWing02;
@@ -756,7 +756,7 @@ public class FlandresWingsModel extends WingEntityModel
 	}
 
 	@Override
-	public void setAngles(LivingEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch)
+	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch)
 	{
 		super.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
 
