@@ -27,15 +27,15 @@ package com.camscorner.icarus.core.mixins;
 import com.camscorner.icarus.common.items.WingItem;
 import com.camscorner.icarus.core.events.callbacks.CameraUpdateCallback;
 import com.camscorner.icarus.core.util.Transform;
+import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
-import net.minecraft.item.Item;
-import net.minecraft.resource.SynchronousResourceReloadListener;
+import net.minecraft.resource.SynchronousResourceReloader;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -43,8 +43,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Optional;
+
 @Mixin(GameRenderer.class)
-public abstract class GameRendererMixin implements SynchronousResourceReloadListener, AutoCloseable
+public abstract class GameRendererMixin implements SynchronousResourceReloader, AutoCloseable
 {
 	@Shadow
 	@Final
@@ -57,22 +59,23 @@ public abstract class GameRendererMixin implements SynchronousResourceReloadList
 	@Inject(method = "renderWorld", at = @At(value = "INVOKE", shift = At.Shift.BEFORE, target = "Lnet/minecraft/client/render/WorldRenderer;render(Lnet/minecraft/client/util/math/MatrixStack;FJZLnet/minecraft/client/render/Camera;Lnet/minecraft/client/render/GameRenderer;Lnet/minecraft/client/render/LightmapTextureManager;Lnet/minecraft/util/math/Matrix4f;)V"))
 	private void PostCameraUpdate(float tickDelta, long limitTime, MatrixStack matrix, CallbackInfo info)
 	{
-		Item item = TrinketsApi.getTrinketComponent(client.player).getStack("chest", "cape").getItem();
+		Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(client.player);
+		boolean isWingItem = component.isPresent() && component.get().isEquipped(itemStack -> itemStack.getItem() instanceof WingItem);
 
-		if(client.player.isFallFlying() && item instanceof WingItem)
+		if(client.player.isFallFlying() && isWingItem)
 		{
 			Transform cameraTransform = new Transform(camera.getPos(), new Vec3d(camera.getPitch(), camera.getYaw(), 0D));
 
 			cameraTransform = CameraUpdateCallback.EVENT.Invoker().onCameraUpdate(camera, cameraTransform, tickDelta);
 
 			//Undo multiplications.
-			matrix.multiply(Vector3f.NEGATIVE_Y.getDegreesQuaternion(camera.getYaw() + 180.0F));
-			matrix.multiply(Vector3f.NEGATIVE_X.getDegreesQuaternion(camera.getPitch()));
+			matrix.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion(camera.getYaw() + 180.0F));
+			matrix.multiply(Vec3f.NEGATIVE_X.getDegreesQuaternion(camera.getPitch()));
 
 			//And now redo them.
-			matrix.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion((float) cameraTransform.eulerRot.z));
-			matrix.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion((float) cameraTransform.eulerRot.x));
-			matrix.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion((float) cameraTransform.eulerRot.y + 180.0F));
+			matrix.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion((float) cameraTransform.eulerRot.z));
+			matrix.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion((float) cameraTransform.eulerRot.x));
+			matrix.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion((float) cameraTransform.eulerRot.y + 180.0F));
 		}
 	}
 }

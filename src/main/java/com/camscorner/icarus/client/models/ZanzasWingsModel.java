@@ -3,12 +3,8 @@
  */
 package com.camscorner.icarus.client.models;
 
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.entity.LivingEntity;
-
-public class ZanzasWingsModel<T extends LivingEntity> extends WingEntityModel<T>
-{
-	private final ModelPart lWing01;
+public class ZanzasWingsModel/*<T extends LivingEntity> extends WingEntityModelOld<T>*/ {
+	/*private final ModelPart lWing01;
 	private final ModelPart lWing02;
 	private final ModelPart lWingCircle;
 	private final ModelPart cube_r1;
@@ -17,8 +13,7 @@ public class ZanzasWingsModel<T extends LivingEntity> extends WingEntityModel<T>
 	private final ModelPart rWingCircle;
 	private final ModelPart cube_r2;
 
-	public ZanzasWingsModel()
-	{
+	public ZanzasWingsModel() {
 		textureWidth = 64;
 		textureHeight = 64;
 		lWing01 = new ModelPart(this);
@@ -69,15 +64,13 @@ public class ZanzasWingsModel<T extends LivingEntity> extends WingEntityModel<T>
 	}
 
 	@Override
-	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch)
-	{
+	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 		super.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
 	}
 
-	public void setRotationAngle(ModelPart bone, float x, float y, float z)
-	{
+	public void setRotationAngle(ModelPart bone, float x, float y, float z) {
 		bone.pitch = x;
 		bone.yaw = y;
 		bone.roll = z;
-	}
+	}*/
 }

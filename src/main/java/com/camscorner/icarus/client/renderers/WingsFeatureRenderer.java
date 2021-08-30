@@ -1,9 +1,10 @@
 package com.camscorner.icarus.client.renderers;
 
 import com.camscorner.icarus.Icarus;
+import com.camscorner.icarus.client.IcarusClient;
 import com.camscorner.icarus.client.models.*;
 import com.camscorner.icarus.common.items.WingItem;
-import com.camscorner.icarus.core.mixins.DyeColourAccessor;
+import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -12,6 +13,7 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
@@ -20,65 +22,72 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M>
-{
-	private WingEntityModel<T> wingModel = new WingEntityModel<>();
+import java.util.Optional;
 
-	public WingsFeatureRenderer(FeatureRendererContext<T, M> context)
-	{
+public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
+	private WingEntityModel<T> wingModel;
+	private final FeatheredWingsModel<T> featheredWings;
+	private final LeatherWingsModel<T> leatherWings;
+	private final LightWingsModel<T> lightWings;
+	private final FlandresWingsModel<T> flandresWings;
+
+	public WingsFeatureRenderer(FeatureRendererContext<T, M> context, EntityModelLoader loader) {
 		super(context);
+		this.featheredWings = new FeatheredWingsModel<>(loader.getModelPart(IcarusClient.FEATHERED));
+		this.leatherWings = new LeatherWingsModel<>(loader.getModelPart(IcarusClient.LEATHER));
+		this.lightWings = new LightWingsModel<>(loader.getModelPart(IcarusClient.LIGHT));
+		this.flandresWings = new FlandresWingsModel<>(loader.getModelPart(IcarusClient.FLANDRE));
 	}
 
 	@Override
-	public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch)
-	{
-		if(entity instanceof PlayerEntity)
-		{
-			ItemStack stack = TrinketsApi.getTrinketComponent((PlayerEntity) entity).getStack("chest", "cape");
+	public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+		if(entity instanceof PlayerEntity) {
+			Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(entity);
 
-			if(stack.getItem() instanceof WingItem)
-			{
-				WingItem wingItem = (WingItem) stack.getItem();
-				int primaryColour = ((DyeColourAccessor) (Object) wingItem.getPrimaryColour()).getColour();
-				int secondaryColour = ((DyeColourAccessor) (Object) wingItem.getSecondaryColour()).getColour();
-				float r1 = (float) (primaryColour >> 16 & 255) / 255F;
-				float g1 = (float) (primaryColour >> 8 & 255) / 255F;
-				float b1 = (float) (primaryColour & 255) / 255F;
-				float r2 = (float) (secondaryColour >> 16 & 255) / 255F;
-				float g2 = (float) (secondaryColour >> 8 & 255) / 255F;
-				float b2 = (float) (secondaryColour & 255) / 255F;
+			component.ifPresent(trinketComponent -> trinketComponent.getAllEquipped().forEach(pair -> {
+				ItemStack stack = pair.getRight();
 
-				String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase() : Registry.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
+				if(stack.getItem() instanceof WingItem wingItem) {
+					float[] primaryColour = wingItem.getPrimaryColour().getColorComponents();
+					float[] secondaryColour = wingItem.getSecondaryColour().getColorComponents();
+					float r1 = primaryColour[0];
+					float g1 = primaryColour[1];
+					float b1 = primaryColour[2];
+					float r2 = secondaryColour[0];
+					float g2 = secondaryColour[1];
+					float b2 = secondaryColour[2];
 
-				if(wingItem.getWingType() == WingItem.WingType.FEATHERED || wingItem.getWingType() == WingItem.WingType.MECHANICAL_FEATHERED)
-					wingModel = new FeatheredWingModel<>();
-				if(wingItem.getWingType() == WingItem.WingType.DRAGON || wingItem.getWingType() == WingItem.WingType.MECHANICAL_LEATHER)
-					wingModel = new LeatherWingModel<>();
-				if(wingItem.getWingType() == WingItem.WingType.LIGHT)
-					wingModel = new LightWingsModel<>();
-				if(wingType.equals("flandres"))
-					wingModel = new FlandresWingsModel<>();
-				if(wingType.equals("discords"))
-					wingModel = new DiscordsWingsModel<>();
-				if(wingType.equals("zanzas"))
-					wingModel = new ZanzasWingsModel<>();
-				
-				Identifier layer1 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings.png");
-				Identifier layer2 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings_2.png");
+					String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase() : Registry.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
 
-				matrices.push();
-				matrices.translate(0.0D, 0.0D, 0.125D);
-				this.getContextModel().copyStateTo(this.wingModel);
-				this.wingModel.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
-				this.renderWings(matrices, vertexConsumers, stack, layer2, light, r2, g2, b2);
-				this.renderWings(matrices, vertexConsumers, stack, layer1, light, r1, g1, b1);
-				matrices.pop();
-			}
+					if(wingItem.getWingType() == WingItem.WingType.FEATHERED || wingItem.getWingType() == WingItem.WingType.MECHANICAL_FEATHERED)
+						wingModel = featheredWings;
+					if(wingItem.getWingType() == WingItem.WingType.DRAGON || wingItem.getWingType() == WingItem.WingType.MECHANICAL_LEATHER)
+						wingModel = leatherWings;
+					if(wingItem.getWingType() == WingItem.WingType.LIGHT)
+						wingModel = lightWings;
+					if(wingType.equals("flandres"))
+						wingModel = flandresWings;
+					/*if(wingType.equals("discords"))
+						wingModel = new DiscordsWingsModel<>();
+					if(wingType.equals("zanzas"))
+						wingModel = new ZanzasWingsModel<>();*/
+
+					Identifier layer1 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings.png");
+					Identifier layer2 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings_2.png");
+
+					matrices.push();
+					matrices.translate(0.0D, 0.0D, 0.125D);
+					this.getContextModel().copyStateTo(this.wingModel);
+					this.wingModel.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
+					this.renderWings(matrices, vertexConsumers, stack, layer2, light, r2, g2, b2);
+					this.renderWings(matrices, vertexConsumers, stack, layer1, light, r1, g1, b1);
+					matrices.pop();
+				}
+			}));
 		}
 	}
 
-	public void renderWings(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, Identifier layerName, int light, float r, float g, float b)
-	{
+	public void renderWings(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, Identifier layerName, int light, float r, float g, float b) {
 		VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getEntityTranslucent(layerName), false, stack.hasGlint());
 		this.wingModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0F);
 	}

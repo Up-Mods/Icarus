@@ -3,12 +3,8 @@
  */
 package com.camscorner.icarus.client.models;
 
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.entity.LivingEntity;
-
-public class DiscordsWingsModel<T extends LivingEntity> extends WingEntityModel<T>
-{
-	private final ModelPart leftWing01;
+public class DiscordsWingsModel {//<T extends LivingEntity> extends WingEntityModelOld<T> {
+	/*private final ModelPart leftWing01;
 	private final ModelPart leftWing02;
 	private final ModelPart leftWing03;
 	private final ModelPart leftWing04;
@@ -32,8 +28,7 @@ public class DiscordsWingsModel<T extends LivingEntity> extends WingEntityModel<
 	private final ModelPart rightStrutLowestLeather01;
 	private final ModelPart rightStrutLowestLeather02;
 
-	public DiscordsWingsModel()
-	{
+	public DiscordsWingsModel() {
 		textureWidth = 128;
 		textureHeight = 64;
 		leftWing01 = new ModelPart(this);
@@ -168,11 +163,10 @@ public class DiscordsWingsModel<T extends LivingEntity> extends WingEntityModel<
 	}
 
 	@Override
-	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch)
-	{
+	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 		super.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
 
-		if(state == WingEntityModel.State.IDLE || state == State.CROUCHING)
+		if(state == WingEntityModelOld.State.IDLE || state == State.CROUCHING)
 			leftWing03.pitch = (float) Math.toRadians(-60);
 		if(state == State.FLYING)
 			leftWing03.pitch = (float) Math.toRadians(-32.5);
@@ -180,10 +174,9 @@ public class DiscordsWingsModel<T extends LivingEntity> extends WingEntityModel<
 		rightWing03.pitch = leftWing03.pitch;
 	}
 
-	public void setRotationAngle(ModelPart bone, float x, float y, float z)
-	{
+	public void setRotationAngle(ModelPart bone, float x, float y, float z) {
 		bone.pitch = x;
 		bone.yaw = y;
 		bone.roll = z;
-	}
+	}*/
 }
