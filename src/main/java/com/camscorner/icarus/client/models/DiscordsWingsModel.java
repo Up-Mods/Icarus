@@ -1,10 +1,15 @@
+// Made with Model Converter by Globox_Z
+// Generate all required imports
 /*
  * Model by cybercat5555
  */
 package com.camscorner.icarus.client.models;
 
-public class DiscordsWingsModel {//<T extends LivingEntity> extends WingEntityModelOld<T> {
-	/*private final ModelPart leftWing01;
+import net.minecraft.client.model.*;
+import net.minecraft.entity.LivingEntity;
+
+public class DiscordsWingsModel<T extends LivingEntity> extends WingEntityModel<T> {
+	private final ModelPart leftWing01;
 	private final ModelPart leftWing02;
 	private final ModelPart leftWing03;
 	private final ModelPart leftWing04;
@@ -28,155 +33,116 @@ public class DiscordsWingsModel {//<T extends LivingEntity> extends WingEntityMo
 	private final ModelPart rightStrutLowestLeather01;
 	private final ModelPart rightStrutLowestLeather02;
 
-	public DiscordsWingsModel() {
-		textureWidth = 128;
-		textureHeight = 64;
-		leftWing01 = new ModelPart(this);
-		leftWing01.setPivot(-6.0F, 0.0F, 0.0F);
-		setRotationAngle(leftWing01, 0.0F, 1.5708F, 0.436332F);
-		leftWing01.setTextureOffset(0, 0).addCuboid(-1.0F, -2.0F, -1.0F, 2.0F, 4.0F, 6.0F, 0.0F, false);
-		rightWing.addChild(leftWing01);
+	public DiscordsWingsModel(ModelPart root) {
+		super(root);
+		
+		this.leftWing01 = root.getChild("leftWing").getChild("leftWing01");
+		this.rightWing01 = root.getChild("rightWing").getChild("rightWing01");
+		this.rightWing02 = this.rightWing01.getChild("rightWing02");
+		this.rightStrutLowest = this.rightWing02.getChild("rightStrutLowest");
+		this.rightStrutLowestLeather02 = this.rightStrutLowest.getChild("rightStrutLowestLeather02");
+		this.rightStrutLowestLeather01 = this.rightStrutLowest.getChild("rightStrutLowestLeather01");
+		this.rightWing03 = this.rightWing02.getChild("rightWing03");
+		this.rightWingStrut03 = this.rightWing03.getChild("rightWingStrut03");
+		this.rightWingStrut03Leather = this.rightWingStrut03.getChild("rightWingStrut03Leather");
+		this.rightWingStrut02 = this.rightWing03.getChild("rightWingStrut02");
+		this.rightWingStrut02Leather = this.rightWingStrut02.getChild("rightWingStrut02Leather");
+		this.rightWingStrut01 = this.rightWing03.getChild("rightWingStrut01");
+		this.rightWingStrut01Leather = this.rightWingStrut01.getChild("rightWingStrut01Leather");
+		this.rightWing04 = this.rightWing03.getChild("rightWing04");
+		this.rightWing04Leather = this.rightWing04.getChild("rightWing04Leather");
+		this.leftWing02 = this.leftWing01.getChild("leftWing02");
+		this.lFeathers01 = this.leftWing02.getChild("lFeathers01");
+		this.Box_r2 = this.lFeathers01.getChild("Box_r2");
+		this.leftWing03 = this.leftWing02.getChild("leftWing03");
+		this.leftWing04 = this.leftWing03.getChild("leftWing04");
+		this.lFeathers02 = this.leftWing04.getChild("lFeathers02");
+		this.Box_r1 = this.lFeathers02.getChild("Box_r1");
+		this.leftWing05 = this.leftWing04.getChild("leftWing05");
+	}
 
-		leftWing02 = new ModelPart(this);
-		leftWing02.setPivot(-0.5F, 0.0F, 3.5F);
-		leftWing01.addChild(leftWing02);
-		setRotationAngle(leftWing02, 0.6109F, 0.3054F, 0.0F);
-		leftWing02.setTextureOffset(17, 0).addCuboid(-0.5F, -1.5F, 0.5F, 1.0F, 2.0F, 8.0F, 0.0F, false);
+	public static TexturedModelData getTexturedModelData() {
+		ModelData modelData = WingEntityModel.getModelData();
+		ModelPartData modelPartData = modelData.getRoot();
 
-		leftWing03 = new ModelPart(this);
-		leftWing03.setPivot(0.0F, -1.0F, 8.5F);
-		leftWing02.addChild(leftWing03);
-		setRotationAngle(leftWing03, -0.5672F, 0.3054F, 0.0F);
-		leftWing03.setTextureOffset(36, 0).addCuboid(-0.5F, -0.1F, -0.5F, 1.0F, 2.0F, 8.0F, 0.0F, false);
+		ModelPartData modelPartData1 = modelPartData.getChild("leftWing").addChild("leftWing01", ModelPartBuilder.create().uv(0, 0)
+				.cuboid(-1.0F, -2.0F, -1.0F, 2.0F, 4.0F, 6.0F),
+				ModelTransform.of(-6.0F, 0.0F, 0.0F, 0.0F, 1.5708F, 0.436332F));
+		ModelPartData modelPartData2 = modelPartData1.addChild("leftWing02", ModelPartBuilder.create().uv(17, 0)
+				.cuboid(-0.5F, -1.5F, 0.5F, 1.0F, 2.0F, 8.0F),
+				ModelTransform.of(-0.5F, 0.0F, 3.5F, 0.6109F, 0.3054F, 0.0F));
+		ModelPartData modelPartData3 = modelPartData2.addChild("leftWing03", ModelPartBuilder.create().uv(36, 0)
+				.cuboid(-0.5F, -0.1F, -0.5F, 1.0F, 2.0F, 8.0F),
+				ModelTransform.of(0.0F, -1.0F, 8.5F, -0.5672F, 0.3054F, 0.0F));
+		ModelPartData modelPartData4 = modelPartData3.addChild("leftWing04", ModelPartBuilder.create().uv(55, 0)
+				.cuboid(-0.7F, -0.2F, -0.5F, 1.0F, 14.0F, 1.0F, true),
+				ModelTransform.of(0.0F, 0.5F, 7.2F, 1.0908F, 0.0F, 0.0F));
+		modelPartData4.addChild("leftWing05", ModelPartBuilder.create().uv(32, 31)
+				.cuboid(0.4F, -4.0F, -12.3F, 0.0F, 20.0F, 13.0F, true),
+				ModelTransform.pivot(-0.5F, 4.8F, -0.2F));
+		ModelPartData modelPartData5 = modelPartData4.addChild("lFeathers02", ModelPartBuilder.create(),
+				ModelTransform.of(0.0F, -3.5F, -3.2F, 0.0F, 0.0F, 0.0873F));
+		modelPartData5.addChild("Box_r1", ModelPartBuilder.create().uv(0, 36)
+				.cuboid(0.0F, -6.6F, -13.8F, 1.0F, 14.0F, 14.0F, true),
+				ModelTransform.of(0.0F, 0.0F, 0.0F, 0.48F, 0.0F, 0.0F));
+		ModelPartData modelPartData6 = modelPartData2.addChild("lFeathers01", ModelPartBuilder.create(),
+				ModelTransform.of(0.6F, 1.3F, 1.5F, -0.1745F, -0.0873F, 0.0F));
+		modelPartData6.addChild("Box_r2", ModelPartBuilder.create().uv(0, 10)
+				.cuboid(-0.5F, -0.8F, -8.1F, 1.0F, 10.0F, 16.0F, true),
+				ModelTransform.of(0.0F, 0.0F, 0.0F, 0.1745F, 0.0F, 0.0F));
+		ModelPartData modelPartData7 = modelPartData.getChild("rightWing").addChild("rightWing01", ModelPartBuilder.create().uv(66, 0)
+				.cuboid(-1.0F, -1.0F, -1.0F, 2.0F, 4.0F, 5.0F, true),
+				ModelTransform.of(6.0F, 0.0F, 0.0F, 0.0F, -1.5708F, -0.436332F));
+		ModelPartData modelPartData8 = modelPartData7.addChild("rightWing02", ModelPartBuilder.create().uv(81, 0)
+				.cuboid(-0.5F, 0.0F, -1.5F, 1.0F, 2.0F, 8.0F, true),
+				ModelTransform.of(0.5F, 0.0F, 3.5F, 0.6109F, -0.48F, 0.0F));
+		ModelPartData modelPartData9 = modelPartData8.addChild("rightWing03", ModelPartBuilder.create().uv(101, 0)
+				.cuboid(-0.5F, -1.1F, -0.5F, 1.0F, 2.0F, 8.0F, true),
+				ModelTransform.of(0.0F, 1.0F, 6.5F, -0.5672F, -0.3054F, 0.0F));
+		ModelPartData modelPartData10 = modelPartData9.addChild("rightWing04", ModelPartBuilder.create().uv(60, 13)
+				.cuboid(-0.4F, -0.8F, -4.0F, 1.0F, 1.0F, 19.0F, true),
+				ModelTransform.of(0.0F, 0.0F, 7.5F, -0.7418F, 0.0F, 0.0F));
+		modelPartData10.addChild("rightWing04Leather", ModelPartBuilder.create().uv(95, 40)
+				.cuboid(0.0F, 0.0F, 0.0F, 0.0F, 5.0F, 14.0F, true),
+				ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+		ModelPartData modelPartData11 = modelPartData9.addChild("rightWingStrut01", ModelPartBuilder.create().uv(83, 12)
+				.cuboid(-0.4F, -0.5F, -0.5F, 1.0F, 1.0F, 16.0F, true),
+				ModelTransform.of(0.0F, 1.0F, 7.0F, -1.0036F, 0.0F, 0.0F));
+		modelPartData11.addChild("rightWingStrut01Leather", ModelPartBuilder.create().uv(95, 34)
+				.cuboid(0.05F, 0.0F, 0.0F, 0.0F, 5.0F, 14.0F, true),
+				ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+		ModelPartData modelPartData12 = modelPartData9.addChild("rightWingStrut02", ModelPartBuilder.create().uv(83, 12)
+				.cuboid(-0.4F, -0.5F, -0.5F, 1.0F, 1.0F, 16.0F, true),
+				ModelTransform.of(0.0F, 1.0F, 6.0F, -1.309F, 0.0F, 0.0F));
+		modelPartData12.addChild("rightWingStrut02Leather", ModelPartBuilder.create().uv(93, 25)
+				.cuboid(0.1F, 0.0F, -1.0F, 0.0F, 6.0F, 16.0F, true),
+				ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+		ModelPartData modelPartData13 = modelPartData9.addChild("rightWingStrut03", ModelPartBuilder.create().uv(83, 12)
+				.cuboid(-0.4F, -0.5F, -0.5F, 1.0F, 1.0F, 16.0F, true),
+				ModelTransform.of(0.0F, 1.0F, 5.0F, -1.6581F, 0.0F, 0.0F));
+		modelPartData13.addChild("rightWingStrut03Leather", ModelPartBuilder.create().uv(93, 19)
+				.cuboid(0.15F, 0.0F, 0.0F, 0.0F, 6.0F, 15.0F, true),
+				ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+		ModelPartData modelPartData14 = modelPartData8.addChild("rightStrutLowest", ModelPartBuilder.create().uv(104, 12)
+				.cuboid(0.1F, 0.0F, -0.5F, 1.0F, 12.0F, 1.0F, true),
+				ModelTransform.of(-0.5F, 1.0F, 2.0F, -0.3491F, 0.0F, 0.0F));
+		modelPartData14.addChild("rightStrutLowestLeather01", ModelPartBuilder.create().uv(79, 28)
+				.cuboid(0.0F, -1.0F, 0.0F, 0.0F, 12.0F, 6.0F, true),
+				ModelTransform.pivot(0.5F, 0.0F, 0.0F));
+		modelPartData14.addChild("rightStrutLowestLeather02", ModelPartBuilder.create().uv(60, 25)
+				.cuboid(0.0F, -1.0F, -9.0F, 0.0F, 12.0F, 9.0F, true),
+				ModelTransform.of(0.5F, 0.0F, 0.0F, 0.0F, 0.2618F, 0.0F));
 
-		leftWing04 = new ModelPart(this);
-		leftWing04.setPivot(0.0F, 0.5F, 7.2F);
-		leftWing03.addChild(leftWing04);
-		setRotationAngle(leftWing04, 1.0908F, 0.0F, 0.0F);
-		leftWing04.setTextureOffset(55, 0).addCuboid(-0.7F, -0.2F, -0.5F, 1.0F, 14.0F, 1.0F, 0.0F, true);
-
-		leftWing05 = new ModelPart(this);
-		leftWing05.setPivot(-0.5F, 4.8F, -0.2F);
-		leftWing04.addChild(leftWing05);
-		leftWing05.setTextureOffset(32, 31).addCuboid(0.4F, -4.0F, -12.3F, 0.0F, 20.0F, 13.0F, 0.0F, true);
-
-		lFeathers02 = new ModelPart(this);
-		lFeathers02.setPivot(0.0F, -3.5F, -3.2F);
-		leftWing04.addChild(lFeathers02);
-		setRotationAngle(lFeathers02, 0.0F, 0.0F, 0.0873F);
-
-		Box_r1 = new ModelPart(this);
-		Box_r1.setPivot(0.0F, 0.0F, 0.0F);
-		lFeathers02.addChild(Box_r1);
-		setRotationAngle(Box_r1, 0.48F, 0.0F, 0.0F);
-		Box_r1.setTextureOffset(0, 36).addCuboid(0.0F, -6.6F, -13.8F, 1.0F, 14.0F, 14.0F, 0.0F, true);
-
-		lFeathers01 = new ModelPart(this);
-		lFeathers01.setPivot(0.6F, 1.3F, 1.5F);
-		leftWing02.addChild(lFeathers01);
-		setRotationAngle(lFeathers01, -0.1745F, -0.0873F, 0.0F);
-
-		Box_r2 = new ModelPart(this);
-		Box_r2.setPivot(0.0F, 0.0F, 0.0F);
-		lFeathers01.addChild(Box_r2);
-		setRotationAngle(Box_r2, 0.1745F, 0.0F, 0.0F);
-		Box_r2.setTextureOffset(0, 10).addCuboid(-0.5F, -0.8F, -8.1F, 1.0F, 10.0F, 16.0F, 0.0F, true);
-
-		rightWing01 = new ModelPart(this);
-		rightWing01.setPivot(6.0F, 0.0F, 0.0F);
-		setRotationAngle(rightWing01, 0.0F, -1.5708F, -0.436332F);
-		rightWing01.setTextureOffset(66, 0).addCuboid(-1.0F, -1.0F, -1.0F, 2.0F, 4.0F, 5.0F, 0.0F, true);
-		leftWing.addChild(rightWing01);
-
-		rightWing02 = new ModelPart(this);
-		rightWing02.setPivot(0.5F, 0.0F, 3.5F);
-		rightWing01.addChild(rightWing02);
-		setRotationAngle(rightWing02, 0.6109F, -0.48F, 0.0F);
-		rightWing02.setTextureOffset(81, 0).addCuboid(-0.5F, 0.0F, -1.5F, 1.0F, 2.0F, 8.0F, 0.0F, true);
-
-		rightWing03 = new ModelPart(this);
-		rightWing03.setPivot(0.0F, 1.0F, 6.5F);
-		rightWing02.addChild(rightWing03);
-		setRotationAngle(rightWing03, -0.5672F, -0.3054F, 0.0F);
-		rightWing03.setTextureOffset(101, 0).addCuboid(-0.5F, -1.1F, -0.5F, 1.0F, 2.0F, 8.0F, 0.0F, true);
-
-		rightWing04 = new ModelPart(this);
-		rightWing04.setPivot(0.0F, 0.0F, 7.5F);
-		rightWing03.addChild(rightWing04);
-		setRotationAngle(rightWing04, -0.7418F, 0.0F, 0.0F);
-		rightWing04.setTextureOffset(60, 13).addCuboid(-0.4F, -0.8F, -4.0F, 1.0F, 1.0F, 19.0F, 0.0F, true);
-
-		rightWing04Leather = new ModelPart(this);
-		rightWing04Leather.setPivot(0.0F, 0.0F, 0.0F);
-		rightWing04.addChild(rightWing04Leather);
-		rightWing04Leather.setTextureOffset(95, 40).addCuboid(0.0F, 0.0F, 0.0F, 0.0F, 5.0F, 14.0F, 0.0F, true);
-
-		rightWingStrut01 = new ModelPart(this);
-		rightWingStrut01.setPivot(0.0F, 1.0F, 7.0F);
-		rightWing03.addChild(rightWingStrut01);
-		setRotationAngle(rightWingStrut01, -1.0036F, 0.0F, 0.0F);
-		rightWingStrut01.setTextureOffset(83, 12).addCuboid(-0.4F, -0.5F, -0.5F, 1.0F, 1.0F, 16.0F, 0.0F, true);
-
-		rightWingStrut01Leather = new ModelPart(this);
-		rightWingStrut01Leather.setPivot(0.0F, 0.0F, 0.0F);
-		rightWingStrut01.addChild(rightWingStrut01Leather);
-		rightWingStrut01Leather.setTextureOffset(95, 34).addCuboid(0.05F, 0.0F, 0.0F, 0.0F, 5.0F, 14.0F, 0.0F, true);
-
-		rightWingStrut02 = new ModelPart(this);
-		rightWingStrut02.setPivot(0.0F, 1.0F, 6.0F);
-		rightWing03.addChild(rightWingStrut02);
-		setRotationAngle(rightWingStrut02, -1.309F, 0.0F, 0.0F);
-		rightWingStrut02.setTextureOffset(83, 12).addCuboid(-0.4F, -0.5F, -0.5F, 1.0F, 1.0F, 16.0F, 0.0F, true);
-
-		rightWingStrut02Leather = new ModelPart(this);
-		rightWingStrut02Leather.setPivot(0.0F, 0.0F, 0.0F);
-		rightWingStrut02.addChild(rightWingStrut02Leather);
-		rightWingStrut02Leather.setTextureOffset(93, 25).addCuboid(0.1F, 0.0F, -1.0F, 0.0F, 6.0F, 16.0F, 0.0F, true);
-
-		rightWingStrut03 = new ModelPart(this);
-		rightWingStrut03.setPivot(0.0F, 1.0F, 5.0F);
-		rightWing03.addChild(rightWingStrut03);
-		setRotationAngle(rightWingStrut03, -1.6581F, 0.0F, 0.0F);
-		rightWingStrut03.setTextureOffset(83, 12).addCuboid(-0.4F, -0.5F, -0.5F, 1.0F, 1.0F, 16.0F, 0.0F, true);
-
-		rightWingStrut03Leather = new ModelPart(this);
-		rightWingStrut03Leather.setPivot(0.0F, 0.0F, 0.0F);
-		rightWingStrut03.addChild(rightWingStrut03Leather);
-		rightWingStrut03Leather.setTextureOffset(93, 19).addCuboid(0.15F, 0.0F, 0.0F, 0.0F, 6.0F, 15.0F, 0.0F, true);
-
-		rightStrutLowest = new ModelPart(this);
-		rightStrutLowest.setPivot(-0.5F, 1.0F, 2.0F);
-		rightWing02.addChild(rightStrutLowest);
-		setRotationAngle(rightStrutLowest, -0.3491F, 0.0F, 0.0F);
-		rightStrutLowest.setTextureOffset(104, 12).addCuboid(0.1F, 0.0F, -0.5F, 1.0F, 12.0F, 1.0F, 0.0F, true);
-
-		rightStrutLowestLeather01 = new ModelPart(this);
-		rightStrutLowestLeather01.setPivot(0.5F, 0.0F, 0.0F);
-		rightStrutLowest.addChild(rightStrutLowestLeather01);
-		rightStrutLowestLeather01.setTextureOffset(79, 28).addCuboid(0.0F, -1.0F, 0.0F, 0.0F, 12.0F, 6.0F, 0.0F, true);
-
-		rightStrutLowestLeather02 = new ModelPart(this);
-		rightStrutLowestLeather02.setPivot(0.5F, 0.0F, 0.0F);
-		rightStrutLowest.addChild(rightStrutLowestLeather02);
-		setRotationAngle(rightStrutLowestLeather02, 0.0F, 0.2618F, 0.0F);
-		rightStrutLowestLeather02.setTextureOffset(60, 25).addCuboid(0.0F, -1.0F, -9.0F, 0.0F, 12.0F, 9.0F, 0.0F, true);
+		return TexturedModelData.of(modelData, 128, 64);
 	}
 
 	@Override
 	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 		super.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
-
-		if(state == WingEntityModelOld.State.IDLE || state == State.CROUCHING)
+		if(state == State.IDLE || state == State.CROUCHING)
 			leftWing03.pitch = (float) Math.toRadians(-60);
 		if(state == State.FLYING)
 			leftWing03.pitch = (float) Math.toRadians(-32.5);
-
 		rightWing03.pitch = leftWing03.pitch;
 	}
-
-	public void setRotationAngle(ModelPart bone, float x, float y, float z) {
-		bone.pitch = x;
-		bone.yaw = y;
-		bone.roll = z;
-	}*/
 }

@@ -30,6 +30,8 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 	private final LeatherWingsModel<T> leatherWings;
 	private final LightWingsModel<T> lightWings;
 	private final FlandresWingsModel<T> flandresWings;
+	private final DiscordsWingsModel<T> discordsWings;
+	private final ZanzasWingsModel<T> zanzasWings;
 
 	public WingsFeatureRenderer(FeatureRendererContext<T, M> context, EntityModelLoader loader) {
 		super(context);
@@ -37,6 +39,8 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 		this.leatherWings = new LeatherWingsModel<>(loader.getModelPart(IcarusClient.LEATHER));
 		this.lightWings = new LightWingsModel<>(loader.getModelPart(IcarusClient.LIGHT));
 		this.flandresWings = new FlandresWingsModel<>(loader.getModelPart(IcarusClient.FLANDRE));
+		this.discordsWings = new DiscordsWingsModel<>(loader.getModelPart(IcarusClient.DISCORD));
+		this.zanzasWings = new ZanzasWingsModel<>(loader.getModelPart(IcarusClient.ZANZA));
 	}
 
 	@Override
@@ -67,10 +71,10 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 						wingModel = lightWings;
 					if(wingType.equals("flandres"))
 						wingModel = flandresWings;
-					/*if(wingType.equals("discords"))
-						wingModel = new DiscordsWingsModel<>();
+					if(wingType.equals("discords"))
+						wingModel = discordsWings;
 					if(wingType.equals("zanzas"))
-						wingModel = new ZanzasWingsModel<>();*/
+						wingModel = zanzasWings;
 
 					Identifier layer1 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings.png");
 					Identifier layer2 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings_2.png");

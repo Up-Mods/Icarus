@@ -1,10 +1,7 @@
 package com.camscorner.icarus.client;
 
 import com.camscorner.icarus.Icarus;
-import com.camscorner.icarus.client.models.FeatheredWingsModel;
-import com.camscorner.icarus.client.models.FlandresWingsModel;
-import com.camscorner.icarus.client.models.LeatherWingsModel;
-import com.camscorner.icarus.client.models.LightWingsModel;
+import com.camscorner.icarus.client.models.*;
 import com.camscorner.icarus.common.items.WingItem;
 import com.camscorner.icarus.core.util.CameraSystem;
 import com.camscorner.icarus.core.util.ColourHelper;
@@ -37,6 +34,8 @@ public class IcarusClient implements ClientModInitializer {
 		EntityModelLayerRegistry.registerModelLayer(LEATHER, LeatherWingsModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(LIGHT, LightWingsModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(FLANDRE, FlandresWingsModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(DISCORD, DiscordsWingsModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(ZANZA, ZanzasWingsModel::getTexturedModelData);
 
 		ColorProviderRegistryImpl.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? ColourHelper.dyeToDecimal(((WingItem) stack.getItem()).getPrimaryColour()) : ColourHelper.dyeToDecimal(((WingItem) stack.getItem()).getSecondaryColour()),
 				WHITE_FEATHERED_WINGS, ORANGE_FEATHERED_WINGS, MAGENTA_FEATHERED_WINGS, LIGHT_BLUE_FEATHERED_WINGS, YELLOW_FEATHERED_WINGS, LIME_FEATHERED_WINGS, PINK_FEATHERED_WINGS, GREY_FEATHERED_WINGS, LIGHT_GREY_FEATHERED_WINGS, CYAN_FEATHERED_WINGS, PURPLE_FEATHERED_WINGS, BLUE_FEATHERED_WINGS, BROWN_FEATHERED_WINGS, GREEN_FEATHERED_WINGS, RED_FEATHERED_WINGS, BLACK_FEATHERED_WINGS,
