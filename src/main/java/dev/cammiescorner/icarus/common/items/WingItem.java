@@ -113,6 +113,13 @@ public class WingItem extends TrinketItem {
 
 	public void stopFlying(PlayerEntity player) {
 		shouldSlowfall = true;
+
+		if(player.getPitch() < -90 || player.getPitch() > 90) {
+			float offset = (player.getPitch() < -90 ? player.getPitch() + 180 : player.getPitch() - 180) * 2;
+			player.setPitch((player.getPitch() < -90 ? 180 + offset : -180 - offset) + player.getPitch());
+			player.setYaw(180 + player.getYaw());
+		}
+
 		player.stopFallFlying();
 	}
 
@@ -121,11 +128,11 @@ public class WingItem extends TrinketItem {
 		Vec3d rotation = player.getRotationVector();
 		Vec3d velocity = player.getVelocity();
 		float modifier = Icarus.getConfig().armourSlows ? Math.max(1F, (player.getArmor() / 30F) * Icarus.getConfig().maxSlowedMultiplier) : 1F;
-		System.out.println(modifier);
+		float speed = Icarus.getConfig().wingsSpeed / modifier;
 
-		player.setVelocity(velocity.add(rotation.x * (Icarus.getConfig().wingsSpeed / modifier) + (rotation.x * 1.5D - velocity.x) * (Icarus.getConfig().wingsAcceleration / modifier),
-				rotation.y * (Icarus.getConfig().wingsSpeed / modifier) + (rotation.y * 1.5D - velocity.y) * (Icarus.getConfig().wingsAcceleration / modifier),
-				rotation.z * (Icarus.getConfig().wingsSpeed / modifier) + (rotation.z * 1.5D - velocity.z) * (Icarus.getConfig().wingsAcceleration / modifier)));
+		player.setVelocity(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * speed,
+				rotation.y * speed + (rotation.y * 1.5D - velocity.y) * speed,
+				rotation.z * speed + (rotation.z * 1.5D - velocity.z) * speed));
 
 		if(!FREE_FLIGHT.contains(this) && !player.isCreative())
 			DeleteHungerMessage.send();
