@@ -32,7 +32,6 @@ import net.minecraft.util.math.Vec3d;
 
 public final class CameraSystem implements CameraUpdateCallback {
 	private static double prevRollOffset;
-	private static double lerpSpeed = 1.0D;
 
 	public CameraSystem() {
 		CameraUpdateCallback.EVENT.Register(this);
@@ -40,10 +39,12 @@ public final class CameraSystem implements CameraUpdateCallback {
 
 	@Override
 	public Transform onCameraUpdate(Camera camera, Transform cameraTransform, float deltaTime) {
+		float pitch = camera.getPitch();
+		float rollAmount = (pitch < -90 || pitch > 90) ? Icarus.getConfig().rollAmount : -Icarus.getConfig().rollAmount;
 		Vec3d velocity = camera.getFocusedEntity().getVelocity();
 		Vec2f relativeXZVelocity = rotate(new Vec2f((float) velocity.x, (float) velocity.z), 360.0F - (float) cameraTransform.eulerRot.y);
 
-		rollOffset(cameraTransform, relativeXZVelocity, deltaTime, -Icarus.getConfig().rollAmount);
+		rollOffset(cameraTransform, relativeXZVelocity, deltaTime, rollAmount);
 
 		return cameraTransform;
 	}
@@ -58,6 +59,7 @@ public final class CameraSystem implements CameraUpdateCallback {
 
 	private void rollOffset(Transform transform, Vec2f relativeXZVelocity, double deltaTime, float intensity) {
 		double strafingRollOffset = -relativeXZVelocity.x * 15.0D;
+		double lerpSpeed = 1.0D;
 
 		prevRollOffset = strafingRollOffset = lerp(prevRollOffset, strafingRollOffset, deltaTime * lerpSpeed);
 

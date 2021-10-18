@@ -13,15 +13,13 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
-public class Icarus implements ModInitializer
-{
+public class Icarus implements ModInitializer {
 	public static final String MOD_ID = "icarus";
 	public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "general"), () -> new ItemStack(ModItems.WHITE_FEATHERED_WINGS));
 	private static ConfigHolder<IcarusConfig> configHolder;
 
 	@Override
-	public void onInitialize()
-	{
+	public void onInitialize() {
 		AutoConfig.register(IcarusConfig.class, JanksonConfigSerializer::new);
 		configHolder = AutoConfig.getConfigHolder(IcarusConfig.class);
 

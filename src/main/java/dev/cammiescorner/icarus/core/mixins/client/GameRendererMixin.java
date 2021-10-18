@@ -1,18 +1,18 @@
 /**
  * MIT License
- *
+ * <p>
  * Copyright (c) 2020 Mirsario
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -46,24 +46,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Optional;
 
 @Mixin(GameRenderer.class)
-public abstract class GameRendererMixin implements SynchronousResourceReloader, AutoCloseable
-{
-	@Shadow
-	@Final
-	private MinecraftClient client;
-
-	@Shadow
-	@Final
-	private Camera camera;
+public abstract class GameRendererMixin implements SynchronousResourceReloader, AutoCloseable {
+	@Shadow @Final private MinecraftClient client;
+	@Shadow @Final private Camera camera;
 
 	@Inject(method = "renderWorld", at = @At(value = "INVOKE", shift = At.Shift.BEFORE, target = "Lnet/minecraft/client/render/WorldRenderer;render(Lnet/minecraft/client/util/math/MatrixStack;FJZLnet/minecraft/client/render/Camera;Lnet/minecraft/client/render/GameRenderer;Lnet/minecraft/client/render/LightmapTextureManager;Lnet/minecraft/util/math/Matrix4f;)V"))
-	private void PostCameraUpdate(float tickDelta, long limitTime, MatrixStack matrix, CallbackInfo info)
-	{
+	private void PostCameraUpdate(float tickDelta, long limitTime, MatrixStack matrix, CallbackInfo info) {
 		Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(client.player);
 		boolean isWingItem = component.isPresent() && component.get().isEquipped(itemStack -> itemStack.getItem() instanceof WingItem);
 
-		if(client.player.isFallFlying() && isWingItem)
-		{
+		if(client.player != null && client.player.isFallFlying() && isWingItem) {
 			Transform cameraTransform = new Transform(camera.getPos(), new Vec3d(camera.getPitch(), camera.getYaw(), 0D));
 
 			cameraTransform = CameraUpdateCallback.EVENT.Invoker().onCameraUpdate(camera, cameraTransform, tickDelta);
