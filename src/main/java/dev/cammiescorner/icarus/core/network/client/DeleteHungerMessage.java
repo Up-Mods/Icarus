@@ -38,13 +38,14 @@ public class DeleteHungerMessage {
 
 				component.ifPresent(trinketComponent -> trinketComponent.getAllEquipped().forEach(pair -> {
 					ItemStack stack = pair.getRight();
-					WingItem wings = (WingItem) stack.getItem();
 
-					if(!wings.isUsable(stack))
-						wings.stopFlying(player);
+					if(stack.getItem() instanceof WingItem wings) {
+						if(!wings.isUsable(stack))
+							wings.stopFlying(player);
 
-					if(stack.isIn(MELTS))
-						stack.damage(1, player, p -> p.sendEquipmentBreakStatus(EquipmentSlot.CHEST));
+						if(stack.isIn(MELTS))
+							stack.damage(1, player, p -> p.sendEquipmentBreakStatus(EquipmentSlot.CHEST));
+					}
 				}));
 			}
 		});
