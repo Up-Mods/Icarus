@@ -1,13 +1,15 @@
 {
 	"required": true,
 	"minVersion": "0.8",
-	"package": "com.camscorner.icarus.core.mixins",
+	"package": "dev.cammiescorner.icarus.core.mixins",
 	"compatibilityLevel": "JAVA_16",
 	"mixins": [
+		"EntityMixin"
 	],
 	"client": [
-		"GameRendererMixin",
-		"PlayerEntityRendererMixin"
+		"client.GameRendererMixin",
+		"client.MouseMixin",
+		"client.PlayerEntityRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

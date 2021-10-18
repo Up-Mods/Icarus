@@ -1,8 +1,8 @@
 {
-  "#comment": "Creative Tabs",
+  //----Creative Tabs-----//
   "itemGroup.icarus.general": "Icarus",
 
-  "#comment": "Items",
+  //----Items----//
   "item.icarus.white_feathered_wings": "White Feathered Wings",
   "item.icarus.orange_feathered_wings": "Orange Feathered Wings",
   "item.icarus.magenta_feathered_wings": "Magenta Feathered Wings",
@@ -90,5 +90,16 @@
 
   "item.icarus.flandres_wings": "Flandre's Wings",
   "item.icarus.discords_wings": "Discord's Wings",
-  "item.icarus.zanzas_wings": "Zanza's Wings"
+  "item.icarus.zanzas_wings": "Zanza's Wings",
+
+  //-----ModMenu-----//
+  "text.autoconfig.icarus.title": "Icarus",
+  "text.autoconfig.icarus.option.canLoopdeloop": "Can the player do loop-de-loops?",
+  "text.autoconfig.icarus.option.armourSlows": "Does armour slow the player down?",
+  "text.autoconfig.icarus.option.maxSlowedMultiplier": "Maximum multiplier armour can slow you by.",
+  "text.autoconfig.icarus.option.wingsSpeed": "How fast the wings can fly.",
+  "text.autoconfig.icarus.option.wingsAcceleration": "How fast the wings accelerate.",
+  "text.autoconfig.icarus.option.wingsDurability": "How much durability all the wings have.",
+  "text.autoconfig.icarus.option.exhaustionAmount": "Exhaustion cost for flying.",
+  "text.autoconfig.icarus.option.rollAmount": "How much the player can roll while flying."
 }

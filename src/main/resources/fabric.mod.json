@@ -17,10 +17,13 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "com.camscorner.icarus.client.IcarusClient"
+      "dev.cammiescorner.icarus.client.IcarusClient"
     ],
     "main": [
-      "com.camscorner.icarus.Icarus"
+      "dev.cammiescorner.icarus.Icarus"
+    ],
+    "modmenu": [
+      "dev.cammiescorner.icarus.core.integration.IcarusModMenu"
     ]
   },
   "mixins": [
