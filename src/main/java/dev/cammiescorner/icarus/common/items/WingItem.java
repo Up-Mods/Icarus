@@ -56,6 +56,9 @@ public class WingItem extends TrinketItem {
 	@Override
 	public void tick(ItemStack stack, SlotReference slot, LivingEntity entity) {
 		if(entity instanceof PlayerEntity player) {
+			if(Icarus.HAS_POWERED_FLIGHT.test(player))
+				return;
+
 			if(player.getHungerManager().getFoodLevel() <= 6 || !isUsable(stack)) {
 				stopFlying(player);
 				return;
@@ -128,7 +131,7 @@ public class WingItem extends TrinketItem {
 		Vec3d rotation = player.getRotationVector();
 		Vec3d velocity = player.getVelocity();
 		float modifier = Icarus.getConfig().armourSlows ? Math.max(1F, (player.getArmor() / 30F) * Icarus.getConfig().maxSlowedMultiplier) : 1F;
-		float speed = Icarus.getConfig().wingsSpeed / modifier;
+		float speed = (Icarus.getConfig().wingsSpeed * (player.getPitch() < -80 && player.getPitch() > -100 ? 2.75F : 1)) / modifier;
 
 		player.setVelocity(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * speed,
 				rotation.y * speed + (rotation.y * 1.5D - velocity.y) * speed,

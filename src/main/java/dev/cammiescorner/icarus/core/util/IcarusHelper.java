@@ -19,10 +19,10 @@ public class IcarusHelper {
 		if(Icarus.getConfig().canLoopdeloop && entity instanceof PlayerEntity player && player.isFallFlying()) {
 			Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
 
-			component.ifPresent(trinketComponent -> trinketComponent.getAllEquipped().forEach(pair -> {
-				if(pair.getRight().getItem() instanceof WingItem)
+			component.ifPresent(trinketComponent -> {
+				if(trinketComponent.isEquipped(stack -> stack.getItem() instanceof WingItem) || Icarus.HAS_POWERED_FLIGHT.test(entity))
 					aaa.pitch = MathHelper.wrapDegrees(entity.getPitch());
-			}));
+			});
 		}
 
 		return aaa.pitch;

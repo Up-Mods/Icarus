@@ -4,9 +4,11 @@
 	"package": "dev.cammiescorner.icarus.core.mixins",
 	"compatibilityLevel": "JAVA_16",
 	"mixins": [
-		"EntityMixin"
+		"EntityMixin",
+		"PlayerEntityMixin"
 	],
 	"client": [
+		"client.CapeFeatureRendererMixin",
 		"client.GameRendererMixin",
 		"client.MouseMixin",
 		"client.PlayerEntityRendererMixin"

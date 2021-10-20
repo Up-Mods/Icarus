@@ -21,6 +21,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -48,51 +49,74 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 		if(entity instanceof PlayerEntity) {
 			Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(entity);
 
-			component.ifPresent(trinketComponent -> trinketComponent.getAllEquipped().forEach(pair -> {
-				ItemStack stack = pair.getRight();
-
-				if(stack.getItem() instanceof WingItem wingItem) {
-					float[] primaryColour = wingItem.getPrimaryColour().getColorComponents();
-					float[] secondaryColour = wingItem.getSecondaryColour().getColorComponents();
-					float r1 = primaryColour[0];
-					float g1 = primaryColour[1];
-					float b1 = primaryColour[2];
-					float r2 = secondaryColour[0];
-					float g2 = secondaryColour[1];
-					float b2 = secondaryColour[2];
-
-					String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase() : Registry.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
-
-					if(wingItem.getWingType() == WingItem.WingType.FEATHERED || wingItem.getWingType() == WingItem.WingType.MECHANICAL_FEATHERED)
-						wingModel = featheredWings;
-					if(wingItem.getWingType() == WingItem.WingType.DRAGON || wingItem.getWingType() == WingItem.WingType.MECHANICAL_LEATHER)
-						wingModel = leatherWings;
-					if(wingItem.getWingType() == WingItem.WingType.LIGHT)
-						wingModel = lightWings;
-					if(wingType.equals("flandres"))
-						wingModel = flandresWings;
-					if(wingType.equals("discords"))
-						wingModel = discordsWings;
-					if(wingType.equals("zanzas"))
-						wingModel = zanzasWings;
-
-					Identifier layer1 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings.png");
-					Identifier layer2 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings_2.png");
+			component.ifPresent(trinketComponent -> {
+				if(!trinketComponent.isEquipped(stack -> stack.getItem() instanceof WingItem) && Icarus.HAS_POWERED_FLIGHT.test(entity)) {
+					float r1 = 1F;
+					float g1 = 1F;
+					float b1 = 1F;
+					float r2 = 1F;
+					float g2 = 1F;
+					float b2 = 1F;
+					Identifier layer1 = new Identifier(Icarus.MOD_ID, "textures/entity/feathered_wings.png");
+					Identifier layer2 = new Identifier(Icarus.MOD_ID, "textures/entity/feathered_wings_2.png");
+					wingModel = featheredWings;
 
 					matrices.push();
 					matrices.translate(0.0D, 0.0D, 0.125D);
 					this.getContextModel().copyStateTo(this.wingModel);
 					this.wingModel.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
-					this.renderWings(matrices, vertexConsumers, stack, layer2, light, r2, g2, b2);
-					this.renderWings(matrices, vertexConsumers, stack, layer1, light, r1, g1, b1);
+					this.renderWings(matrices, vertexConsumers, null, layer2, light, r2, g2, b2);
+					this.renderWings(matrices, vertexConsumers, null, layer1, light, r1, g1, b1);
 					matrices.pop();
 				}
-			}));
+				else {
+					trinketComponent.getAllEquipped().forEach(pair -> {
+						ItemStack stack = pair.getRight();
+
+						if(stack.getItem() instanceof WingItem wingItem) {
+							float[] primaryColour = wingItem.getPrimaryColour().getColorComponents();
+							float[] secondaryColour = wingItem.getSecondaryColour().getColorComponents();
+							float r1 = primaryColour[0];
+							float g1 = primaryColour[1];
+							float b1 = primaryColour[2];
+							float r2 = secondaryColour[0];
+							float g2 = secondaryColour[1];
+							float b2 = secondaryColour[2];
+
+							String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase() : Registry.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
+
+							if(wingItem.getWingType() == WingItem.WingType.FEATHERED || wingItem.getWingType() == WingItem.WingType.MECHANICAL_FEATHERED)
+								wingModel = featheredWings;
+							if(wingItem.getWingType() == WingItem.WingType.DRAGON || wingItem.getWingType() == WingItem.WingType.MECHANICAL_LEATHER)
+								wingModel = leatherWings;
+							if(wingItem.getWingType() == WingItem.WingType.LIGHT)
+								wingModel = lightWings;
+							if(wingType.equals("flandres"))
+								wingModel = flandresWings;
+							if(wingType.equals("discords"))
+								wingModel = discordsWings;
+							if(wingType.equals("zanzas"))
+								wingModel = zanzasWings;
+
+							Identifier layer1 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings.png");
+							Identifier layer2 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings_2.png");
+
+							matrices.push();
+							matrices.translate(0.0D, 0.0D, 0.125D);
+							this.getContextModel().copyStateTo(this.wingModel);
+							this.wingModel.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
+							this.renderWings(matrices, vertexConsumers, stack, layer2, light, r2, g2, b2);
+							this.renderWings(matrices, vertexConsumers, stack, layer1, light, r1, g1, b1);
+							matrices.pop();
+						}
+					});
+				}
+			});
 		}
 	}
 
-	public void renderWings(MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, Identifier layerName, int light, float r, float g, float b) {
-		VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getEntityTranslucent(layerName), false, stack.hasGlint());
+	public void renderWings(MatrixStack matrices, VertexConsumerProvider vertexConsumers, @Nullable ItemStack stack, Identifier layerName, int light, float r, float g, float b) {
+		VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getEntityTranslucent(layerName), false, stack != null && stack.hasGlint());
 		this.wingModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0F);
 	}
 }

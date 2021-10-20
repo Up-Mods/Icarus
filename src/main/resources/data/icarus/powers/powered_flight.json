@@ -1,0 +1,9 @@
+{
+	"type": "origins:attribute",
+	"modifier": {
+		"name": "Origin modifier",
+		"attribute": "caelus.elytra_flight",
+		"operation": "addition",
+		"value": 1
+	}
+}

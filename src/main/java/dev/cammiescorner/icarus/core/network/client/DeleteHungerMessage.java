@@ -33,7 +33,7 @@ public class DeleteHungerMessage {
 		server.execute(() -> {
 			player.getHungerManager().addExhaustion(Icarus.getConfig().exhaustionAmount);
 
-			if(Icarus.getConfig().wingsDurability > 0 && player.age % 20 == 0) {
+			if(!Icarus.HAS_POWERED_FLIGHT.test(player) && Icarus.getConfig().wingsDurability > 0 && player.age % 20 == 0) {
 				Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
 
 				component.ifPresent(trinketComponent -> trinketComponent.getAllEquipped().forEach(pair -> {
