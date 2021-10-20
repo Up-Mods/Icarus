@@ -2,6 +2,7 @@ package dev.cammiescorner.icarus.core.network.client;
 
 import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.common.items.WingItem;
+import dev.cammiescorner.icarus.core.util.IcarusHelper;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import io.netty.buffer.Unpooled;
@@ -41,7 +42,7 @@ public class DeleteHungerMessage {
 
 					if(stack.getItem() instanceof WingItem wings) {
 						if(!wings.isUsable(stack))
-							wings.stopFlying(player);
+							IcarusHelper.stopFlying(player);
 
 						if(stack.isIn(MELTS))
 							stack.damage(1, player, p -> p.sendEquipmentBreakStatus(EquipmentSlot.CHEST));

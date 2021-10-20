@@ -3,7 +3,7 @@
 		"icarus:powered_flight",
 		"origins:aerial_combatant",
 		"icarus:hollow_bones",
-		"origins:unwieldy",
+		"origins:no_shield",
 		"origins:carnivore"
 	],
 	"icon": "icarus:white_feathered_wings",
