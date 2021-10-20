@@ -104,6 +104,7 @@
   "text.autoconfig.icarus.title": "Icarus",
   "text.autoconfig.icarus.option.canLoopdeloop": "Can the player do loop-de-loops?",
   "text.autoconfig.icarus.option.armourSlows": "Does armour slow the player down?",
+  "text.autoconfig.icarus.option.canSlowFall": "Can the player slow-fall by Sneaking while flying?",
   "text.autoconfig.icarus.option.maxSlowedMultiplier": "Maximum multiplier armour can slow you by.",
   "text.autoconfig.icarus.option.wingsSpeed": "How fast the wings can fly.",
   "text.autoconfig.icarus.option.wingsAcceleration": "How fast the wings accelerate.",

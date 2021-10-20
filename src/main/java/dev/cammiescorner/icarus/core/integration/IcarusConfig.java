@@ -8,6 +8,7 @@ import me.shedaniel.autoconfig.annotation.Config;
 public class IcarusConfig implements ConfigData {
 	public boolean canLoopdeloop = true;
 	public boolean armourSlows = true;
+	public boolean canSlowFall = false;
 	public float maxSlowedMultiplier = 3F;
 	public float wingsSpeed = 0.02F;
 	public int wingsDurability = 432;

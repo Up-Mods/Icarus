@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.core.util.IcarusHelper;
+import dev.cammiescorner.icarus.core.util.SlowFallEntity;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.tag.TagRegistry;
@@ -65,11 +66,20 @@ public class WingItem extends TrinketItem {
 				if(player.forwardSpeed > 0)
 					IcarusHelper.applySpeed(player, this);
 
-				if(player.isSubmergedInWater())
+				if((Icarus.getConfig().canSlowFall && player.isSneaking()) || player.isSubmergedInWater())
 					IcarusHelper.stopFlying(player);
 
 				if(player.getPos().y > player.world.getHeight() + 64 && player.age % 2 == 0 && MELTS.contains(this))
 					stack.damage(1, player, p -> p.sendEquipmentBreakStatus(EquipmentSlot.CHEST));
+			}
+			else {
+				if(player.isOnGround() || player.isTouchingWater())
+					((SlowFallEntity) player).setSlowFalling(false);
+
+				if(((SlowFallEntity) player).isSlowFalling()) {
+					player.fallDistance = 0F;
+					player.setVelocity(player.getVelocity().x, -0.4, player.getVelocity().z);
+				}
 			}
 		}
 	}

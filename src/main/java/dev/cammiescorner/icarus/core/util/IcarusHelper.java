@@ -37,6 +37,7 @@ public class IcarusHelper {
 	}
 
 	public static void applySpeed(PlayerEntity player, Item item) {
+		((SlowFallEntity) player).setSlowFalling(false);
 		Vec3d rotation = player.getRotationVector();
 		Vec3d velocity = player.getVelocity();
 		float modifier = Icarus.getConfig().armourSlows ? Math.max(1F, (player.getArmor() / 30F) * Icarus.getConfig().maxSlowedMultiplier) : 1F;
@@ -51,6 +52,8 @@ public class IcarusHelper {
 	}
 
 	public static void stopFlying(PlayerEntity player) {
+		((SlowFallEntity) player).setSlowFalling(true);
+
 		if(player.getPitch() < -90 || player.getPitch() > 90) {
 			float offset = (player.getPitch() < -90 ? player.getPitch() + 180 : player.getPitch() - 180) * 2;
 			player.setPitch((player.getPitch() < -90 ? 180 + offset : -180 - offset) + player.getPitch());
