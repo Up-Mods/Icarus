@@ -13,7 +13,6 @@ import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -49,7 +48,7 @@ public class IcarusHelper {
 				rotation.z * speed + (rotation.z * 1.5D - velocity.z) * speed));
 	}
 
-	public static void applySpeed(PlayerEntity player, @Nullable Item item) {
+	public static void applySpeed(PlayerEntity player, Item item) {
 		((SlowFallEntity) player).setSlowFalling(false);
 		Vec3d rotation = player.getRotationVector();
 		Vec3d velocity = player.getVelocity();
