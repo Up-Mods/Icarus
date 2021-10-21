@@ -13,6 +13,7 @@ import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -36,18 +37,30 @@ public class IcarusHelper {
 		return aaa.pitch;
 	}
 
-	public static void applySpeed(PlayerEntity player, Item item) {
+	public static void applySpeed(PlayerEntity player) {
 		((SlowFallEntity) player).setSlowFalling(false);
 		Vec3d rotation = player.getRotationVector();
 		Vec3d velocity = player.getVelocity();
 		float modifier = Icarus.getConfig().armourSlows ? Math.max(1F, (player.getArmor() / 30F) * Icarus.getConfig().maxSlowedMultiplier) : 1F;
-		float speed = (Icarus.getConfig().wingsSpeed * (player.getPitch() < -80 && player.getPitch() > -100 ? 2.75F : 1)) / modifier;
+		float speed = (Icarus.getConfig().wingsSpeed * (player.getPitch() < -75 && player.getPitch() > -105 ? 3F : 1.5F)) / modifier;
+
+		player.setVelocity(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * speed,
+				rotation.y * speed + (rotation.y * 1.5D - velocity.y) * speed,
+				rotation.z * speed + (rotation.z * 1.5D - velocity.z) * speed));
+	}
+
+	public static void applySpeed(PlayerEntity player, @Nullable Item item) {
+		((SlowFallEntity) player).setSlowFalling(false);
+		Vec3d rotation = player.getRotationVector();
+		Vec3d velocity = player.getVelocity();
+		float modifier = Icarus.getConfig().armourSlows ? Math.max(1F, (player.getArmor() / 30F) * Icarus.getConfig().maxSlowedMultiplier) : 1F;
+		float speed = (Icarus.getConfig().wingsSpeed * (player.getPitch() < -75 && player.getPitch() > -105 ? 2.75F : 1F)) / modifier;
 
 		player.setVelocity(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * speed,
 				rotation.y * speed + (rotation.y * 1.5D - velocity.y) * speed,
 				rotation.z * speed + (rotation.z * 1.5D - velocity.z) * speed));
 
-		if((item == null || !FREE_FLIGHT.contains(item)) && !player.isCreative())
+		if(!FREE_FLIGHT.contains(item) && !player.isCreative())
 			DeleteHungerMessage.send();
 	}
 

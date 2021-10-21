@@ -96,7 +96,7 @@
   "origin.icarus.icarae.name": "Icarae",
   "origin.icarus.icarae.description": "Carnivorous bird people, Icarae fly low to the ground, weaving between and through obstacles to hunt their prey.",
   "power.icarus.powered_flight.name": "Wings!",
-  "power.icarus.powered_flight.description": "Thanks to your wings, you are capable of powered flight at the cost of hunger.\n\nOf course you need to be light-weight to fly fast, so heavy armor slows you down significantly.",
+  "power.icarus.powered_flight.description": "Thanks to your wings, you are capable of powered flight at low-altitudes.\n\nOf course you need to be light-weight to fly fast, so heavy armor slows you down significantly.",
   "power.icarus.hollow_bones.name": "Hollow Bones",
   "power.icarus.hollow_bones.description": "In order to fly, Icarae had to evolve a hollow bone structure, similar to birds.\n\nThis causes them to be much more vulnerable to damage.",
 
