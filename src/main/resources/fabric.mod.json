@@ -12,7 +12,7 @@
     "issues": "https://github.com/CammiePone/Icarus/issues",
     "repo": "https://github.com/CammiePone/Icarus"
   },
-  "license": "MIT",
+  "license": "Custom License",
   "icon": "assets/icarus/textures/item/feathered_wings.png",
   "environment": "*",
   "entrypoints": {
