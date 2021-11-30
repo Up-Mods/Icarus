@@ -4,6 +4,7 @@ import dev.cammiescorner.icarus.core.integration.IcarusConfig;
 import dev.cammiescorner.icarus.core.integration.IcarusOrigins;
 import dev.cammiescorner.icarus.core.network.client.DeleteHungerMessage;
 import dev.cammiescorner.icarus.core.registry.ModItems;
+import dev.cammiescorner.icarus.core.util.EventHandler;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
@@ -31,6 +32,7 @@ public class Icarus implements ModInitializer {
 
 		ServerPlayNetworking.registerGlobalReceiver(DeleteHungerMessage.ID, DeleteHungerMessage::handle);
 		ModItems.register();
+		EventHandler.commonEvents();
 	}
 
 	public static IcarusConfig getConfig() {

@@ -1,7 +1,5 @@
 package dev.cammiescorner.icarus.common.items;
 
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.core.util.IcarusHelper;
 import dev.cammiescorner.icarus.core.util.SlowFallEntity;
@@ -10,8 +8,6 @@ import dev.emi.trinkets.api.TrinketItem;
 import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,12 +19,8 @@ import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import org.jetbrains.annotations.Nullable;
-import top.theillusivec4.caelus.api.CaelusApi;
-
-import java.util.UUID;
 
 public class WingItem extends TrinketItem {
-	private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 	private final DyeColor primaryColour;
 	private final DyeColor secondaryColour;
 	private final WingType wingType;
@@ -39,9 +31,6 @@ public class WingItem extends TrinketItem {
 	 */
 	public WingItem(DyeColor primaryColour, DyeColor secondaryColour, WingType wingType) {
 		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1).maxDamage(Icarus.getConfig().wingsDurability).rarity(wingType == WingType.UNIQUE ? Rarity.EPIC : Rarity.RARE));
-		ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(CaelusApi.getInstance().getFlightAttribute(), new EntityAttributeModifier(UUID.fromString("7d9704a0-383f-11eb-adc1-0242ac120002"), "Flight", 1, EntityAttributeModifier.Operation.ADDITION));
-		this.attributeModifiers = builder.build();
 		this.primaryColour = primaryColour;
 		this.secondaryColour = secondaryColour;
 		this.wingType = wingType;
@@ -82,11 +71,6 @@ public class WingItem extends TrinketItem {
 				}
 			}
 		}
-	}
-
-	@Override
-	public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid) {
-		return this.attributeModifiers;
 	}
 
 	@Override
