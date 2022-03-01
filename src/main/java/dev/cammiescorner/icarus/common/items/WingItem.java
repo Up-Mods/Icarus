@@ -5,7 +5,6 @@ import dev.cammiescorner.icarus.core.util.IcarusHelper;
 import dev.cammiescorner.icarus.core.util.SlowFallEntity;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketItem;
-import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,17 +13,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
 public class WingItem extends TrinketItem {
 	private final DyeColor primaryColour;
 	private final DyeColor secondaryColour;
 	private final WingType wingType;
-	private static final Tag<Item> MELTS = TagRegistry.item(new Identifier(Icarus.MOD_ID, "melts"));
+	private static final TagKey<Item> MELTS = TagKey.of(Registry.ITEM_KEY, new Identifier(Icarus.MOD_ID, "melts"));
 
 	/**
 	 * The default constructor.
@@ -53,12 +53,12 @@ public class WingItem extends TrinketItem {
 
 			if(player.isFallFlying()) {
 				if(player.forwardSpeed > 0)
-					IcarusHelper.applySpeed(player, this);
+					IcarusHelper.applySpeed(player, stack);
 
 				if((Icarus.getConfig().canSlowFall && player.isSneaking()) || player.isSubmergedInWater())
 					IcarusHelper.stopFlying(player);
 
-				if(player.getPos().y > player.world.getHeight() + 64 && player.age % 2 == 0 && MELTS.contains(this))
+				if(player.getPos().y > player.world.getHeight() + 64 && player.age % 2 == 0 && stack.isIn(MELTS))
 					stack.damage(1, player, p -> p.sendEquipmentBreakStatus(EquipmentSlot.CHEST));
 			}
 			else {
