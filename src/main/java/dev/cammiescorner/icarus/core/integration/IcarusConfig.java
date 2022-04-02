@@ -14,4 +14,6 @@ public class IcarusConfig implements ConfigData {
 	public int wingsDurability = 432;
 	public float exhaustionAmount = 0.03F;
 	public float rollAmount = 1.0F;
+	public boolean limitIcaraeHeight = true;
+	public int icaraeHeightLimit = 64;
 }
