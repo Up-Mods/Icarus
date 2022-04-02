@@ -2,6 +2,7 @@ package dev.cammiescorner.icarus.core.mixins;
 
 import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.core.util.IcarusHelper;
+import dev.cammiescorner.icarus.core.integration.IcarusConfig;
 import dev.cammiescorner.icarus.core.util.SlowFallEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -26,7 +27,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements SlowFall
 	public void tick(CallbackInfo info) {
 		if(Icarus.HAS_POWERED_FLIGHT.test(this)) {
 			if(isFallFlying()) {
-				if(forwardSpeed > 0 && getBlockY() - getAverageHeight() <= 64)
+				if(Icarus.getConfig().limitIcaraeHeight && forwardSpeed > 0 && getBlockY() - getAverageHeight() <= Icarus.getConfig().icaraeHeightLimit)
 					IcarusHelper.applySpeed((PlayerEntity) (Object) this);
 				if((Icarus.getConfig().canSlowFall && isSneaking()) || isSubmergedInWater())
 					IcarusHelper.stopFlying((PlayerEntity) (Object) this);
