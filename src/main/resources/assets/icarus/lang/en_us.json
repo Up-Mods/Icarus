@@ -110,5 +110,7 @@
   "text.autoconfig.icarus.option.wingsAcceleration": "How fast the wings accelerate.",
   "text.autoconfig.icarus.option.wingsDurability": "How much durability all the wings have.",
   "text.autoconfig.icarus.option.exhaustionAmount": "Exhaustion cost for flying.",
-  "text.autoconfig.icarus.option.rollAmount": "How much the player can roll while flying."
+  "text.autoconfig.icarus.option.rollAmount": "How much the player can roll while flying.",
+  "text.autoconfig.icarus.option.limitIcaraeHeight": "Limit how high can the Icarae Origin fly?",
+  "text.autoconfig.icarus.option.icaraeHeightLimit": "How high can the Icarae Origin fly."
 }
