@@ -6,8 +6,8 @@ import dev.cammiescorner.icarus.core.util.IcarusHelper;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.fabricmc.fabric.impl.networking.ClientSidePacketRegistryImpl;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,7 +27,7 @@ public class DeleteHungerMessage {
 
 	public static void send() {
 		PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-		ClientSidePacketRegistryImpl.INSTANCE.sendToServer(ID, buf);
+		ClientPlayNetworking.send(ID, buf);
 	}
 
 	public static void handle(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler network, PacketByteBuf buf, PacketSender sender) {
