@@ -11,7 +11,7 @@ public class IcarusConfig implements ConfigData {
 	public boolean canSlowFall = false;
 	public float maxSlowedMultiplier = 3F;
 	public float wingsSpeed = 0.02F;
-	public int wingsDurability = 432;
+	public int wingsDurability = 0;
 	public float exhaustionAmount = 0.03F;
 	public float rollAmount = 1.0F;
 }
