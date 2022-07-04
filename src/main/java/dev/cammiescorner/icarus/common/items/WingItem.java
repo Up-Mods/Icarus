@@ -37,7 +37,7 @@ public class WingItem extends TrinketItem {
 	}
 
 	public boolean isUsable(ItemStack stack) {
-		return stack.getDamage() < stack.getMaxDamage() - 1;
+		return Icarus.getConfig().wingsDurability <= 0 || stack.getDamage() < stack.getMaxDamage() - 1;
 	}
 
 	@Override
