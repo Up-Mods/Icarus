@@ -101,14 +101,14 @@
   "power.icarus.hollow_bones.description": "In order to fly, Icarae had to evolve a hollow bone structure, similar to birds.\n\nThis causes them to be much more vulnerable to damage.",
 
   //-----ModMenu-----//
-  "text.autoconfig.icarus.title": "Icarus",
-  "text.autoconfig.icarus.option.canLoopdeloop": "Can the player do loop-de-loops?",
-  "text.autoconfig.icarus.option.armourSlows": "Does armour slow the player down?",
-  "text.autoconfig.icarus.option.canSlowFall": "Can the player slow-fall by Sneaking while flying?",
-  "text.autoconfig.icarus.option.maxSlowedMultiplier": "Maximum multiplier armour can slow you by.",
-  "text.autoconfig.icarus.option.wingsSpeed": "How fast the wings can fly.",
-  "text.autoconfig.icarus.option.wingsAcceleration": "How fast the wings accelerate.",
-  "text.autoconfig.icarus.option.wingsDurability": "How much durability all the wings have.",
-  "text.autoconfig.icarus.option.exhaustionAmount": "Exhaustion cost for flying.",
-  "text.autoconfig.icarus.option.rollAmount": "How much the player can roll while flying."
+  "icarus.midnightconfig.title": "Icarus",
+  "icarus.midnightconfig.canLoopdeloop": "Can the player do loop-de-loops?",
+  "icarus.midnightconfig.armourSlows": "Does armour slow the player down?",
+  "icarus.midnightconfig.canSlowFall": "Can the player slow-fall by Sneaking while flying?",
+  "icarus.midnightconfig.maxSlowedMultiplier": "Maximum multiplier armour can slow you by.",
+  "icarus.midnightconfig.wingsSpeed": "How fast the wings can fly.",
+  "icarus.midnightconfig.wingsAcceleration": "How fast the wings accelerate.",
+  "icarus.midnightconfig.wingsDurability": "How much durability all the wings have.",
+  "icarus.midnightconfig.exhaustionAmount": "Exhaustion cost for flying.",
+  "icarus.midnightconfig.rollAmount": "How much the player can roll while flying."
 }

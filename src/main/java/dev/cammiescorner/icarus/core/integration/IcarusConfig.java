@@ -1,17 +1,14 @@
 package dev.cammiescorner.icarus.core.integration;
 
-import dev.cammiescorner.icarus.Icarus;
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
+import eu.midnightdust.lib.config.MidnightConfig;
 
-@Config(name = Icarus.MOD_ID)
-public class IcarusConfig implements ConfigData {
-	public boolean canLoopdeloop = true;
-	public boolean armourSlows = true;
-	public boolean canSlowFall = false;
-	public float maxSlowedMultiplier = 3F;
-	public float wingsSpeed = 0.02F;
-	public int wingsDurability = 0;
-	public float exhaustionAmount = 0.03F;
-	public float rollAmount = 1.0F;
+public class IcarusConfig extends MidnightConfig {
+	@Entry public static boolean canLoopdeloop = true;
+	@Entry public static boolean armourSlows = true;
+	@Entry public static boolean canSlowFall = false;
+	@Entry public static float maxSlowedMultiplier = 3F;
+	@Entry public static float wingsSpeed = 0.02F;
+	@Entry public static int wingsDurability = 0;
+	@Entry public static float exhaustionAmount = 0.03F;
+	@Entry public static float rollAmount = 1.0F;
 }

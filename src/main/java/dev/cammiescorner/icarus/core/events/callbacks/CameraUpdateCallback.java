@@ -31,9 +31,8 @@ import net.minecraft.client.render.Camera;
 
 public interface CameraUpdateCallback {
 	Event<CameraUpdateCallback> EVENT = EventHelper.createEvent(CameraUpdateCallback.class, (listeners) -> (camera, transform, deltaTime) -> {
-		for(CameraUpdateCallback listener : listeners) {
+		for(CameraUpdateCallback listener : listeners)
 			transform = listener.onCameraUpdate(camera, transform, deltaTime);
-		}
 
 		return transform;
 	});

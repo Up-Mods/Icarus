@@ -19,8 +19,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
@@ -66,8 +66,8 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 					matrices.translate(0.0D, 0.0D, 0.125D);
 					this.getContextModel().copyStateTo(this.wingModel);
 					this.wingModel.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
-					this.renderWings(matrices, vertexConsumers, null, layer2, light, r2, g2, b2);
-					this.renderWings(matrices, vertexConsumers, null, layer1, light, r1, g1, b1);
+					this.renderWings(matrices, vertexConsumers, null, RenderLayer.getEntityTranslucent(layer2), light, r2, g2, b2);
+					this.renderWings(matrices, vertexConsumers, null, RenderLayer.getEntityTranslucent(layer1), light, r1, g1, b1);
 					matrices.pop();
 				}
 				else {
@@ -84,7 +84,7 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 							float g2 = secondaryColour[1];
 							float b2 = secondaryColour[2];
 
-							String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase(Locale.ROOT) : Registry.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
+							String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase(Locale.ROOT) : Registries.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
 
 							if(wingItem.getWingType() == WingItem.WingType.FEATHERED || wingItem.getWingType() == WingItem.WingType.MECHANICAL_FEATHERED)
 								wingModel = featheredWings;
@@ -106,8 +106,8 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 							matrices.translate(0.0D, 0.0D, 0.125D);
 							this.getContextModel().copyStateTo(this.wingModel);
 							this.wingModel.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
-							this.renderWings(matrices, vertexConsumers, stack, layer2, light, r2, g2, b2);
-							this.renderWings(matrices, vertexConsumers, stack, layer1, light, r1, g1, b1);
+							this.renderWings(matrices, vertexConsumers, stack, RenderLayer.getEntityTranslucent(layer2), light, r2, g2, b2);
+							this.renderWings(matrices, vertexConsumers, stack, RenderLayer.getEntityTranslucent(layer1), light, r1, g1, b1);
 							matrices.pop();
 						}
 					});
@@ -116,8 +116,8 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 		}
 	}
 
-	public void renderWings(MatrixStack matrices, VertexConsumerProvider vertexConsumers, @Nullable ItemStack stack, Identifier layerName, int light, float r, float g, float b) {
-		VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getEntityTranslucent(layerName), false, stack != null && stack.hasGlint());
-		this.wingModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0F);
+	public void renderWings(MatrixStack matrices, VertexConsumerProvider vertexConsumers, @Nullable ItemStack stack, RenderLayer renderLayer, int light, float r, float g, float b) {
+		VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, renderLayer, false, stack != null && stack.hasGlint());
+		this.wingModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, r, g, b, 1F);
 	}
 }

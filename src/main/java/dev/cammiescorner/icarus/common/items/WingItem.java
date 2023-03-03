@@ -1,6 +1,7 @@
 package dev.cammiescorner.icarus.common.items;
 
 import dev.cammiescorner.icarus.Icarus;
+import dev.cammiescorner.icarus.core.integration.IcarusConfig;
 import dev.cammiescorner.icarus.core.util.IcarusHelper;
 import dev.cammiescorner.icarus.core.util.SlowFallEntity;
 import dev.emi.trinkets.api.SlotReference;
@@ -11,33 +12,33 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.TagKey;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
-import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
 public class WingItem extends TrinketItem {
 	private final DyeColor primaryColour;
 	private final DyeColor secondaryColour;
 	private final WingType wingType;
-	private static final TagKey<Item> MELTS = TagKey.of(Registry.ITEM_KEY, new Identifier(Icarus.MOD_ID, "melts"));
+	private static final TagKey<Item> MELTS = TagKey.of(Registries.ITEM.getKey(), new Identifier(Icarus.MOD_ID, "melts"));
 
 	/**
 	 * The default constructor.
 	 */
 	public WingItem(DyeColor primaryColour, DyeColor secondaryColour, WingType wingType) {
-		super(new Item.Settings().group(Icarus.ITEM_GROUP).maxCount(1).maxDamage(Icarus.getConfig().wingsDurability).rarity(wingType == WingType.UNIQUE ? Rarity.EPIC : Rarity.RARE));
+		super(new Item.Settings().maxCount(1).maxDamage(IcarusConfig.wingsDurability).rarity(wingType == WingType.UNIQUE ? Rarity.EPIC : Rarity.RARE));
 		this.primaryColour = primaryColour;
 		this.secondaryColour = secondaryColour;
 		this.wingType = wingType;
 	}
 
 	public boolean isUsable(ItemStack stack) {
-		return Icarus.getConfig().wingsDurability <= 0 || stack.getDamage() < stack.getMaxDamage() - 1;
+		return IcarusConfig.wingsDurability <= 0 || stack.getDamage() < stack.getMaxDamage() - 1;
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class WingItem extends TrinketItem {
 				if(player.forwardSpeed > 0)
 					IcarusHelper.applySpeed(player, stack);
 
-				if((Icarus.getConfig().canSlowFall && player.isSneaking()) || player.isSubmergedInWater())
+				if((IcarusConfig.canSlowFall && player.isSneaking()) || player.isSubmergedInWater())
 					IcarusHelper.stopFlying(player);
 
 				if(player.getPos().y > player.world.getHeight() + 64 && player.age % 2 == 0 && stack.isIn(MELTS))

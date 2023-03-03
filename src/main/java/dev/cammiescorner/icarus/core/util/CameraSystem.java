@@ -24,8 +24,8 @@
 
 package dev.cammiescorner.icarus.core.util;
 
-import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.core.events.callbacks.CameraUpdateCallback;
+import dev.cammiescorner.icarus.core.integration.IcarusConfig;
 import net.minecraft.client.render.Camera;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
@@ -40,7 +40,7 @@ public final class CameraSystem implements CameraUpdateCallback {
 	@Override
 	public Transform onCameraUpdate(Camera camera, Transform cameraTransform, float deltaTime) {
 		float pitch = camera.getPitch();
-		float rollAmount = (pitch < -90 || pitch > 90) ? Icarus.getConfig().rollAmount : -Icarus.getConfig().rollAmount;
+		float rollAmount = (pitch < -90 || pitch > 90) ? IcarusConfig.rollAmount : -IcarusConfig.rollAmount;
 		Vec3d velocity = camera.getFocusedEntity().getVelocity();
 		Vec2f relativeXZVelocity = rotate(new Vec2f((float) velocity.x, (float) velocity.z), 360.0F - (float) cameraTransform.eulerRot.y);
 

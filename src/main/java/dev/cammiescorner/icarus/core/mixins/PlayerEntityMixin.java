@@ -1,6 +1,7 @@
 package dev.cammiescorner.icarus.core.mixins;
 
 import dev.cammiescorner.icarus.Icarus;
+import dev.cammiescorner.icarus.core.integration.IcarusConfig;
 import dev.cammiescorner.icarus.core.util.IcarusHelper;
 import dev.cammiescorner.icarus.core.util.SlowFallEntity;
 import net.minecraft.entity.EntityType;
@@ -28,7 +29,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements SlowFall
 			if(isFallFlying()) {
 				if(forwardSpeed > 0 && getBlockY() - getAverageHeight() <= 64)
 					IcarusHelper.applySpeed((PlayerEntity) (Object) this);
-				if((Icarus.getConfig().canSlowFall && isSneaking()) || isSubmergedInWater())
+				if((IcarusConfig.canSlowFall && isSneaking()) || isSubmergedInWater())
 					IcarusHelper.stopFlying((PlayerEntity) (Object) this);
 			}
 			else {

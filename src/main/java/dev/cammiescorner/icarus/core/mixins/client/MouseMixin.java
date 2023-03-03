@@ -1,6 +1,6 @@
 package dev.cammiescorner.icarus.core.mixins.client;
 
-import dev.cammiescorner.icarus.Icarus;
+import dev.cammiescorner.icarus.core.integration.IcarusConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import org.spongepowered.asm.mixin.Final;
@@ -17,7 +17,7 @@ public class MouseMixin {
 			target = "Lnet/minecraft/client/network/ClientPlayerEntity;changeLookDirection(DD)V"
 	), index = 0)
 	public double changeLookDirectionX(double x) {
-		if(Icarus.getConfig().canLoopdeloop && client.player != null && client.player.isFallFlying() && (client.player.getPitch() > 90 || client.player.getPitch() < -90))
+		if(IcarusConfig.canLoopdeloop && client.player != null && client.player.isFallFlying() && (client.player.getPitch() > 90 || client.player.getPitch() < -90))
 			return -x;
 
 		return x;
