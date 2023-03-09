@@ -7,8 +7,8 @@ import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class WingsPower extends Power implements WingsValues {
 	private Item wingsItem;
@@ -28,7 +28,7 @@ public class WingsPower extends Power implements WingsValues {
 	@Override
 	public Item getWings() {
 		if(wingsItem == null)
-			wingsItem = Registries.ITEM.get(wingsId) instanceof WingItem wings ? wings : ModItems.WHITE_FEATHERED_WINGS;
+			wingsItem = Registry.ITEM.get(wingsId) instanceof WingItem wings ? wings : ModItems.WHITE_FEATHERED_WINGS;
 
 		return wingsItem;
 	}

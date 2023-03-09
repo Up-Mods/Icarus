@@ -19,8 +19,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
@@ -61,7 +61,7 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 					float g2 = secondaryColour[1];
 					float b2 = secondaryColour[2];
 
-					String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase(Locale.ROOT) : Registries.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
+					String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase(Locale.ROOT) : Registry.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
 
 					if(wingItem.getWingType() == WingItem.WingType.FEATHERED || wingItem.getWingType() == WingItem.WingType.MECHANICAL_FEATHERED)
 						wingModel = featheredWings;
@@ -101,7 +101,7 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 							float g2 = secondaryColour[1];
 							float b2 = secondaryColour[2];
 
-							String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase(Locale.ROOT) : Registries.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
+							String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase(Locale.ROOT) : Registry.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
 
 							if(wingItem.getWingType() == WingItem.WingType.FEATHERED || wingItem.getWingType() == WingItem.WingType.MECHANICAL_FEATHERED)
 								wingModel = featheredWings;

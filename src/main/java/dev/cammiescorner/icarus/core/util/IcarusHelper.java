@@ -10,16 +10,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.registry.Registry;
 
 import java.util.Optional;
 
 public class IcarusHelper {
-	private static final TagKey<Item> FREE_FLIGHT = TagKey.of(Registries.ITEM.getKey(), new Identifier(Icarus.MOD_ID, "free_flight"));
+	private static final TagKey<Item> FREE_FLIGHT = TagKey.of(Registry.ITEM.getKey(), new Identifier(Icarus.MOD_ID, "free_flight"));
 
 	public static float getAdjustedPitch(Entity entity, float value) {
 		var aaa = new Object() {

@@ -20,6 +20,10 @@ repositories {
         content { includeGroup "com.jamieswhiteshirt" }
     }
     maven { url "https://jitpack.io" }
+
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
@@ -30,8 +34,10 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-    modImplementation "com.github.apace100:origins-fabric:${project.origins_version}"
+    modImplementation "maven.modrinth:origins:${project.origins_version}"
     modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
+    modImplementation "com.github.apace100:apoli:624eb4d094"
+    modImplementation "com.github.apace100:calio:v1.7.0"
 }
 
 processResources {

@@ -12,20 +12,20 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
 public class WingItem extends TrinketItem {
 	private final DyeColor primaryColour;
 	private final DyeColor secondaryColour;
 	private final WingType wingType;
-	private static final TagKey<Item> MELTS = TagKey.of(Registries.ITEM.getKey(), new Identifier(Icarus.MOD_ID, "melts"));
+	private static final TagKey<Item> MELTS = TagKey.of(Registry.ITEM.getKey(), new Identifier(Icarus.MOD_ID, "melts"));
 
 	/**
 	 * The default constructor.

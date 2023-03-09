@@ -13,15 +13,14 @@ import io.github.apace100.apoli.registry.ApoliRegistries;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.entity.Entity;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import java.util.function.Function;
 
 public class IcarusOrigins {
 	public static final PowerFactory<Power> WINGS_FACTORY = new PowerFactory<>(new Identifier(Icarus.MOD_ID, "wings"), new SerializableData()
-			.add("wings_type", SerializableDataTypes.IDENTIFIER, Registries.ITEM.getId(ModItems.WHITE_FEATHERED_WINGS))
+			.add("wings_type", SerializableDataTypes.IDENTIFIER, Registry.ITEM.getId(ModItems.WHITE_FEATHERED_WINGS))
 			.add("speed", SerializableDataTypes.FLOAT, 0.02F)
 			.add("armor_slow_multiplier", SerializableDataTypes.FLOAT, 3F)
 			.add("can_fly", SerializableDataTypes.BOOLEAN, true)
