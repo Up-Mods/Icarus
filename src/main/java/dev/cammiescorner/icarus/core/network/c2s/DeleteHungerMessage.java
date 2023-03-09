@@ -1,4 +1,4 @@
-package dev.cammiescorner.icarus.core.network.client;
+package dev.cammiescorner.icarus.core.network.c2s;
 
 import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.common.items.WingItem;
@@ -35,7 +35,7 @@ public class DeleteHungerMessage {
 		server.execute(() -> {
 			player.getHungerManager().addExhaustion(IcarusConfig.exhaustionAmount);
 
-			if(!Icarus.HAS_POWERED_FLIGHT.test(player) && IcarusConfig.wingsDurability > 0 && player.age % 20 == 0) {
+			if(!Icarus.HAS_WINGS.test(player) && IcarusConfig.wingsDurability > 0 && player.age % 20 == 0) {
 				Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
 
 				component.ifPresent(trinketComponent -> trinketComponent.getAllEquipped().forEach(pair -> {

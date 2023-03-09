@@ -3,7 +3,7 @@ package dev.cammiescorner.icarus.core.integration;
 import eu.midnightdust.lib.config.MidnightConfig;
 
 public class IcarusConfig extends MidnightConfig {
-	@Entry public static boolean canLoopdeloop = true;
+	@Entry public static boolean canLoopDeLoop = true;
 	@Entry public static boolean armourSlows = true;
 	@Entry public static boolean canSlowFall = false;
 	@Entry public static float maxSlowedMultiplier = 3F;

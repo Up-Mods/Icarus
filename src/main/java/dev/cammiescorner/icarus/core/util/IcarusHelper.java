@@ -1,9 +1,9 @@
 package dev.cammiescorner.icarus.core.util;
 
 import dev.cammiescorner.icarus.Icarus;
+import dev.cammiescorner.icarus.client.IcarusClient;
 import dev.cammiescorner.icarus.common.items.WingItem;
-import dev.cammiescorner.icarus.core.integration.IcarusConfig;
-import dev.cammiescorner.icarus.core.network.client.DeleteHungerMessage;
+import dev.cammiescorner.icarus.core.network.c2s.DeleteHungerMessage;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.entity.Entity;
@@ -26,11 +26,11 @@ public class IcarusHelper {
 			float pitch = value;
 		};
 
-		if(IcarusConfig.canLoopdeloop && entity instanceof PlayerEntity player && player.isFallFlying()) {
+		if(IcarusClient.canLoopDeLoop && entity instanceof PlayerEntity player && player.isFallFlying()) {
 			Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
 
 			component.ifPresent(trinketComponent -> {
-				if(trinketComponent.isEquipped(stack -> stack.getItem() instanceof WingItem) || Icarus.HAS_POWERED_FLIGHT.test(entity))
+				if(trinketComponent.isEquipped(stack -> stack.getItem() instanceof WingItem) || Icarus.HAS_WINGS.test(entity))
 					aaa.pitch = MathHelper.wrapDegrees(entity.getPitch());
 			});
 		}
@@ -39,11 +39,12 @@ public class IcarusHelper {
 	}
 
 	public static void applySpeed(PlayerEntity player) {
+		WingsValues values = Icarus.WINGS.apply(player);
 		((SlowFallEntity) player).setSlowFalling(false);
 		Vec3d rotation = player.getRotationVector();
 		Vec3d velocity = player.getVelocity();
-		float modifier = IcarusConfig.armourSlows ? Math.max(1F, (player.getArmor() / 30F) * IcarusConfig.maxSlowedMultiplier) : 1F;
-		float speed = (IcarusConfig.wingsSpeed * (player.getPitch() < -75 && player.getPitch() > -105 ? 3F : 1.5F)) / modifier;
+		float modifier = values.doesArmourSlow() ? Math.max(1F, (player.getArmor() / 30F) * values.getArmourSlowMultiplier()) : 1F;
+		float speed = (values.getSpeed() * (player.getPitch() < -75 && player.getPitch() > -105 ? 3F : 1.5F)) / modifier;
 
 		player.setVelocity(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * speed,
 				rotation.y * speed + (rotation.y * 1.5D - velocity.y) * speed,
@@ -54,8 +55,8 @@ public class IcarusHelper {
 		((SlowFallEntity) player).setSlowFalling(false);
 		Vec3d rotation = player.getRotationVector();
 		Vec3d velocity = player.getVelocity();
-		float modifier = IcarusConfig.armourSlows ? Math.max(1F, (player.getArmor() / 30F) * IcarusConfig.maxSlowedMultiplier) : 1F;
-		float speed = (IcarusConfig.wingsSpeed * (player.getPitch() < -75 && player.getPitch() > -105 ? 2.75F : 1F)) / modifier;
+		float modifier = IcarusClient.armourSlows ? Math.max(1F, (player.getArmor() / 30F) * IcarusClient.maxSlowedMultiplier) : 1F;
+		float speed = (IcarusClient.wingSpeed * (player.getPitch() < -75 && player.getPitch() > -105 ? 2.75F : 1F)) / modifier;
 
 		player.setVelocity(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * speed,
 				rotation.y * speed + (rotation.y * 1.5D - velocity.y) * speed,

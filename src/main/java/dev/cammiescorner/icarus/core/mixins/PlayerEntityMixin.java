@@ -7,9 +7,11 @@ import dev.cammiescorner.icarus.core.util.SlowFallEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,6 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity implements SlowFallEntity {
+	@Shadow public abstract void playSound(SoundEvent sound, float volume, float pitch);
+
 	@Unique public boolean slowFalling = false;
 
 	protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
@@ -25,7 +29,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements SlowFall
 
 	@Inject(method = "tick", at = @At("HEAD"))
 	public void tick(CallbackInfo info) {
-		if(Icarus.HAS_POWERED_FLIGHT.test(this)) {
+		if(Icarus.HAS_WINGS.test(this) && Icarus.WINGS.apply(this).canFly()) {
 			if(isFallFlying()) {
 				if(forwardSpeed > 0 && getBlockY() - getAverageHeight() <= 64)
 					IcarusHelper.applySpeed((PlayerEntity) (Object) this);

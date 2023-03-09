@@ -198,6 +198,7 @@ public class ModItems {
 			entries.add(DISCORDS_WINGS);
 			entries.add(ZANZAS_WINGS);
 		}).build();
+
 		ITEMS.keySet().forEach(item -> Registry.register(Registries.ITEM, ITEMS.get(item), item));
 	}
 

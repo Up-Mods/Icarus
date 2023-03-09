@@ -3,11 +3,13 @@ package dev.cammiescorner.icarus.client;
 import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.client.models.*;
 import dev.cammiescorner.icarus.common.items.WingItem;
+import dev.cammiescorner.icarus.core.network.s2c.SyncConfigValuesPacket;
 import dev.cammiescorner.icarus.core.util.CameraSystem;
 import dev.cammiescorner.icarus.core.util.ColourHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.loader.api.FabricLoader;
@@ -24,6 +26,10 @@ public class IcarusClient implements ClientModInitializer {
 	public static final EntityModelLayer FLANDRE = new EntityModelLayer(new Identifier(Icarus.MOD_ID, "flandre"), "main");
 	public static final EntityModelLayer DISCORD = new EntityModelLayer(new Identifier(Icarus.MOD_ID, "discord"), "main");
 	public static final EntityModelLayer ZANZA = new EntityModelLayer(new Identifier(Icarus.MOD_ID, "zanza"), "main");
+	public static float wingSpeed;
+	public static float maxSlowedMultiplier;
+	public static boolean armourSlows;
+	public static boolean canLoopDeLoop;
 
 	@Override
 	public void onInitializeClient() {
@@ -36,6 +42,8 @@ public class IcarusClient implements ClientModInitializer {
 		EntityModelLayerRegistry.registerModelLayer(FLANDRE, FlandresWingsModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(DISCORD, DiscordsWingsModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(ZANZA, ZanzasWingsModel::getTexturedModelData);
+
+		ClientPlayNetworking.registerGlobalReceiver(SyncConfigValuesPacket.ID, SyncConfigValuesPacket::handle);
 
 		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? ColourHelper.dyeToDecimal(((WingItem) stack.getItem()).getPrimaryColour()) : ColourHelper.dyeToDecimal(((WingItem) stack.getItem()).getSecondaryColour()),
 				WHITE_FEATHERED_WINGS, ORANGE_FEATHERED_WINGS, MAGENTA_FEATHERED_WINGS, LIGHT_BLUE_FEATHERED_WINGS, YELLOW_FEATHERED_WINGS, LIME_FEATHERED_WINGS, PINK_FEATHERED_WINGS, GREY_FEATHERED_WINGS, LIGHT_GREY_FEATHERED_WINGS, CYAN_FEATHERED_WINGS, PURPLE_FEATHERED_WINGS, BLUE_FEATHERED_WINGS, BROWN_FEATHERED_WINGS, GREEN_FEATHERED_WINGS, RED_FEATHERED_WINGS, BLACK_FEATHERED_WINGS,
