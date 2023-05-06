@@ -108,7 +108,7 @@ public class ModItems {
 
 	//-----Registry-----//
 	public static void register() {
-		FabricItemGroup.builder(new Identifier(Icarus.MOD_ID, "general")).icon(() -> new ItemStack(ModItems.WHITE_FEATHERED_WINGS)).entries((enabledFeatures, entries, operatorsEnabled) -> {
+		FabricItemGroup.builder(new Identifier(Icarus.MOD_ID, "general")).icon(() -> new ItemStack(ModItems.WHITE_FEATHERED_WINGS)).entries((enabledFeatures, entries) -> {
 			entries.add(WHITE_FEATHERED_WINGS);
 			entries.add(ORANGE_FEATHERED_WINGS);
 			entries.add(MAGENTA_FEATHERED_WINGS);

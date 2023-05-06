@@ -9,6 +9,7 @@ import dev.emi.trinkets.api.TrinketItem;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Equipment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -21,7 +22,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import org.jetbrains.annotations.Nullable;
 
-public class WingItem extends TrinketItem {
+public class WingItem extends TrinketItem implements Equipment {
 	private final DyeColor primaryColour;
 	private final DyeColor secondaryColour;
 	private final WingType wingType;
@@ -77,6 +78,11 @@ public class WingItem extends TrinketItem {
 	@Override
 	public boolean canRepair(ItemStack stack, ItemStack ingredient) {
 		return ingredient.isOf(Items.PHANTOM_MEMBRANE);
+	}
+
+	@Override
+	public EquipmentSlot getSlotType() {
+		return EquipmentSlot.CHEST;
 	}
 
 	@Nullable

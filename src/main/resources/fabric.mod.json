@@ -32,8 +32,8 @@
   "depends": {
     "fabricloader": ">=0.12.0",
     "fabric": "*",
-    "minecraft": "1.19.3",
-    "trinkets": ">=3.5.1",
+    "minecraft": "1.19.4",
+    "trinkets": ">=3.6.0",
     "midnightlib": ">=1.1.0"
   }
 }

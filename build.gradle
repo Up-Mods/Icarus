@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.12-SNAPSHOT'
+    id 'fabric-loom' version '1.2.+'
     id 'maven-publish'
 }
 
@@ -29,9 +29,20 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.1.0"
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-    modImplementation "com.github.apace100:origins-fabric:${project.origins_version}"
     modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
+
+    // This bit is hackish; there are some issues with how origins includes AEA.
+    modImplementation("com.github.apace100:origins-fabric:${project.origins_version}") {
+        exclude group: 'com.github.DaFuqs', module: 'AdditionalEntityAttributes'
+    }
+    modImplementation("com.github.apace100:apoli:2.7.1") {
+        exclude group: 'com.github.DaFuqs', module: 'AdditionalEntityAttributes'
+    }
+    modImplementation("com.github.apace100:calio:1.9.0") {
+        exclude group: 'com.github.DaFuqs', module: 'AdditionalEntityAttributes'
+    }
 }
 
 processResources {
@@ -55,7 +66,7 @@ tasks.withType(JavaCompile) {
 // if it is present.
 // If you remove this task, sources will not be generated.
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
+    archiveClassifier.set("sources")
     from sourceSets.main.allSource
 }
 
