@@ -4,9 +4,11 @@ import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.common.items.WingItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.text.Text;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 
@@ -108,7 +110,7 @@ public class ModItems {
 
 	//-----Registry-----//
 	public static void register() {
-		FabricItemGroup.builder(new Identifier(Icarus.MOD_ID, "general")).icon(() -> new ItemStack(ModItems.WHITE_FEATHERED_WINGS)).entries((enabledFeatures, entries, operatorsEnabled) -> {
+		ItemGroup group = FabricItemGroup.builder().displayName(Text.translatable(Icarus.MOD_ID + ".item_group")).icon(() -> new ItemStack(ModItems.WHITE_FEATHERED_WINGS)).entries((displayContext, entries) -> {
 			entries.add(WHITE_FEATHERED_WINGS);
 			entries.add(ORANGE_FEATHERED_WINGS);
 			entries.add(MAGENTA_FEATHERED_WINGS);
@@ -199,6 +201,7 @@ public class ModItems {
 			entries.add(ZANZAS_WINGS);
 		}).build();
 
+		Registry.register(Registries.ITEM_GROUP, new Identifier(Icarus.MOD_ID, "item_group"), group);
 		ITEMS.keySet().forEach(item -> Registry.register(Registries.ITEM, ITEMS.get(item), item));
 	}
 

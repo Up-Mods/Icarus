@@ -30,7 +30,6 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-    modImplementation "com.github.apace100:origins-fabric:${project.origins_version}"
     modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
 }
 

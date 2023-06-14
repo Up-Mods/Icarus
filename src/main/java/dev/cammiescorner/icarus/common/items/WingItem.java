@@ -14,12 +14,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
-import org.jetbrains.annotations.Nullable;
 
 public class WingItem extends TrinketItem {
 	private final DyeColor primaryColour;
@@ -44,9 +41,6 @@ public class WingItem extends TrinketItem {
 	@Override
 	public void tick(ItemStack stack, SlotReference slot, LivingEntity entity) {
 		if(entity instanceof PlayerEntity player) {
-			if(Icarus.HAS_WINGS.test(player))
-				return;
-
 			if(player.getHungerManager().getFoodLevel() <= 6 || !isUsable(stack)) {
 				IcarusHelper.stopFlying(player);
 				return;
@@ -59,7 +53,7 @@ public class WingItem extends TrinketItem {
 				if((IcarusConfig.canSlowFall && player.isSneaking()) || player.isSubmergedInWater())
 					IcarusHelper.stopFlying(player);
 
-				if(player.getPos().y > player.world.getHeight() + 64 && player.age % 2 == 0 && stack.isIn(MELTS))
+				if(player.getPos().y > player.getWorld().getHeight() + 64 && player.age % 2 == 0 && stack.isIn(MELTS))
 					stack.damage(1, player, p -> p.sendEquipmentBreakStatus(EquipmentSlot.CHEST));
 			}
 			else {
@@ -77,12 +71,6 @@ public class WingItem extends TrinketItem {
 	@Override
 	public boolean canRepair(ItemStack stack, ItemStack ingredient) {
 		return ingredient.isOf(Items.PHANTOM_MEMBRANE);
-	}
-
-	@Nullable
-	@Override
-	public SoundEvent getEquipSound() {
-		return SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA;
 	}
 
 	public DyeColor getPrimaryColour() {

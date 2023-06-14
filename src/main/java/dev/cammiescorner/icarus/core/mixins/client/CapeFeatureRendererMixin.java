@@ -1,6 +1,5 @@
 package dev.cammiescorner.icarus.core.mixins.client;
 
-import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.common.items.WingItem;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -16,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class CapeFeatureRendererMixin {
 	@Inject(method = "render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/network/AbstractClientPlayerEntity;FFFFFF)V", at = @At("HEAD"), cancellable = true)
 	public void disableCape(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, float h, float j, float k, float l, CallbackInfo info) {
-		if(Icarus.HAS_WINGS.test(abstractClientPlayerEntity) || TrinketsApi.getTrinketComponent(abstractClientPlayerEntity).map(trinketComponent -> trinketComponent.isEquipped(itemStack -> itemStack.getItem() instanceof WingItem)).orElse(false))
+		if(TrinketsApi.getTrinketComponent(abstractClientPlayerEntity).map(trinketComponent -> trinketComponent.isEquipped(itemStack -> itemStack.getItem() instanceof WingItem)).orElse(false))
 			info.cancel();
 	}
 }
