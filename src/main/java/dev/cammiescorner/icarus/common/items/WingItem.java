@@ -41,6 +41,9 @@ public class WingItem extends TrinketItem {
 	@Override
 	public void tick(ItemStack stack, SlotReference slot, LivingEntity entity) {
 		if(entity instanceof PlayerEntity player) {
+			if(Icarus.HAS_WINGS.test(player))
+				return;
+
 			if(player.getHungerManager().getFoodLevel() <= 6 || !isUsable(stack)) {
 				IcarusHelper.stopFlying(player);
 				return;

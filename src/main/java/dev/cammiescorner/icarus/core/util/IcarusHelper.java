@@ -30,12 +30,25 @@ public class IcarusHelper {
 			Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
 
 			component.ifPresent(trinketComponent -> {
-				if(trinketComponent.isEquipped(stack -> stack.getItem() instanceof WingItem))
+				if(trinketComponent.isEquipped(stack -> stack.getItem() instanceof WingItem) || Icarus.HAS_WINGS.test(entity))
 					aaa.pitch = MathHelper.wrapDegrees(entity.getPitch());
 			});
 		}
 
 		return aaa.pitch;
+	}
+
+	public static void applySpeed(PlayerEntity player) {
+		WingsValues values = Icarus.WINGS.apply(player);
+		((SlowFallEntity) player).setSlowFalling(false);
+		Vec3d rotation = player.getRotationVector();
+		Vec3d velocity = player.getVelocity();
+		float modifier = values.doesArmourSlow() ? Math.max(1F, (player.getArmor() / 30F) * values.getArmourSlowMultiplier()) : 1F;
+		float speed = (values.getSpeed() * (player.getPitch() < -75 && player.getPitch() > -105 ? 3F : 1.5F)) / modifier;
+
+		player.setVelocity(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * speed,
+				rotation.y * speed + (rotation.y * 1.5D - velocity.y) * speed,
+				rotation.z * speed + (rotation.z * 1.5D - velocity.z) * speed));
 	}
 
 	public static void applySpeed(PlayerEntity player, ItemStack stack) {

@@ -1,0 +1,12 @@
+{
+	"powers": [
+		"icarus:wings",
+		"origins:aerial_combatant",
+		"icarus:hollow_bones",
+		"origins:no_shield",
+		"origins:carnivore"
+	],
+	"icon": "icarus:white_feathered_wings",
+	"order": 1,
+	"impact": 3
+}

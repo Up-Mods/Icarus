@@ -24,6 +24,7 @@
 
 package dev.cammiescorner.icarus.core.mixins.client;
 
+import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.common.items.WingItem;
 import dev.cammiescorner.icarus.core.events.callbacks.CameraUpdateCallback;
 import dev.cammiescorner.icarus.core.util.Transform;
@@ -58,7 +59,7 @@ public abstract class GameRendererMixin implements SynchronousResourceReloader, 
 		Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(client.player);
 		boolean isWingItem = component.isPresent() && component.get().isEquipped(itemStack -> itemStack.getItem() instanceof WingItem);
 
-		if(client.player != null && client.player.isFallFlying() && isWingItem) {
+		if(client.player != null && client.player.isFallFlying() && (isWingItem || Icarus.HAS_WINGS.test(client.cameraEntity))) {
 			Transform cameraTransform = new Transform(camera.getPos(), new Vec3d(camera.getPitch(), camera.getYaw(), 0D));
 
 			cameraTransform = CameraUpdateCallback.EVENT.Invoker().onCameraUpdate(camera, cameraTransform, tickDelta);

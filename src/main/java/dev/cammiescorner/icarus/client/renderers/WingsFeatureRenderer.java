@@ -51,46 +51,84 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 			Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(entity);
 
 			component.ifPresent(trinketComponent -> {
-				trinketComponent.getAllEquipped().forEach(pair -> {
-					ItemStack stack = pair.getRight();
+				if(!trinketComponent.isEquipped(stack -> stack.getItem() instanceof WingItem) && Icarus.HAS_WINGS.test(entity) && Icarus.WINGS.apply(entity).getWings() instanceof WingItem wingItem) {
+					float[] primaryColour = wingItem.getPrimaryColour().getColorComponents();
+					float[] secondaryColour = wingItem.getSecondaryColour().getColorComponents();
+					float r1 = primaryColour[0];
+					float g1 = primaryColour[1];
+					float b1 = primaryColour[2];
+					float r2 = secondaryColour[0];
+					float g2 = secondaryColour[1];
+					float b2 = secondaryColour[2];
 
-					if(stack.getItem() instanceof WingItem wingItem) {
-						float[] primaryColour = wingItem.getPrimaryColour().getColorComponents();
-						float[] secondaryColour = wingItem.getSecondaryColour().getColorComponents();
-						float r1 = primaryColour[0];
-						float g1 = primaryColour[1];
-						float b1 = primaryColour[2];
-						float r2 = secondaryColour[0];
-						float g2 = secondaryColour[1];
-						float b2 = secondaryColour[2];
+					String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase(Locale.ROOT) : Registries.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
 
-						String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase(Locale.ROOT) : Registries.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
+					if(wingItem.getWingType() == WingItem.WingType.FEATHERED || wingItem.getWingType() == WingItem.WingType.MECHANICAL_FEATHERED)
+						wingModel = featheredWings;
+					if(wingItem.getWingType() == WingItem.WingType.DRAGON || wingItem.getWingType() == WingItem.WingType.MECHANICAL_LEATHER)
+						wingModel = leatherWings;
+					if(wingItem.getWingType() == WingItem.WingType.LIGHT)
+						wingModel = lightWings;
+					if(wingType.equals("flandres"))
+						wingModel = flandresWings;
+					if(wingType.equals("discords"))
+						wingModel = discordsWings;
+					if(wingType.equals("zanzas"))
+						wingModel = zanzasWings;
 
-						if(wingItem.getWingType() == WingItem.WingType.FEATHERED || wingItem.getWingType() == WingItem.WingType.MECHANICAL_FEATHERED)
-							wingModel = featheredWings;
-						if(wingItem.getWingType() == WingItem.WingType.DRAGON || wingItem.getWingType() == WingItem.WingType.MECHANICAL_LEATHER)
-							wingModel = leatherWings;
-						if(wingItem.getWingType() == WingItem.WingType.LIGHT)
-							wingModel = lightWings;
-						if(wingType.equals("flandres"))
-							wingModel = flandresWings;
-						if(wingType.equals("discords"))
-							wingModel = discordsWings;
-						if(wingType.equals("zanzas"))
-							wingModel = zanzasWings;
+					Identifier layer1 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings.png");
+					Identifier layer2 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings_2.png");
 
-						Identifier layer1 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings.png");
-						Identifier layer2 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings_2.png");
+					matrices.push();
+					matrices.translate(0.0D, 0.0D, 0.125D);
+					this.getContextModel().copyStateTo(this.wingModel);
+					this.wingModel.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
+					this.renderWings(matrices, vertexConsumers, wingItem.getDefaultStack(), RenderLayer.getEntityTranslucent(layer2), light, r2, g2, b2);
+					this.renderWings(matrices, vertexConsumers, wingItem.getDefaultStack(), RenderLayer.getEntityTranslucent(layer1), light, r1, g1, b1);
+					matrices.pop();
+				}
+				else {
+					trinketComponent.getAllEquipped().forEach(pair -> {
+						ItemStack stack = pair.getRight();
 
-						matrices.push();
-						matrices.translate(0.0D, 0.0D, 0.125D);
-						this.getContextModel().copyStateTo(this.wingModel);
-						this.wingModel.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
-						this.renderWings(matrices, vertexConsumers, stack, RenderLayer.getEntityTranslucent(layer2), light, r2, g2, b2);
-						this.renderWings(matrices, vertexConsumers, stack, RenderLayer.getEntityTranslucent(layer1), light, r1, g1, b1);
-						matrices.pop();
-					}
-				});
+						if (stack.getItem() instanceof WingItem wingItem) {
+							float[] primaryColour = wingItem.getPrimaryColour().getColorComponents();
+							float[] secondaryColour = wingItem.getSecondaryColour().getColorComponents();
+							float r1 = primaryColour[0];
+							float g1 = primaryColour[1];
+							float b1 = primaryColour[2];
+							float r2 = secondaryColour[0];
+							float g2 = secondaryColour[1];
+							float b2 = secondaryColour[2];
+
+							String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase(Locale.ROOT) : Registries.ITEM.getId(wingItem).getPath().replaceAll("_wings", "");
+
+							if (wingItem.getWingType() == WingItem.WingType.FEATHERED || wingItem.getWingType() == WingItem.WingType.MECHANICAL_FEATHERED)
+								wingModel = featheredWings;
+							if (wingItem.getWingType() == WingItem.WingType.DRAGON || wingItem.getWingType() == WingItem.WingType.MECHANICAL_LEATHER)
+								wingModel = leatherWings;
+							if (wingItem.getWingType() == WingItem.WingType.LIGHT)
+								wingModel = lightWings;
+							if (wingType.equals("flandres"))
+								wingModel = flandresWings;
+							if (wingType.equals("discords"))
+								wingModel = discordsWings;
+							if (wingType.equals("zanzas"))
+								wingModel = zanzasWings;
+
+							Identifier layer1 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings.png");
+							Identifier layer2 = new Identifier(Icarus.MOD_ID, "textures/entity/" + wingType + "_wings_2.png");
+
+							matrices.push();
+							matrices.translate(0.0D, 0.0D, 0.125D);
+							this.getContextModel().copyStateTo(this.wingModel);
+							this.wingModel.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
+							this.renderWings(matrices, vertexConsumers, stack, RenderLayer.getEntityTranslucent(layer2), light, r2, g2, b2);
+							this.renderWings(matrices, vertexConsumers, stack, RenderLayer.getEntityTranslucent(layer1), light, r1, g1, b1);
+							matrices.pop();
+						}
+					});
+				}
 			});
 		}
 	}

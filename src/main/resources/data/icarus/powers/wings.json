@@ -1,0 +1,8 @@
+{
+	"type": "icarus:wings",
+	"wings_type": "icarus:white_feathered_wings",
+	"speed": 0.02,
+	"armor_slow_multiplier": 3,
+	"can_fly": true,
+	"armor_slows": true
+}
