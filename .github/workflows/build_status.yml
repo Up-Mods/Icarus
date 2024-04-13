@@ -1,0 +1,49 @@
+name: Build Status
+
+on:
+  push:
+    paths-ignore:
+      - '.github/**'
+    branches:
+      - '*'
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'microsoft'
+          java-version: 17
+          cache: 'gradle'
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+      - name: Build with Gradle
+        run: ./gradlew build
+      - name: Upload build artifacts (Common)
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.event.repository.name }}-Common-${{ github.sha }}
+          path: |
+            Common/build/libs/*.jar
+            !Common/build/libs/*-dev.jar
+      - name: Upload build artifacts (NeoForge)
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.event.repository.name }}-NeoForge-${{ github.sha }}
+          path: |
+            NeoForge/build/libs/*.jar
+            !NeoForge/build/libs/*-dev.jar
+      - name: Upload build artifacts (Quilt)
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.event.repository.name }}-Quilt-${{ github.sha }}
+          path: |
+            Quilt/build/libs/*.jar
+            !Quilt/build/libs/*-dev.jar
