@@ -103,6 +103,11 @@ $RECYCLE.BIN/
 .gradle
 build/
 
+# Misc
+mcModsRepo/
+.tmp/
+.data/
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
