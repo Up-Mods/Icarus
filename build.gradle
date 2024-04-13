@@ -128,6 +128,11 @@ subprojects {
 		}
 
 		maven {
+			name = "Shedaniel"
+			url = "https://maven.shedaniel.me"
+		}
+
+		maven {
 			name = "Modrinth"
 			url = "https://api.modrinth.com/maven"
 			content {

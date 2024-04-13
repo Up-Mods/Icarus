@@ -37,6 +37,7 @@ dependencies {
 
     modCompileOnly fabric.cameraoverhaul
     modLocalRuntime fabric.cameraoverhaul
+    modLocalRuntime fabric.cloth
 
     // modCompileOnly "${libs.emi.fabric.get()}:api"
 }

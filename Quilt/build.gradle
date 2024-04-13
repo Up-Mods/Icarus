@@ -29,6 +29,7 @@ dependencies {
 
     modCompileOnly quilt.cameraoverhaul
     modLocalRuntime quilt.cameraoverhaul
+    modLocalRuntime quilt.cloth
 
     modCompileOnly quilt.modmenu
     modLocalRuntime quilt.modmenu
