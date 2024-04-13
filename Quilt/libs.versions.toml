@@ -1,0 +1,31 @@
+[versions]
+# The latest versions are available at https://lambdaurora.dev/tools/import_quilt.html
+quilt_loom = "1.5.+"
+
+quilt_loader = "0.24.0"
+quilted_fabric_api = "7.5.0+0.91.0-1.20.1"
+
+trinkets = "3.7.1"
+
+cameraoverhaul = "4271111" # 1.4.0
+
+modmenu = "7.2.2"
+
+[libraries]
+quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
+
+quilted_fabric_api = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api", version.ref = "quilted_fabric_api" }
+quilted_fabric_api_deprecated = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api-deprecated", version.ref = "quilted_fabric_api" }
+
+trinkets = { module = "dev.emi:trinkets", version.ref = "trinkets" }
+
+modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
+
+cameraoverhaul = { module = "curse.maven:cameraoverhaul-423602", version.ref = "cameraoverhaul" }
+
+# If you have multiple similar dependencies, you can declare a dependency bundle and reference it on the build script with "libs.bundles.example".
+[bundles]
+quilted_fabric_api = ["quilted_fabric_api", "quilted_fabric_api_deprecated"]
+
+[plugins]
+quilt_loom = { id = "org.quiltmc.loom", version.ref = "quilt_loom" }

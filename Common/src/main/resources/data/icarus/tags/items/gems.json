@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values":
+  [
+    {
+      "id": "#c:gems",
+      "required": false
+    },
+    {
+      "id": "#forge:gems/diamond",
+      "required": false
+    },
+    {
+      "id": "#c:gems/emerald",
+      "required": false
+    }
+  ]
+}

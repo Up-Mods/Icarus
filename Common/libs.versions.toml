@@ -1,0 +1,46 @@
+[versions]
+minecraft = "1.20.1"
+
+# The latest versions are available at https://parchmentmc.org/docs/getting-started
+parchment = "2023.09.03"
+
+mixin = "0.8.5"
+mixin_extras = "0.3.5"
+asm = "9.6"
+jetbrains_annotations = "24.1.0"
+vanilla_gradle = "0.2.1-SNAPSHOT"
+
+commonnetworking = "1.0.2-1.20.1"
+resourcefulconfig = "2.1.2"
+emi = "1.1.4+1.20.1"
+
+[libraries]
+minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+parchment_mappings = { module = "org.parchmentmc.data:parchment-1.20.1", version.ref = "parchment" }
+mixin = { module = "org.spongepowered:mixin", version.ref = "mixin" }
+mixin_extras = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixin_extras" }
+mixin_extras_neoforge = { module = "io.github.llamalad7:mixinextras-neoforge", version.ref = "mixin_extras" }
+asm = { module = "org.ow2.asm:asm", version.ref = "asm" }
+asm_analysis = { module = "org.ow2.asm:asm-analysis", version.ref = "asm" }
+asm_commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }
+asm_tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
+asm_util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
+jetbrains_annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains_annotations" }
+
+resourcefulconfig = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-common-1.20.1", version.ref = "resourcefulconfig" }
+resourcefulconfig_fabric = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-1.20.1", version.ref = "resourcefulconfig" }
+resourcefulconfig_forge = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-1.20.1", version.ref = "resourcefulconfig" }
+
+commonnetworking = { module = "mysticdrew:common-networking-common", version.ref = "commonnetworking" }
+commonnetworking_fabric = { module = "mysticdrew:common-networking-fabric", version.ref = "commonnetworking" }
+commonnetworking_neoforge = { module = "mysticdrew:common-networking-neoforge_version", version.ref = "commonnetworking" }
+
+emi = { module = "dev.emi:emi-xplat-mojmap", version.ref = "emi" }
+emi_neoforge = { module = "dev.emi:emi-neoforge", version.ref = "emi" }
+emi_fabric = { module = "dev.emi:emi-fabric", version.ref = "emi" }
+
+[bundles]
+mixin = ["mixin", "mixin_extras", "asm", "asm_analysis", "asm_commons", "asm_tree", "asm_util"]
+
+[plugins]
+vanilla_gradle = { id = "org.spongepowered.gradle.vanilla", version.ref = "vanilla_gradle" }

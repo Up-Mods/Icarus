@@ -1,0 +1,43 @@
+modLoader = "javafml" #mandatory
+loaderVersion = "*" #mandatory
+license = "${license_url}" # Review your options at https://choosealicense.com/.
+issueTrackerURL = "${issues_url}" #optional
+
+[[mods]] #mandatory
+modId = "${mod_id}" #mandatory
+version = "${version}" #mandatory
+displayName = "${mod_display_name}" #mandatory
+displayURL = "${homepage_url}" #optional (displayed in the mod UI)
+logoFile = "icon.png" #optional
+#credits = "" #optional
+authors = "Cammie, Up" #optional
+description = '''${mod_description}''' #mandatory (Supports multiline text)
+
+[[mixins]]
+config = "${mod_id}.mixins.json"
+
+[[mixins]]
+config = "${mod_id}.neoforge.mixins.json"
+
+# https://docs.neoforged.net/docs/gettingstarted/modfiles#dependency-configurations
+[dependencies]
+    "${mod_id}" = [
+        { modId = "forge", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { ignore = true } },
+        { modId = "minecraft", mandatory = true, versionRange = "[${minecraft_version}]", ordering = "NONE", side = "BOTH" },
+        { modId = "curios", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "309927", modrinth = "vvuO3ImH" } },
+        { modId = "resourcefulconfig", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "714059", modrinth = "M1953qlQ" } }
+    ]
+
+# Features are specific properties of the game environment, that you may want to declare you require. This example declares
+# that your mod requires GL version 3.2 or higher. Other features will be added. They are side aware so declaring this won't
+# stop your mod loading on the server for example.
+#[features.${mod_id}]
+#openGLVersion="[3.2,)"
+
+[mc-publish]
+    curseforge = "${curseforge_id}"
+    modrinth = "${modrinth_id}"
+    loaders = ["neoforge"]
+    dependencies = [
+        "cameraoverhaul(optional){curseforge:443034}#(ignore:modrinth)"
+    ]

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "tag": "icarus:dragon_wings"
+    },
+    {
+      "tag": "c:dyes/light_gray"
+    }
+  ],
+  "result":
+  {
+    "item": "icarus:light_gray_dragon_wings"
+  }
+}

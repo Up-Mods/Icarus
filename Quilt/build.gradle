@@ -1,0 +1,97 @@
+plugins {
+    alias quilt.plugins.quilt.loom
+}
+
+// messy workaround for bug in quilt loom 1.3.3+
+project.configurations.configureEach {
+    exclude(group: "net.fabricmc", module: "fabric-loader")
+    exclude(group: "net.fabricmc.fabric-api")
+}
+
+dependencies {
+    minecraft libs.minecraft
+    mappings(loom.layered {
+        it.parchment("${libs.parchment.mappings.get()}@zip")
+        it.officialMojangMappings()
+    })
+
+    modImplementation quilt.quilt.loader
+    modImplementation quilt.quilted.fabric.api
+    modRuntimeOnly(quilt.quilted.fabric.api.deprecated) {
+        transitive = false
+    }
+
+    compileOnly project(":Common")
+
+    modImplementation libs.resourcefulconfig.fabric
+    modImplementation libs.commonnetworking.fabric
+    modImplementation quilt.trinkets
+
+    modCompileOnly quilt.cameraoverhaul
+    modLocalRuntime quilt.cameraoverhaul
+
+    modCompileOnly quilt.modmenu
+    modLocalRuntime quilt.modmenu
+
+    // modCompileOnly "${libs.emi.fabric.get()}:api"
+}
+
+loom {
+    mods {
+        "${mod_id}" {
+            // Tell Loom about each source set used by your mod here. This ensures that your mod's classes are properly transformed by Loader.
+            sourceSet("main")
+            project(":Common").sourceSets.main
+        }
+    }
+    if (project(":Common").file("src/main/resources/${mod_id}.accesswidener").exists()) {
+        accessWidenerPath.set(project(":Common").file("src/main/resources/${mod_id}.accesswidener"))
+    }
+    mixin {
+        defaultRefmapName.set("${mod_id}.refmap.json")
+    }
+
+    runs {
+        client {
+            client()
+            setConfigName("Quilt Client")
+            ideConfigGenerated(true)
+            runDir("run")
+
+            if (rootProject.hasProperty('mc_uuid')) {
+                programArgs("--uuid", rootProject.mc_uuid)
+            }
+
+            if (rootProject.hasProperty('mc_username')) {
+                programArgs("--username", rootProject.mc_username)
+            }
+
+            if (rootProject.hasProperty('mc_java_agent_path')) {
+                vmArg("-javaagent:${rootProject.mc_java_agent_path}")
+            }
+        }
+
+        server {
+            server()
+            setConfigName("Quilt Server")
+            ideConfigGenerated(true)
+            runDir("run/server")
+        }
+    }
+}
+
+tasks.named("compileJava", JavaCompile) {
+    source(project(":Common").sourceSets.main.allJava)
+}
+
+tasks.named("javadoc", Javadoc) {
+    source(project(":Common").sourceSets.main.allJava)
+}
+
+tasks.named("sourcesJar", Jar) {
+    from(project(":Common").sourceSets.main.allSource)
+}
+
+processResources {
+    from project(":Common").sourceSets.main.resources
+}

@@ -1,0 +1,146 @@
+plugins {
+    id 'idea'
+    alias neoforge.plugins.neogradle
+    alias neoforge.plugins.librarian
+    alias neoforge.plugins.mixingradle
+}
+
+def usingJarJar = true
+
+if(usingJarJar) {
+    jarJar.enable()
+}
+
+dependencies {
+    minecraft neoforge.neoforge.get()
+    compileOnly project(":Common")
+    annotationProcessor "${libs.mixin.asProvider().get()}:processor"
+
+    implementation fg.deobf(libs.resourcefulconfig.forge.get())
+    implementation fg.deobf(libs.commonnetworking.neoforge.get())
+
+    implementation fg.deobf(neoforge.curios.get())
+
+    compileOnly fg.deobf(neoforge.cameraoverhaul.get())
+    // NOT UPDATED YET!
+//    runtimeOnly fg.deobf(neoforge.cameraoverhaul.get())
+
+    // compileOnly "${libs.emi.neoforge.get()}:api"
+
+    minecraftEmbed (libs.mixin.extras.neoforge.get()) {
+        jarJar.ranged(it, "[${libs.versions.mixin.extras.get()},)")
+    }
+}
+
+mixin {
+    add(sourceSets.main, "${mod_id}.refmap.json")
+
+    config("${mod_id}.mixins.json")
+    config("${mod_id}.neoforge.mixins.json")
+}
+
+if(usingJarJar) {
+    jar {
+        archiveClassifier.set("slim")
+    }
+
+    tasks.jarJar.configure {
+        archiveClassifier.set('')
+    }
+}
+
+minecraft {
+    mappings channel: 'parchment', version: "${libs.versions.parchment.get()}-${libs.versions.minecraft.get()}"
+
+    copyIdeResources = true //Calls processResources when in dev
+
+    // Automatically enable neoforge AccessTransformers if the file exists
+// This location is hardcoded in FML and can not be changed.
+// https://github.com/neoforged/FancyModLoader/blob/a952595eaaddd571fbc53f43847680b00894e0c1/loader/src/main/java/net/neoforged/fml/loading/moddiscovery/ModFile.java#L118
+    if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
+        accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    }
+
+    runs {
+        configureEach {
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            args "-mixin.config=${mod_id}.mixins.json", "-mixin.config=${mod_id}.neoforge.mixins.json"
+
+            workingDirectory(project.file('run'))
+        }
+        client {
+            ideaModule "${rootProject.name}.${project.name}.main"
+            mods {
+                modClientRun {
+                    source sourceSets.main
+                    source project(":Common").sourceSets.main
+                }
+            }
+
+            if (rootProject.hasProperty('mc_uuid')) {
+                args("--uuid", rootProject.mc_uuid)
+            }
+
+            if (rootProject.hasProperty('mc_username')) {
+                args("--username", rootProject.mc_username)
+            }
+
+            if (rootProject.hasProperty('mc_java_agent_path')) {
+                jvmArg("-javaagent:${rootProject.mc_java_agent_path}")
+            }
+        }
+
+        server {
+            ideaModule "${rootProject.name}.${project.name}.main"
+            args 'nogui'
+            mods {
+                modServerRun {
+                    source sourceSets.main
+                    source project(":Common").sourceSets.main
+                }
+            }
+        }
+
+        data {
+            ideaModule "${rootProject.name}.${project.name}.main"
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/').absolutePath, '--existing', file('src/main/resources/').absolutePath
+            mods {
+                modDataRun {
+                    source sourceSets.main
+                    source project(":Common").sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+tasks.named("compileJava", JavaCompile) {
+    source(project(":Common").sourceSets.main.allJava)
+}
+
+tasks.named("javadoc", Javadoc) {
+    source(project(":Common").sourceSets.main.allJava)
+}
+
+tasks.named("sourcesJar", Jar) {
+    from(project(":Common").sourceSets.main.allSource)
+}
+
+processResources {
+    from project(":Common").sourceSets.main.resources
+}
+
+if(usingJarJar) {
+    publishing {
+        publications {
+            "mavenJava${project.name}"(MavenPublication) {
+                jarJar.component(it)
+            }
+        }
+    }
+}
