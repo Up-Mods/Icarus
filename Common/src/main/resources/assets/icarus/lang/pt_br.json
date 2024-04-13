@@ -1,8 +1,6 @@
 {
-  //----Creative Tabs-----//
-  "itemGroup.icarus.general": "Icarus",
+  "itemGroup.icarus": "Icarus",
 
-  //----Items----//
   "item.icarus.white_feathered_wings": "Asas Emplumadas Branca",
   "item.icarus.orange_feathered_wings": "Asas Emplumadas Laranja",
   "item.icarus.magenta_feathered_wings": "Asas Emplumadas Magenta",
@@ -92,15 +90,6 @@
   "item.icarus.discords_wings": "Asas do Discord",
   "item.icarus.zanzas_wings": "Asas da Zanza",
 
-  //-----Origins-----//
-  "origin.icarus.icarae.name": "Ícaros",
-  "origin.icarus.icarae.description": "Pessoas-Pássaro carnivoras, Ícaros voam próximos ao chão, passando e atravessando por obstaculos para caçar suar presas.",
-  "power.icarus.wings.name": "Asas!",
-  "power.icarus.wings.description": "Graças as suas asas, você consegue voar em altitudes baixas.\n\nÉ claro que você precisa ser peso pena para voar rápido, então armadura pesada te desacelera imensamente.",
-  "power.icarus.hollow_bones.name": "Ossos Ocos",
-  "power.icarus.hollow_bones.description": "Para poder voar, Icaros tiveram que desenvolver estruturas ósseas ocas, similar a pássaros.\n\nIsso os torna mais vulneráveis a dano.",
-
-  //-----ModMenu-----//
   "icarus.midnightconfig.title": "Icarus",
   "icarus.midnightconfig.canLoopDeLoop": "O jogador consegue fazer loop-de-loops?",
   "icarus.midnightconfig.armourSlows": "A armadura desacelera o jogador?",
