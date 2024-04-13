@@ -90,14 +90,12 @@
   "item.icarus.discords_wings": "Asas do Discord",
   "item.icarus.zanzas_wings": "Asas da Zanza",
 
-  "icarus.midnightconfig.title": "Icarus",
-  "icarus.midnightconfig.canLoopDeLoop": "O jogador consegue fazer loop-de-loops?",
-  "icarus.midnightconfig.armourSlows": "A armadura desacelera o jogador?",
-  "icarus.midnightconfig.canSlowFall": "O jogador pode cair lentamente se ele apertar Shift enquanto caí?",
-  "icarus.midnightconfig.maxSlowedMultiplier": "Multiplicador Máximo de lentidão recebido por armadura.",
-  "icarus.midnightconfig.wingsSpeed": "Quão rápido as asas voam.",
-  "icarus.midnightconfig.wingsAcceleration": "Quão rápido as asas aceleram.",
-  "icarus.midnightconfig.wingsDurability": "Quanta durabilidade todas as asas tem.",
-  "icarus.midnightconfig.exhaustionAmount": "Custo de exaustão por vôo.",
-  "icarus.midnightconfig.rollAmount": "Quanto o jogador pode rodar enquanto voa."
+  "config.icarus.can_loop_de_loop": "O jogador consegue fazer loop-de-loops?",
+  "config.icarus.armor_slows": "A armadura desacelera o jogador?",
+  "config.icarus.can_slow_fall": "O jogador pode cair lentamente se ele apertar Shift enquanto caí?",
+  "config.icarus.max_slowed_multiplier": "Multiplicador Máximo de lentidão recebido por armadura.",
+  "config.icarus.wings_speed": "Quão rápido as asas voam.",
+  "config.icarus.wings_durability": "Quanta durabilidade todas as asas tem.",
+  "config.icarus.exhaustion_amount": "Custo de exaustão por vôo.",
+  "config.icarus.roll_amount": "Quanto o jogador pode rodar enquanto voa. (Requires CameraOverhaul)"
 }

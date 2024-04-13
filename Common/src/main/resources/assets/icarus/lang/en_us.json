@@ -90,14 +90,12 @@
   "item.icarus.discords_wings": "Discord's Wings",
   "item.icarus.zanzas_wings": "Zanza's Wings",
 
-  "icarus.midnightconfig.title": "Icarus",
-  "icarus.midnightconfig.canLoopDeLoop": "Can the player do loop-de-loops?",
-  "icarus.midnightconfig.armourSlows": "Does armour slow the player down?",
-  "icarus.midnightconfig.canSlowFall": "Can the player slow-fall by Sneaking while flying?",
-  "icarus.midnightconfig.maxSlowedMultiplier": "Maximum multiplier armour can slow you by.",
-  "icarus.midnightconfig.wingsSpeed": "How fast the wings can fly.",
-  "icarus.midnightconfig.wingsAcceleration": "How fast the wings accelerate.",
-  "icarus.midnightconfig.wingsDurability": "How much durability all the wings have.",
-  "icarus.midnightconfig.exhaustionAmount": "Exhaustion cost for flying.",
-  "icarus.midnightconfig.rollAmount": "How much the player can roll while flying."
+  "config.icarus.can_loop_de_loop": "Can the player do loop-de-loops?",
+  "config.icarus.armor_slows": "Does armor slow the player down?",
+  "config.icarus.can_slow_fall": "Can the player slow-fall by Sneaking while flying?",
+  "config.icarus.max_slowed_multiplier": "Maximum multiplier armor can slow you by.",
+  "config.icarus.wings_speed": "How fast the wings can fly.",
+  "config.icarus.wings_durability": "How much durability all the wings have.",
+  "config.icarus.exhaustion_amount": "Exhaustion cost for flying.",
+  "config.icarus.roll_amount": "How much the player can roll while flying. (Requires CameraOverhaul)"
 }
