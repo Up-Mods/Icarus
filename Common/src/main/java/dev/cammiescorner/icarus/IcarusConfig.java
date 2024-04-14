@@ -46,4 +46,6 @@ public final class IcarusConfig {
     public static float exhaustionAmount = 0.03F;
     @ConfigEntry(id = "roll_amount", type = EntryType.FLOAT, translation = "config.icarus.roll_amount")
     public static float rollAmount = 1.0F;
+    @ConfigEntry(id = "max_height_above_world", type = EntryType.INTEGER, translation = "config.icarus.max_height_above_world")
+    public static int maxHeightAboveWorld = 64;
 }
