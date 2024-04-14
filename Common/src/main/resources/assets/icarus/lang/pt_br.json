@@ -97,5 +97,7 @@
   "config.icarus.wings_speed": "Quão rápido as asas voam.",
   "config.icarus.wings_durability": "Quanta durabilidade todas as asas tem.",
   "config.icarus.exhaustion_amount": "Custo de exaustão por vôo.",
-  "config.icarus.roll_amount": "Quanto o jogador pode rodar enquanto voa. (Requires CameraOverhaul)"
+  "config.icarus.roll_amount": "Quanto o jogador pode rodar enquanto voa. (Requires CameraOverhaul)",
+
+  "message.icarus.status.no_fly.dimension": "Flying is not allowed in this dimension!"
 }

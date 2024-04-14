@@ -97,5 +97,7 @@
   "config.icarus.wings_speed": "How fast the wings can fly.",
   "config.icarus.wings_durability": "How much durability all the wings have.",
   "config.icarus.exhaustion_amount": "Exhaustion cost for flying.",
-  "config.icarus.roll_amount": "How much the player can roll while flying. (Requires CameraOverhaul)"
+  "config.icarus.roll_amount": "How much the player can roll while flying. (Requires CameraOverhaul)",
+
+  "message.icarus.status.no_fly.dimension": "Flying is not allowed in this dimension!"
 }

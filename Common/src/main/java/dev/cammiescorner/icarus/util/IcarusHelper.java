@@ -2,9 +2,13 @@ package dev.cammiescorner.icarus.util;
 
 import dev.cammiescorner.icarus.IcarusConfig;
 import dev.cammiescorner.icarus.api.SlowFallingEntity;
+import dev.cammiescorner.icarus.init.IcarusDimensionTags;
 import dev.cammiescorner.icarus.init.IcarusItemTags;
 import dev.cammiescorner.icarus.item.WingItem;
 import dev.cammiescorner.icarus.network.s2c.SyncConfigValuesPacket;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +26,14 @@ public class IcarusHelper {
     public static BiPredicate<LivingEntity, ItemStack> equipFunc = (entity, stack) -> false;
 
     public static boolean onFallFlyingTick(LivingEntity entity, @Nullable ItemStack wings, boolean tick) {
+        if(!entity.level().isClientSide() && entity.level().registryAccess().registryOrThrow(Registries.DIMENSION).getHolderOrThrow(entity.level().dimension()).is(IcarusDimensionTags.NO_FLYING_ALLOWED)) {
+            if (entity instanceof ServerPlayer player) {
+                stopFlying(player);
+                player.sendSystemMessage(Component.translatable("message.icarus.status.no_fly.dimension").withStyle(ChatFormatting.RED), true);
+            }
+            return false;
+        }
+
         if (wings != null) {
             if (!(wings.getItem() instanceof WingItem wingItem) || !wingItem.isUsable(entity, wings)) {
                 if (entity instanceof Player player) {
