@@ -82,7 +82,7 @@
       "quilt"
     ],
     "dependencies": [
-      "cameraoverhaul{modrinth:m0oRwcZx}{curseforge:423602}(optional)"
+      "cameraoverhaul(optional){modrinth:m0oRwcZx}{curseforge:423602}"
     ]
   }
 }
