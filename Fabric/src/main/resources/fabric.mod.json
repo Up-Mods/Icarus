@@ -36,7 +36,8 @@
     "fabric-api": "*",
     "minecraft": "=${minecraft_version}",
     "trinkets": "*",
-    "resourcefulconfig": "*"
+    "resourcefulconfig": "*",
+    "commonnetworking": "*"
   },
   "custom": {
     "mc-publish": {
@@ -49,6 +50,7 @@
         "fabric-api(required){modrinth:P7dR8mSH}{curseforge:306612}",
         "trinkets(required){modrinth:5aaWibi9}{curseforge:341284}",
         "resourcefulconfig(required){modrinth:M1953qlQ}{curseforge:714059}",
+        "commonnetworking(required){modrinth:HIuqnQpi}{curseforge:806044}",
         "cameraoverhaul(optional){modrinth:m0oRwcZx}{curseforge:423602}"
       ]
     }
