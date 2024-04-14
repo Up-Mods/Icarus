@@ -14,11 +14,20 @@ public abstract class EntityMixin {
 
     @Shadow public abstract float getXRot();
 
-    @ModifyExpressionValue(method = "turn", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(FFF)F"))
+    @Shadow public float xRotO;
+
+    @ModifyExpressionValue(method = "turn", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(FFF)F", ordinal = 0))
     private float icarus$updateLookDirection(float original) {
-        var self = (Entity)(Object) this;
-        if(self instanceof LivingEntity living) {
+        if(Entity.class.cast(this) instanceof LivingEntity living) {
             return IcarusHelper.hasWings.test(living) ? Mth.wrapDegrees(this.getXRot()) : original;
+        }
+        return original;
+    }
+
+    @ModifyExpressionValue(method = "turn", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(FFF)F", ordinal = 1))
+    private float icarus$updateLookDirection0(float original) {
+        if (Entity.class.cast(this) instanceof LivingEntity living) {
+            return IcarusHelper.hasWings.test(living) ? Mth.wrapDegrees(this.xRotO) : original;
         }
         return original;
     }
