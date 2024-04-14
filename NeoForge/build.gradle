@@ -17,7 +17,7 @@ dependencies {
     minecraft neoforge.neoforge.get()
     compileOnly project(":Common")
     annotationProcessor "${libs.mixin.asProvider().get()}:processor"
-    annotationProcessor libs.mixin.extras.neoforge
+    annotationProcessor libs.mixin.extras.forge
 
     implementation fg.deobf(libs.resourcefulconfig.forge.get())
     implementation fg.deobf(libs.commonnetworking.neoforge.get())
@@ -30,7 +30,7 @@ dependencies {
 
     // compileOnly "${libs.emi.neoforge.get()}:api"
 
-    minecraftEmbed (libs.mixin.extras.neoforge.get()) {
+    minecraftEmbed (libs.mixin.extras.forge.get()) {
         jarJar.ranged(it, "[${libs.versions.mixin.extras.get()},)")
     }
 }
