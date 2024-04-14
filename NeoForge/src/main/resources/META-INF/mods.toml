@@ -38,7 +38,10 @@ config = "${mod_id}.neoforge.mixins.json"
 [mc-publish]
     curseforge = "${curseforge_id}"
     modrinth = "${modrinth_id}"
-    loaders = ["neoforge"]
+    loaders = [
+        "neoforge",
+        "forge"
+    ]
     dependencies = [
         "cameraoverhaul(optional){curseforge:443034}#(ignore:modrinth)"
     ]
