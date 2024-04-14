@@ -15,6 +15,7 @@ dependencies {
     minecraft neoforge.neoforge.get()
     compileOnly project(":Common")
     annotationProcessor "${libs.mixin.asProvider().get()}:processor"
+    annotationProcessor libs.mixin.extras.neoforge
 
     implementation fg.deobf(libs.resourcefulconfig.forge.get())
     implementation fg.deobf(libs.commonnetworking.neoforge.get())
