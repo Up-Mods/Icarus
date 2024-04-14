@@ -9,7 +9,9 @@ def usingJarJar = true
 
 if(usingJarJar) {
     jarJar.enable()
+    tasks.jarJar.finalizedBy('reobfJarJar')
 }
+jar.finalizedBy('reobfJar')
 
 dependencies {
     minecraft neoforge.neoforge.get()
