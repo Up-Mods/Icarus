@@ -20,7 +20,7 @@ public abstract class EntityMixin {
     @ModifyExpressionValue(method = "turn", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(FFF)F", ordinal = 0))
     private float icarus$updateLookDirection(float original) {
         if(((Object) this) instanceof LivingEntity living) {
-            return IcarusHelper.hasWings.test(living) && living.isFallFlying() ? Mth.wrapDegrees(this.getXRot()) : original;
+            return living.isFallFlying() && IcarusHelper.hasWings.test(living) ? Mth.wrapDegrees(this.getXRot()) : original;
         }
         return original;
     }
@@ -28,7 +28,7 @@ public abstract class EntityMixin {
     @ModifyExpressionValue(method = "turn", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(FFF)F", ordinal = 1))
     private float icarus$updateLookDirection0(float original) {
         if (((Object) this) instanceof LivingEntity living) {
-            return IcarusHelper.hasWings.test(living) && living.isFallFlying() ? Mth.wrapDegrees(this.xRotO) : original;
+            return living.isFallFlying() && IcarusHelper.hasWings.test(living) ? Mth.wrapDegrees(this.xRotO) : original;
         }
         return original;
     }
