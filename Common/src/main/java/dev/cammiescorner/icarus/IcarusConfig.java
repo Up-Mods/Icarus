@@ -50,4 +50,6 @@ public final class IcarusConfig {
     public static boolean maxHeightEnabled = true;
     @ConfigEntry(id = "max_height_above_world", type = EntryType.INTEGER, translation = "config.icarus.max_height_above_world")
     public static int maxHeightAboveWorld = 64;
+    @ConfigEntry(id = "flying_target_radius", type = EntryType.FLOAT, translation = "config.icarus.flying_target_radius")
+    public static float flyingTargetRadius = 0.25f;
 }
