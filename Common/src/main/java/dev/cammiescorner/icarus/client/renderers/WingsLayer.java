@@ -15,88 +15,81 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Locale;
-
 //TODO clean up
 public class WingsLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
-	private final FeatheredWingsModel<T> featheredWings;
-	private final LeatherWingsModel<T> leatherWings;
-	private final LightWingsModel<T> lightWings;
-	private final FlandresWingsModel<T> flandresWings;
-	private final DiscordsWingsModel<T> discordsWings;
-	private final ZanzasWingsModel<T> zanzasWings;
+    private final FeatheredWingsModel<T> featheredWings;
+    private final LeatherWingsModel<T> leatherWings;
+    private final LightWingsModel<T> lightWings;
+    private final FlandresWingsModel<T> flandresWings;
+    private final DiscordsWingsModel<T> discordsWings;
+    private final ZanzasWingsModel<T> zanzasWings;
 
-	public WingsLayer(RenderLayerParent<T, M> context, EntityModelSet loader) {
-		super(context);
-		this.featheredWings = new FeatheredWingsModel<>(loader.bakeLayer(IcarusModels.FEATHERED));
-		this.leatherWings = new LeatherWingsModel<>(loader.bakeLayer(IcarusModels.LEATHER));
-		this.lightWings = new LightWingsModel<>(loader.bakeLayer(IcarusModels.LIGHT));
-		this.flandresWings = new FlandresWingsModel<>(loader.bakeLayer(IcarusModels.FLANDRE));
-		this.discordsWings = new DiscordsWingsModel<>(loader.bakeLayer(IcarusModels.DISCORD));
-		this.zanzasWings = new ZanzasWingsModel<>(loader.bakeLayer(IcarusModels.ZANZA));
-	}
+    public WingsLayer(RenderLayerParent<T, M> context, EntityModelSet loader) {
+        super(context);
+        this.featheredWings = new FeatheredWingsModel<>(loader.bakeLayer(IcarusModels.FEATHERED));
+        this.leatherWings = new LeatherWingsModel<>(loader.bakeLayer(IcarusModels.LEATHER));
+        this.lightWings = new LightWingsModel<>(loader.bakeLayer(IcarusModels.LIGHT));
+        this.flandresWings = new FlandresWingsModel<>(loader.bakeLayer(IcarusModels.FLANDRE));
+        this.discordsWings = new DiscordsWingsModel<>(loader.bakeLayer(IcarusModels.DISCORD));
+        this.zanzasWings = new ZanzasWingsModel<>(loader.bakeLayer(IcarusModels.ZANZA));
+    }
 
-	@Override
-	public void render(PoseStack matrices, MultiBufferSource vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-		var stack = IcarusHelper.getEquippedWings.apply(entity);
+    @Override
+    public void render(PoseStack matrices, MultiBufferSource vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+        var stack = IcarusHelper.getEquippedWings.apply(entity);
 
-		if(!stack.isEmpty()) {
-			if (stack.getItem() instanceof WingItem wingItem) {
-				float[] primaryColour = wingItem.getPrimaryColor(stack).getTextureDiffuseColors();
-				float[] secondaryColour = wingItem.getSecondaryColor(stack).getTextureDiffuseColors();
-				float r1 = primaryColour[0];
-				float g1 = primaryColour[1];
-				float b1 = primaryColour[2];
-				float r2 = secondaryColour[0];
-				float g2 = secondaryColour[1];
-				float b2 = secondaryColour[2];
+        if (stack.getItem() instanceof WingItem wingItem) {
+            float[] primaryColour = wingItem.getPrimaryColor(stack).getTextureDiffuseColors();
+            float[] secondaryColour = wingItem.getSecondaryColor(stack).getTextureDiffuseColors();
+            float r1 = primaryColour[0];
+            float g1 = primaryColour[1];
+            float b1 = primaryColour[2];
+            float r2 = secondaryColour[0];
+            float g2 = secondaryColour[1];
+            float b2 = secondaryColour[2];
 
-				String wingType = wingItem.getWingType() != WingItem.WingType.UNIQUE ? wingItem.getWingType().toString().toLowerCase(Locale.ROOT) : BuiltInRegistries.ITEM.getKey(wingItem).getPath().replaceAll("_wings", "");
+            var wingModel = switch (wingItem.getWingType()) {
+                case FEATHERED, MECHANICAL_FEATHERED -> featheredWings;
+                case DRAGON, MECHANICAL_LEATHER -> leatherWings;
+                case LIGHT -> lightWings;
+                case UNIQUE -> {
+                    if (stack.is(IcarusItems.FLANDRES_WINGS.get())) {
+                        yield flandresWings;
+                    }
+                    if (stack.is(IcarusItems.DISCORDS_WINGS.get())) {
+                        yield discordsWings;
+                    }
+                    if (stack.is(IcarusItems.ZANZAS_WINGS.get())) {
+                        yield zanzasWings;
+                    }
+                    yield null;
+                }
+                default -> null;
+            };
+            if (wingModel == null) {
+                return;
+            }
 
-				var wingModel = switch (wingItem.getWingType()) {
-					case FEATHERED, MECHANICAL_FEATHERED -> featheredWings;
-					case DRAGON, MECHANICAL_LEATHER -> leatherWings;
-					case LIGHT -> lightWings;
-					case UNIQUE -> {
-						if(stack.is(IcarusItems.FLANDRES_WINGS.get())) {
-							yield flandresWings;
-						}
-						if(stack.is(IcarusItems.DISCORDS_WINGS.get())) {
-							yield discordsWings;
-						}
-						if(stack.is(IcarusItems.ZANZAS_WINGS.get())) {
-							yield zanzasWings;
-						}
-						yield null;
-					}
-					default -> null;
-				};
-				if(wingModel == null) {
-					return;
-				}
+            ResourceLocation layer1 = wingItem.getWingType().getTextureLayer1(stack);
+            ResourceLocation layer2 = wingItem.getWingType().getTextureLayer2(stack);
 
-				ResourceLocation layer1 = wingItem.getWingType().getTextureLayer1(stack);
-				ResourceLocation layer2 = wingItem.getWingType().getTextureLayer2(stack);
+            matrices.pushPose();
+            matrices.translate(0.0D, 0.0D, 0.125D);
+            this.getParentModel().copyPropertiesTo(wingModel);
+            wingModel.setupAnim(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
+            this.renderWings(wingModel, matrices, vertexConsumers, stack, RenderType.entityTranslucent(layer2), light, r2, g2, b2);
+            this.renderWings(wingModel, matrices, vertexConsumers, stack, RenderType.entityTranslucent(layer1), light, r1, g1, b1);
+            matrices.popPose();
+        }
+    }
 
-				matrices.pushPose();
-				matrices.translate(0.0D, 0.0D, 0.125D);
-				this.getParentModel().copyPropertiesTo(wingModel);
-				wingModel.setupAnim(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
-				this.renderWings(wingModel, matrices, vertexConsumers, stack, RenderType.entityTranslucent(layer2), light, r2, g2, b2);
-				this.renderWings(wingModel, matrices, vertexConsumers, stack, RenderType.entityTranslucent(layer1), light, r1, g1, b1);
-				matrices.popPose();
-			}
-		}
-	}
-
-	public void renderWings(WingEntityModel<T> model, PoseStack matrices, MultiBufferSource vertexConsumers, @Nullable ItemStack stack, RenderType renderLayer, int light, float r, float g, float b) {
-		VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(vertexConsumers, renderLayer, false, stack != null && stack.hasFoil());
-		model.renderToBuffer(matrices, vertexConsumer, light, OverlayTexture.NO_OVERLAY, r, g, b, 1F);
-	}
+    public void renderWings(WingEntityModel<T> model, PoseStack matrices, MultiBufferSource vertexConsumers, @Nullable ItemStack stack, RenderType renderLayer, int light, float r, float g, float b) {
+        VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(vertexConsumers, renderLayer, false, stack != null && stack.hasFoil());
+        model.renderToBuffer(matrices, vertexConsumer, light, OverlayTexture.NO_OVERLAY, r, g, b, 1F);
+    }
 }
