@@ -15,6 +15,7 @@ jobs:
         with:
           distribution: 'microsoft'
           java-version: 17
+          cache: 'gradle'
       - name: Get current time
         uses: srfrnk/current-time@master
         id: current-time
