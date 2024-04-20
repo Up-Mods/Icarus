@@ -133,6 +133,11 @@ subprojects {
 		}
 
 		maven {
+			name = "FiguraMC"
+			url = "https://maven.figuramc.org/releases"
+		}
+
+		maven {
 			name = "Modrinth"
 			url = "https://api.modrinth.com/maven"
 			content {
@@ -147,6 +152,15 @@ subprojects {
                 includeGroup "curse.maven"
             }
         }
+
+		maven {
+			name = "JitPack"
+			url = "https://jitpack.io"
+			content {
+				includeGroupByRegex("com\\.github\\..*")
+				includeGroupByRegex("io\\.github\\..*")
+			}
+		}
 	}
 
 	tasks.withType(JavaCompile).configureEach {

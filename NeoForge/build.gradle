@@ -28,6 +28,9 @@ dependencies {
     // NOT UPDATED YET!
 //    runtimeOnly fg.deobf(neoforge.cameraoverhaul.get())
 
+    compileOnly fg.deobf(libs.figura.forge.get())
+//    runtimeOnly fg.deobf(libs.figura.forge.get())
+
     // compileOnly "${libs.emi.neoforge.get()}:api"
 
     minecraftLibrary(libs.mixin.extras.asProvider().get())

@@ -14,6 +14,10 @@ commonnetworking = "1.0.2-1.20.1"
 resourcefulconfig = "2.1.2"
 emi = "1.1.4+1.20.1"
 
+figura = "0.1.4+1.20.1"
+luaj = "3.0.8-figura"
+nv_websocket = "2.14"
+
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 parchment_mappings = { module = "org.parchmentmc.data:parchment-1.20.1", version.ref = "parchment" }
@@ -39,8 +43,17 @@ emi = { module = "dev.emi:emi-xplat-mojmap", version.ref = "emi" }
 emi_neoforge = { module = "dev.emi:emi-neoforge", version.ref = "emi" }
 emi_fabric = { module = "dev.emi:emi-fabric", version.ref = "emi" }
 
+figura = { module = "org.figuramc:figura-common-mojmap", version.ref = "figura" }
+figura_forge = { module = "org.figuramc:figura-forge", version.ref = "figura" }
+figura_fabric = { module = "org.figuramc:figura-fabric", version.ref = "figura" }
+
+luaj_core = { module = "com.github.FiguraMC.luaj:luaj-core", version.ref = "luaj" }
+luaj_jse = { module = "com.github.FiguraMC.luaj:luaj-jse", version.ref = "luaj" }
+nv_websocket = { module = "com.neovisionaries:nv-websocket-client", version.ref = "nv_websocket" }
+
 [bundles]
 mixin = ["mixin", "mixin_extras", "asm", "asm_analysis", "asm_commons", "asm_tree", "asm_util"]
+figura_runtime = ["luaj_core", "luaj_jse", "nv_websocket"]
 
 [plugins]
 vanilla_gradle = { id = "org.spongepowered.gradle.vanilla", version.ref = "vanilla_gradle" }

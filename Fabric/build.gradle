@@ -39,6 +39,10 @@ dependencies {
 //    modLocalRuntime fabric.cameraoverhaul
 //    modLocalRuntime fabric.cloth
 
+    modCompileOnly libs.figura.fabric
+    modLocalRuntime libs.figura.fabric
+    localRuntime libs.bundles.figura.runtime
+
     // modCompileOnly "${libs.emi.fabric.get()}:api"
 }
 

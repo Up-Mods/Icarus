@@ -26,7 +26,9 @@
     "entrypoints": {
       "init": "dev.cammiescorner.icarus.quilt.entrypoints.Main",
       "client_init": "dev.cammiescorner.icarus.quilt.entrypoints.Client",
-      "modmenu": "dev.cammiescorner.icarus.quilt.entrypoints.Modmenu"
+      "modmenu": "dev.cammiescorner.icarus.quilt.entrypoints.Modmenu",
+      "figura_api": "dev.cammiescorner.icarus.integration.figura.IcarusFiguraPlugin",
+      "figura_vanilla_part": "dev.cammiescorner.icarus.integration.figura.IcarusFiguraModelPartsPlugin"
     },
     "depends": [
       {

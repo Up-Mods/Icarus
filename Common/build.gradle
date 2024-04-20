@@ -17,5 +17,8 @@ dependencies {
 	implementation libs.resourcefulconfig
 	implementation libs.commonnetworking
 
+	compileOnly libs.figura
+	compileOnly libs.bundles.figura.runtime
+
 	// compileOnly "${libs.emi.asProvider().get()}:api"
 }

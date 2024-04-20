@@ -25,6 +25,12 @@
     ],
     "modmenu": [
       "dev.cammiescorner.icarus.fabric.entrypoints.Modmenu"
+    ],
+    "figura_api": [
+      "dev.cammiescorner.icarus.integration.figura.IcarusFiguraPlugin"
+    ],
+    "figura_vanilla_part": [
+      "dev.cammiescorner.icarus.integration.figura.IcarusFiguraModelPartsPlugin"
     ]
   },
   "mixins": [

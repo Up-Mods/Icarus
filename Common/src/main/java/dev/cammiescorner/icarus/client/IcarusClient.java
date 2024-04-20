@@ -1,13 +1,21 @@
 package dev.cammiescorner.icarus.client;
 
 import dev.cammiescorner.icarus.util.IcarusHelper;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.ApiStatus;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 public class IcarusClient {
     public static float wingSpeed;
     public static float maxSlowedMultiplier;
     public static boolean armorSlows;
     public static boolean canLoopDeLoop;
+
+    private static final List<Predicate<LivingEntity>> renderPredicates = new ArrayList<>();
 
     public static void onPlayerTick(Player player) {
         if (player.isFallFlying() && IcarusHelper.hasWings.test(player) && player.zza > 0) {
@@ -20,5 +28,21 @@ public class IcarusClient {
                     rotation.y * speed + (rotation.y * 1.5D - velocity.y) * speed,
                     rotation.z * speed + (rotation.z * 1.5D - velocity.z) * speed));
         }
+    }
+
+    @ApiStatus.Internal
+    public static void addRenderPredicate(Predicate<LivingEntity> predicate) {
+        renderPredicates.add(predicate);
+    }
+
+    public static boolean shouldRenderWings(LivingEntity entity) {
+        if (!renderPredicates.isEmpty()) {
+            for (Predicate<LivingEntity> predicate : renderPredicates) {
+                if (!predicate.test(entity)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

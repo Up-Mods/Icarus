@@ -27,12 +27,16 @@ dependencies {
     modImplementation libs.commonnetworking.fabric
     modImplementation quilt.trinkets
 
+    modCompileOnly quilt.modmenu
+    modLocalRuntime quilt.modmenu
+
     modCompileOnly quilt.cameraoverhaul
 //    modLocalRuntime quilt.cameraoverhaul
 //    modLocalRuntime quilt.cloth
 
-    modCompileOnly quilt.modmenu
-    modLocalRuntime quilt.modmenu
+    modCompileOnly libs.figura.fabric
+    modLocalRuntime libs.figura.fabric
+    localRuntime libs.bundles.figura.runtime
 
     // modCompileOnly "${libs.emi.fabric.get()}:api"
 }
