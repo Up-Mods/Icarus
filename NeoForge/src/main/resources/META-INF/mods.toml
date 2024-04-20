@@ -43,5 +43,6 @@ config = "${mod_id}.neoforge.mixins.json"
         "forge"
     ]
     dependencies = [
-        "cameraoverhaul(optional){curseforge:443034}#(ignore:modrinth)"
+        "cameraoverhaul(optional){curseforge:443034}#(ignore:modrinth)",
+        "figura(optional){modrinth:s9gIPDom}{curseforge:901503}"
     ]
