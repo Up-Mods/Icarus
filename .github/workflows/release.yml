@@ -50,6 +50,7 @@ jobs:
             **/build/libs/!(*-@(dev|sources|javadoc|slim)).jar
             **/build/libs/*-@(sources|javadoc).jar
       - name: Publish (NeoForge)
+        id: publish_neoforge
         uses: Kir-Antipov/mc-publish@423b200ec84e6eefad726549c72513d7a9b4c2c0 # (new) v3.3
         with:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
@@ -59,6 +60,7 @@ jobs:
             NeoForge/build/libs/!(*-@(dev|sources|javadoc|slim)).jar
             NeoForge/build/libs/*-@(sources|javadoc).jar
       - name: Publish (Quilt)
+        id: publish_quilt
         uses: Kir-Antipov/mc-publish@423b200ec84e6eefad726549c72513d7a9b4c2c0 # (new) v3.3
         with:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
@@ -68,6 +70,7 @@ jobs:
             Quilt/build/libs/!(*-@(dev|sources|javadoc|slim)).jar
             Quilt/build/libs/*-@(sources|javadoc).jar
       - name: Publish (Fabric)
+        id: publish_fabric
         uses: Kir-Antipov/mc-publish@423b200ec84e6eefad726549c72513d7a9b4c2c0 # (new) v3.3
         with:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
@@ -76,3 +79,11 @@ jobs:
           files: |
             Fabric/build/libs/!(*-@(dev|sources|javadoc|slim)).jar
             Fabric/build/libs/*-@(sources|javadoc).jar
+      - name: Notify Discord
+        uses: Up-Mods/action-discord-release@main
+        with:
+          version: ${{ github.ref_name }}
+          webhook-url: ${{ secrets.ANNOUNCEMENT_WEBHOOK_URL }}
+          curseforge-project-id: steps.publish_quilt.outputs.curseforge-id
+          modrinth-project-id: steps.publish_quilt.outputs.modrinth-id
+          thumbnail-url: https://mod-assets.upcraft.dev/promo/icarus/icon_128x.png
