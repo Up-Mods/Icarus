@@ -39,7 +39,7 @@ public final class IcarusConfig {
     @ConfigEntry(id = "max_slowed_multiplier", type = EntryType.FLOAT, translation = "config.icarus.max_slowed_multiplier")
     public static float maxSlowedMultiplier = 3F;
     @ConfigEntry(id = "wings_speed", type = EntryType.FLOAT, translation = "config.icarus.wings_speed")
-    public static float wingsSpeed = 0.02F;
+    public static float wingsSpeed = 0.0125F;
     @ConfigEntry(id = "wings_durability", type = EntryType.INTEGER, translation = "config.icarus.wings_durability")
     public static int wingsDurability = 0;
     @ConfigEntry(id = "exhaustion_amount", type = EntryType.FLOAT, translation = "config.icarus.exhaustion_amount")
