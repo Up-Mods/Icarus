@@ -16,7 +16,7 @@ jar.finalizedBy('reobfJar')
 dependencies {
     minecraft neoforge.neoforge.get()
     compileOnly project(":Common")
-    annotationProcessor "${libs.mixin.asProvider().get()}:processor"
+    annotationProcessor "net.fabricmc:sponge-mixin:0.13.0+mixin.0.8.5" //TODO fix in 1.20.4
     annotationProcessor libs.mixin.extras
 
     implementation fg.deobf(libs.resourcefulconfig.forge.get())
