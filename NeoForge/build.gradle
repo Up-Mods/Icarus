@@ -13,6 +13,13 @@ if(usingJarJar) {
 }
 jar.finalizedBy('reobfJar')
 
+repositories {
+    maven {
+        name = "TheIllusiveC4"
+        url = "https://maven.theillusivec4.top"
+    }
+}
+
 dependencies {
     minecraft neoforge.neoforge.get()
     compileOnly project(":Common")
@@ -23,6 +30,8 @@ dependencies {
     implementation fg.deobf(libs.commonnetworking.neoforge.get())
 
     implementation fg.deobf(neoforge.curios.get())
+
+    implementation fg.deobf(neoforge.caelus.get())
 
     compileOnly fg.deobf(neoforge.cameraoverhaul.get())
     // NOT UPDATED YET!

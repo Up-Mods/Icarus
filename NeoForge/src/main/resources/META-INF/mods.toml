@@ -25,6 +25,7 @@ config = "${mod_id}.neoforge.mixins.json"
         { modId = "forge", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { ignore = true } },
         { modId = "minecraft", mandatory = true, versionRange = "[${minecraft_version}]", ordering = "NONE", side = "BOTH" },
         { modId = "curios", mandatory = true, versionRange = "[5.8.0,)", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "309927", modrinth = "vvuO3ImH" } },
+        { modId = "caelus", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "308989", modrinth = "40FYwb4z" } },
         { modId = "resourcefulconfig", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "714059", modrinth = "M1953qlQ" } },
         { modId = "commonnetworking", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "806044", modrinth = "HIuqnQpi" } }
     ]
