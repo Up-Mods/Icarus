@@ -5,7 +5,7 @@ librarian = "1.+"
 
 neoforge = "1.20.1-47.1.104"
 
-curios = "5266541"
+curios = "5.8.1+1.20.1"
 
 caelus = "3.2.0+1.20.1"
 
@@ -14,7 +14,7 @@ cameraoverhaul = "4057605"
 [libraries]
 neoforge = { module = "net.neoforged:forge", version.ref = "neoforge" }
 
-curios = { module = "curse.maven:curios-309927", version.ref = "curios" }
+curios = { module = "top.theillusivec4.curios:curios-forge", version.ref = "curios" }
 
 caelus = { module = "top.theillusivec4.caelus:caelus-forge", version.ref = "caelus" }
 
