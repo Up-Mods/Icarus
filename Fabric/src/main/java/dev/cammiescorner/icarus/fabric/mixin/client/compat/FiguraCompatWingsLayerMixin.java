@@ -1,4 +1,4 @@
-package dev.cammiescorner.icarus.mixin.client;
+package dev.cammiescorner.icarus.fabric.mixin.client.compat;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;

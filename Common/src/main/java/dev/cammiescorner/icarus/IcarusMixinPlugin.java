@@ -25,8 +25,11 @@ public class IcarusMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if("dev.cammiescorner.icarus.mixin.client.FiguraCompatWingsLayerMixin".equals(mixinClassName)) {
-            return COMPAT_SERVICE.isModLoaded("figura");
+        //noinspection EnhancedSwitchMigration
+        switch (mixinClassName) {
+            case "dev.cammiescorner.icarus.fabric.mixin.client.compat.FiguraCompatWingsLayerMixin":
+            case "dev.cammiescorner.icarus.quilt.mixin.client.compat.FiguraCompatWingsLayerMixin":
+                return COMPAT_SERVICE.isModLoaded("figura");
         }
 
         return true;

@@ -9,6 +9,7 @@
     "MixinWingItem"
   ],
   "client": [
+    "client.compat.FiguraCompatWingsLayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
