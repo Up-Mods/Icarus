@@ -79,25 +79,7 @@ public class Main implements ModInitializer {
             return false;
         };
 
-        EntityElytraEvents.CUSTOM.register((entity, tickElytra) -> {
-            var component = TrinketsApi.getTrinketComponent(entity);
-            if (component.isPresent()) {
-                var items = component.orElseThrow().getEquipped(stack -> stack.getItem() instanceof WingItem);
-                if (!items.isEmpty()) {
-                    var slot = items.get(0);
-                    var stack = slot.getB();
-                    var copy = stack.copy();
-                    if (!stack.isEmpty() && IcarusHelper.onFallFlyingTick(entity, stack, tickElytra)) {
-                        if(!ItemStack.matches(stack, copy)) {
-                            slot.getA().inventory().markUpdate();
-                        }
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        });
+        EntityElytraEvents.CUSTOM.register((entity, tickElytra) -> IcarusHelper.onFallFlyingTick(entity, IcarusHelper.getEquippedWings(entity), tickElytra));
 
         ServerLifecycleEvents.SERVER_STARTING.register(Icarus::onServerStart);
 
