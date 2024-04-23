@@ -31,7 +31,7 @@ public class IcarusClient {
 
     @ApiStatus.Internal
     public static ItemStack getWingsForRendering(LivingEntity entity) {
-        return MoreObjects.firstNonNull(IcarusHelper.getEquippedWings(entity), ItemStack.EMPTY);
+        return MoreObjects.firstNonNull(IcarusHelper.getEquippedWings.apply(entity), ItemStack.EMPTY);
     }
 
     @ApiStatus.Internal
