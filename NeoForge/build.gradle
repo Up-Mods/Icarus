@@ -151,10 +151,11 @@ processResources {
     from project(":Common").sourceSets.main.resources
 }
 
-if(usingJarJar) {
-    publishing {
-        publications {
-            "mavenJava${project.name}"(MavenPublication) {
+publishing {
+    publications {
+        "mavenJava${project.name}"(MavenPublication) {
+            fg.component(it)
+            if (usingJarJar) {
                 jarJar.component(it)
             }
         }
