@@ -15,7 +15,7 @@ public class IcarusClient {
     private static final List<Predicate<LivingEntity>> renderPredicates = new ArrayList<>();
 
     public static void onPlayerTick(Player player) {
-        if (player.isFallFlying() && IcarusHelper.hasWings.test(player) && player.zza > 0) {
+        if (player.isFallFlying() && IcarusHelper.hasWings(player) && player.zza > 0) {
             var cfg = IcarusHelper.getConfigValues(player);
             var rotation = player.getLookAngle();
             var velocity = player.getDeltaMovement();
@@ -30,7 +30,7 @@ public class IcarusClient {
 
     @ApiStatus.Internal
     public static ItemStack getWingsForRendering(LivingEntity entity) {
-        return IcarusHelper.getEquippedWings.apply(entity);
+        return IcarusHelper.getEquippedWings(entity);
     }
 
     @ApiStatus.Internal

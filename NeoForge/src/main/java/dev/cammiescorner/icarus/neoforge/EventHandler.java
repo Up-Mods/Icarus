@@ -29,18 +29,18 @@ public class EventHandler {
             if(attributeInstance != null) {
                 if (attributeInstance.hasModifier(WINGS_FLIGHT)) {
                     if(event.player.isFallFlying()) {
-                        if (!IcarusHelper.onFallFlyingTick(event.player, IcarusHelper.getEquippedWings.apply(event.player), true)) {
+                        if (!IcarusHelper.onFallFlyingTick(event.player, IcarusHelper.getEquippedWings(event.player), true)) {
                             attributeInstance.removeModifier(WINGS_FLIGHT);
                         }
                     }
                     else {
-                        if(!IcarusHelper.hasWings.test(event.player)) {
+                        if(!IcarusHelper.hasWings(event.player)) {
                             attributeInstance.removeModifier(WINGS_FLIGHT);
                         }
                     }
                 }
                 else {
-                    if (IcarusHelper.hasWings.test(event.player)) {
+                    if (IcarusHelper.hasWings(event.player)) {
                         attributeInstance.addTransientModifier(WINGS_FLIGHT);
                     }
                 }

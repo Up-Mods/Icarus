@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiPredicate;
@@ -21,9 +22,15 @@ import java.util.function.Predicate;
 
 public class IcarusHelper {
 
+    @ApiStatus.Internal
     public static Predicate<LivingEntity> hasWings = entity -> false;
+
+    @ApiStatus.Internal
     public static Function<LivingEntity, ItemStack> getEquippedWings = entity -> ItemStack.EMPTY;
+    @ApiStatus.Internal
     public static BiPredicate<LivingEntity, ItemStack> equipFunc = (entity, stack) -> false;
+
+    @ApiStatus.Internal
     public static IcarusPlayerValues fallbackValues = new ServerPlayerFallbackValues();
 
     public static boolean onFallFlyingTick(LivingEntity entity, @Nullable ItemStack wings, boolean tick) {
@@ -71,6 +78,14 @@ public class IcarusHelper {
         }
 
         return true;
+    }
+
+    public static boolean hasWings(LivingEntity entity) {
+        return hasWings.test(entity);
+    }
+
+    public static ItemStack getEquippedWings(LivingEntity entity) {
+        return getEquippedWings.apply(entity);
     }
 
     public static IcarusPlayerValues getConfigValues(LivingEntity entity) {

@@ -14,7 +14,7 @@ public abstract class CapeLayerMixin {
 
     @WrapOperation(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/player/AbstractClientPlayer;FFFFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/AbstractClientPlayer;isModelPartShown(Lnet/minecraft/world/entity/player/PlayerModelPart;)Z"))
     private boolean icarus$hideCape(AbstractClientPlayer instance, PlayerModelPart playerModelPart, Operation<Boolean> original) {
-        return original.call(instance, playerModelPart) && !IcarusHelper.hasWings.test(instance);
+        return original.call(instance, playerModelPart) && !IcarusHelper.hasWings(instance);
     }
 
 }
