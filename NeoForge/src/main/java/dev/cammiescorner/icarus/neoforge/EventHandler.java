@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.caelus.api.CaelusApi;
@@ -56,5 +57,10 @@ public class EventHandler {
     @SubscribeEvent
     public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         IcarusHelper.onServerPlayerJoin((ServerPlayer) event.getEntity());
+    }
+
+    @SubscribeEvent
+    public static void onServerStart(ServerStartingEvent event) {
+        Icarus.onServerStart(event.getServer());
     }
 }

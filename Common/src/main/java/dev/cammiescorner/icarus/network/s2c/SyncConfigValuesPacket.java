@@ -3,8 +3,9 @@ package dev.cammiescorner.icarus.network.s2c;
 import commonnetwork.api.Dispatcher;
 import commonnetwork.networking.data.PacketContext;
 import dev.cammiescorner.icarus.Icarus;
-import dev.cammiescorner.icarus.IcarusConfig;
-import dev.cammiescorner.icarus.client.IcarusClient;
+import dev.cammiescorner.icarus.client.ClientPlayerFallbackValues;
+import dev.cammiescorner.icarus.util.IcarusHelper;
+import dev.cammiescorner.icarus.util.ServerPlayerFallbackValues;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +22,8 @@ public record SyncConfigValuesPacket(float wingsSpeed, float maxSlowedMultiplier
 	}
 
 	public static void send(ServerPlayer player) {
-		var packet = new SyncConfigValuesPacket(IcarusConfig.wingsSpeed, IcarusConfig.maxSlowedMultiplier, IcarusConfig.armorSlows, IcarusConfig.canLoopDeLoop);
+		var cfg = new ServerPlayerFallbackValues();
+		var packet = new SyncConfigValuesPacket(cfg.wingsSpeed(), cfg.maxSlowedMultiplier(), cfg.armorSlows(), cfg.canLoopDeLoop());
 		Dispatcher.sendToClient(packet, player);
 	}
 
@@ -35,11 +37,11 @@ public record SyncConfigValuesPacket(float wingsSpeed, float maxSlowedMultiplier
 	}
 
 	public static void handle(PacketContext<SyncConfigValuesPacket> ctx) {
-		Minecraft.getInstance().execute(() -> {
-			IcarusClient.wingSpeed = ctx.message().wingsSpeed();
-			IcarusClient.maxSlowedMultiplier = ctx.message().maxSlowedMultiplier();
-			IcarusClient.armorSlows = ctx.message().armorSlows();
-			IcarusClient.canLoopDeLoop = ctx.message().canLoopDeLoop();
-		});
+		Minecraft.getInstance().execute(() -> IcarusHelper.fallbackValues = new ClientPlayerFallbackValues(
+                ctx.message().wingsSpeed(),
+                ctx.message().maxSlowedMultiplier(),
+                ctx.message().armorSlows(),
+                ctx.message().canLoopDeLoop()
+        ));
 	}
 }

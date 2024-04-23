@@ -3,7 +3,10 @@ package dev.cammiescorner.icarus;
 import com.teamresourceful.resourcefulconfig.common.config.Configurator;
 import commonnetwork.api.Network;
 import dev.cammiescorner.icarus.network.s2c.SyncConfigValuesPacket;
+import dev.cammiescorner.icarus.util.IcarusHelper;
+import dev.cammiescorner.icarus.util.ServerPlayerFallbackValues;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 
 public class Icarus {
 
@@ -18,5 +21,9 @@ public class Icarus {
 
     public static ResourceLocation id(String path) {
         return new ResourceLocation(MODID, path);
+    }
+
+    public static void onServerStart(MinecraftServer server) {
+        IcarusHelper.fallbackValues = new ServerPlayerFallbackValues();
     }
 }

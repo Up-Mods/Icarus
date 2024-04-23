@@ -2,12 +2,12 @@ package dev.cammiescorner.icarus.client.renderers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import dev.cammiescorner.icarus.api.client.IcarusAPIClient;
 import dev.cammiescorner.icarus.client.IcarusClient;
 import dev.cammiescorner.icarus.client.IcarusModels;
 import dev.cammiescorner.icarus.client.models.*;
 import dev.cammiescorner.icarus.init.IcarusItems;
 import dev.cammiescorner.icarus.item.WingItem;
-import dev.cammiescorner.icarus.util.IcarusHelper;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -42,7 +42,7 @@ public class WingsLayer<T extends LivingEntity, M extends EntityModel<T>> extend
 
     @Override
     public void render(PoseStack matrices, MultiBufferSource vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        var stack = IcarusHelper.getEquippedWings.apply(entity);
+        var stack = IcarusAPIClient.getWingsForRendering(entity);
 
         if (stack.getItem() instanceof WingItem wingItem && IcarusClient.shouldRenderWings(entity)) {
             float[] primaryColour = wingItem.getPrimaryColor(stack).getTextureDiffuseColors();

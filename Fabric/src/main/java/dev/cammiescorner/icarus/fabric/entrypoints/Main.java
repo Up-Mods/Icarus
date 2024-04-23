@@ -12,6 +12,7 @@ import dev.emi.trinkets.api.TrinketInventory;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.core.Registry;
@@ -97,6 +98,8 @@ public class Main implements ModInitializer {
 
             return false;
         });
+
+        ServerLifecycleEvents.SERVER_STARTING.register(Icarus::onServerStart);
 
         IcarusItems.register(new Registrar<>() {
             @Override

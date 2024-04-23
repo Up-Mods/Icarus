@@ -1,6 +1,6 @@
 package dev.cammiescorner.icarus.util;
 
-import dev.cammiescorner.icarus.IcarusConfig;
+import dev.cammiescorner.icarus.api.IcarusPlayerValues;
 import dev.cammiescorner.icarus.api.SlowFallingEntity;
 import dev.cammiescorner.icarus.init.IcarusDimensionTags;
 import dev.cammiescorner.icarus.init.IcarusItemTags;
@@ -24,6 +24,7 @@ public class IcarusHelper {
     public static Predicate<LivingEntity> hasWings = entity -> false;
     public static Function<LivingEntity, ItemStack> getEquippedWings = entity -> ItemStack.EMPTY;
     public static BiPredicate<LivingEntity, ItemStack> equipFunc = (entity, stack) -> false;
+    public static IcarusPlayerValues fallbackValues = new ServerPlayerFallbackValues();
 
     public static boolean onFallFlyingTick(LivingEntity entity, @Nullable ItemStack wings, boolean tick) {
         if(!entity.level().isClientSide() && entity.level().registryAccess().registryOrThrow(Registries.DIMENSION).getHolderOrThrow(entity.level().dimension()).is(IcarusDimensionTags.NO_FLYING_ALLOWED)) {
@@ -43,7 +44,8 @@ public class IcarusHelper {
             }
 
             if (tick) {
-                if ((IcarusConfig.canSlowFall && entity.isShiftKeyDown()) || entity.isUnderWater()) {
+                var cfg = IcarusHelper.getConfigValues(entity);
+                if ((cfg.canSlowFall() && entity.isShiftKeyDown()) || entity.isUnderWater()) {
                     if (entity instanceof Player player) {
                         stopFlying(player);
                     }
@@ -51,7 +53,7 @@ public class IcarusHelper {
                 }
 
                 if (!wings.is(IcarusItemTags.FREE_FLIGHT) && entity instanceof Player player && !player.isCreative()) {
-                    player.getFoodData().addExhaustion(IcarusConfig.exhaustionAmount);
+                    player.getFoodData().addExhaustion(cfg.exhaustionAmount());
                     if (player.getFoodData().getFoodLevel() <= 6) {
                         stopFlying(player);
                         return false;
@@ -69,6 +71,10 @@ public class IcarusHelper {
         }
 
         return true;
+    }
+
+    public static IcarusPlayerValues getConfigValues(LivingEntity entity) {
+        return fallbackValues;
     }
 
     public static void onPlayerTick(Player player) {

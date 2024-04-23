@@ -49,7 +49,8 @@ public class WingItem extends Item {
 
 	public boolean onFlightTick(LivingEntity entity, ItemStack wings, int ticks) {
 		if (IcarusConfig.wingsDurability > 0 && wings.is(IcarusItemTags.MELTS) && !(entity instanceof Player player && player.isCreative())) {
-			if (ticks % 20 == 0 || (IcarusConfig.maxHeightEnabled && entity.getY() > entity.level().getHeight() + IcarusConfig.maxHeightAboveWorld && ticks % 2 == 0)) {
+			var cfg = IcarusHelper.getConfigValues(entity);
+			if (ticks % 20 == 0 || (cfg.maxHeightEnabled() && entity.getY() > entity.level().getHeight() + cfg.maxHeightAboveWorld() && ticks % 2 == 0)) {
 				wings.hurtAndBreak(1, entity, e -> e.broadcastBreakEvent(EquipmentSlot.CHEST));
 			}
 		}

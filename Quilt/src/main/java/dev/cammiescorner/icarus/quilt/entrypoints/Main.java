@@ -23,6 +23,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.quiltmc.qsl.entity.event.api.ServerEntityTickCallback;
+import org.quiltmc.qsl.lifecycle.api.event.ServerLifecycleEvents;
 import org.quiltmc.qsl.networking.api.ServerPlayConnectionEvents;
 
 import java.util.function.Supplier;
@@ -106,6 +107,8 @@ public class Main implements ModInitializer {
                 IcarusHelper.onPlayerTick(player);
             }
         });
+
+        ServerLifecycleEvents.STARTING.register(Icarus::onServerStart);
 
         IcarusItems.register(new Registrar<>() {
             @Override
