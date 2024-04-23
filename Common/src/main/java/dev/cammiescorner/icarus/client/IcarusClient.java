@@ -1,5 +1,6 @@
 package dev.cammiescorner.icarus.client;
 
+import com.google.common.base.MoreObjects;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -30,7 +31,7 @@ public class IcarusClient {
 
     @ApiStatus.Internal
     public static ItemStack getWingsForRendering(LivingEntity entity) {
-        return IcarusHelper.getEquippedWings(entity);
+        return MoreObjects.firstNonNull(IcarusHelper.getEquippedWings(entity), ItemStack.EMPTY);
     }
 
     @ApiStatus.Internal
