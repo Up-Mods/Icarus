@@ -2,6 +2,7 @@ package dev.cammiescorner.icarus.neoforge.entrypoints;
 
 import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.init.IcarusItems;
+import dev.cammiescorner.icarus.init.IcarusStatusEffects;
 import dev.cammiescorner.icarus.item.WingItem;
 import dev.cammiescorner.icarus.neoforge.registry.IcarusDeferredRegister;
 import dev.cammiescorner.icarus.util.IcarusHelper;
@@ -11,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
 
 @Mod(Icarus.MODID)
@@ -41,9 +43,13 @@ public class Main {
 //        }
 
         var bus = FMLJavaModLoadingContext.get().getModEventBus();
-        var register = new IcarusDeferredRegister();
-        IcarusItems.register(register);
-        register.subscribe(bus);
+        var itemRegister = IcarusDeferredRegister.create(ForgeRegistries.ITEMS);
+        IcarusItems.register(itemRegister);
+        itemRegister.subscribe(bus);
+
+        var statusEffectsRegister = IcarusDeferredRegister.create(ForgeRegistries.MOB_EFFECTS);
+        IcarusStatusEffects.register(statusEffectsRegister);
+        statusEffectsRegister.subscribe(bus);
 
         var tabsRegister = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Icarus.MODID);
         tabsRegister.register("icarus", () -> IcarusItems.makeTab(CreativeModeTab.builder()));

@@ -2,6 +2,7 @@ package dev.cammiescorner.icarus.fabric.entrypoints;
 
 import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.init.IcarusItems;
+import dev.cammiescorner.icarus.init.IcarusStatusEffects;
 import dev.cammiescorner.icarus.item.WingItem;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import dev.cammiescorner.icarus.util.Registrar;
@@ -18,6 +19,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -87,6 +89,14 @@ public class Main implements ModInitializer {
             @Override
             public <T extends Item> Supplier<T> register(String name, Supplier<? extends T> factory) {
                 var value = Registry.register(BuiltInRegistries.ITEM, Icarus.id(name), factory.get());
+                return () -> value;
+            }
+        });
+
+        IcarusStatusEffects.register(new Registrar<>() {
+            @Override
+            public <T extends MobEffect> Supplier<T> register(String name, Supplier<? extends T> factory) {
+                var value = Registry.register(BuiltInRegistries.MOB_EFFECT, Icarus.id(name), factory.get());
                 return () -> value;
             }
         });

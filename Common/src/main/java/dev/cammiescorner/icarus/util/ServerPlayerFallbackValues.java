@@ -2,6 +2,9 @@ package dev.cammiescorner.icarus.util;
 
 import dev.cammiescorner.icarus.IcarusConfig;
 import dev.cammiescorner.icarus.api.IcarusPlayerValues;
+import dev.cammiescorner.icarus.init.IcarusDimensionTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.Level;
 
 public class ServerPlayerFallbackValues implements IcarusPlayerValues {
 
@@ -38,6 +41,11 @@ public class ServerPlayerFallbackValues implements IcarusPlayerValues {
     @Override
     public boolean maxHeightEnabled() {
         return IcarusConfig.maxHeightEnabled;
+    }
+
+    @Override
+    public TagKey<Level> noFlyingAllowedInDimensions() {
+        return IcarusDimensionTags.NO_FLYING_ALLOWED;
     }
 
     @Override

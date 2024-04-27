@@ -1,5 +1,8 @@
 package dev.cammiescorner.icarus.api;
 
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.Level;
+
 public interface IcarusPlayerValues {
 
     float wingsSpeed();
@@ -17,4 +20,6 @@ public interface IcarusPlayerValues {
     int maxHeightAboveWorld();
 
     boolean maxHeightEnabled();
+
+    TagKey<Level> noFlyingAllowedInDimensions();
 }

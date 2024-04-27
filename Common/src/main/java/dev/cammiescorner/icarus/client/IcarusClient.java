@@ -2,6 +2,8 @@ package dev.cammiescorner.icarus.client;
 
 import com.google.common.base.MoreObjects;
 import dev.cammiescorner.icarus.util.IcarusHelper;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -48,5 +50,11 @@ public class IcarusClient {
             }
         }
         return true;
+    }
+
+    public static void sendActionbarMessage(Player player, Component message) {
+        if(player instanceof LocalPlayer localPlayer) {
+            localPlayer.displayClientMessage(message, true);
+        }
     }
 }

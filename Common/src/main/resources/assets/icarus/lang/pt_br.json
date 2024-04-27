@@ -102,5 +102,8 @@
   "config.icarus.max_height_above_world": "Maximum height above the world build limit that players can fly to",
   "config.icarus.flying_target_radius": "How much the targeting hitbox of a flying player is increased by",
 
-  "message.icarus.status.no_fly.dimension": "Flying is not allowed in this dimension!"
+  "effect.icarus.flightless": "Flightless",
+
+  "message.icarus.status.no_fly.dimension": "Flying is not allowed in this dimension!",
+  "message.icarus.status.no_fly.status_effect": "You cannot fly right now!"
 }

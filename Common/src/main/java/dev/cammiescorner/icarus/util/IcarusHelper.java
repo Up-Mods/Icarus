@@ -2,8 +2,9 @@ package dev.cammiescorner.icarus.util;
 
 import dev.cammiescorner.icarus.api.IcarusPlayerValues;
 import dev.cammiescorner.icarus.api.SlowFallingEntity;
-import dev.cammiescorner.icarus.init.IcarusDimensionTags;
+import dev.cammiescorner.icarus.client.IcarusClient;
 import dev.cammiescorner.icarus.init.IcarusItemTags;
+import dev.cammiescorner.icarus.init.IcarusStatusEffects;
 import dev.cammiescorner.icarus.item.WingItem;
 import dev.cammiescorner.icarus.network.s2c.SyncConfigValuesPacket;
 import net.minecraft.ChatFormatting;
@@ -34,10 +35,25 @@ public class IcarusHelper {
     public static IcarusPlayerValues fallbackValues = new ServerPlayerFallbackValues();
 
     public static boolean onFallFlyingTick(LivingEntity entity, @Nullable ItemStack wings, boolean tick) {
-        if(!entity.level().isClientSide() && entity.level().registryAccess().registryOrThrow(Registries.DIMENSION).getHolderOrThrow(entity.level().dimension()).is(IcarusDimensionTags.NO_FLYING_ALLOWED)) {
+        IcarusPlayerValues cfg = IcarusHelper.getConfigValues(entity);
+        if (!entity.level().isClientSide() && entity.level().registryAccess().registryOrThrow(Registries.DIMENSION).getHolderOrThrow(entity.level().dimension()).is(cfg.noFlyingAllowedInDimensions())) {
             if (entity instanceof ServerPlayer player) {
                 stopFlying(player);
                 player.sendSystemMessage(Component.translatable("message.icarus.status.no_fly.dimension").withStyle(ChatFormatting.RED), true);
+            }
+            return false;
+        }
+
+        if (entity.hasEffect(IcarusStatusEffects.FLIGHTLESS.get())) {
+            if (entity instanceof Player player) {
+                stopFlying(player);
+                Component message = Component.translatable("message.icarus.status.no_fly.status_effect").withStyle(ChatFormatting.BLUE);
+                if (entity instanceof ServerPlayer serverPlayer) {
+                    serverPlayer.sendSystemMessage(message, true);
+                }
+                else {
+                    IcarusClient.sendActionbarMessage(player, message);
+                }
             }
             return false;
         }
@@ -51,7 +67,6 @@ public class IcarusHelper {
             }
 
             if (tick) {
-                var cfg = IcarusHelper.getConfigValues(entity);
                 if ((cfg.canSlowFall() && entity.isShiftKeyDown()) || entity.isUnderWater()) {
                     if (entity instanceof Player player) {
                         stopFlying(player);
