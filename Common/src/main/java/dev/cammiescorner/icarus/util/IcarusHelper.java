@@ -50,45 +50,42 @@ public class IcarusHelper {
                 Component message = Component.translatable("message.icarus.status.no_fly.status_effect").withStyle(ChatFormatting.BLUE);
                 if (entity instanceof ServerPlayer serverPlayer) {
                     serverPlayer.sendSystemMessage(message, true);
-                }
-                else {
+                } else {
                     IcarusClient.sendActionbarMessage(player, message);
                 }
             }
             return false;
         }
 
-        if (wings != null) {
-            if (!(wings.getItem() instanceof WingItem wingItem) || !wingItem.isUsable(entity, wings)) {
+
+        if (wings != null && (!(wings.getItem() instanceof WingItem wingItem) || !wingItem.isUsable(entity, wings))) {
+            if (entity instanceof Player player) {
+                stopFlying(player);
+            }
+            return false;
+        }
+
+        if (tick) {
+            if ((cfg.canSlowFall() && entity.isShiftKeyDown()) || entity.isUnderWater()) {
                 if (entity instanceof Player player) {
                     stopFlying(player);
                 }
                 return false;
             }
 
-            if (tick) {
-                if ((cfg.canSlowFall() && entity.isShiftKeyDown()) || entity.isUnderWater()) {
-                    if (entity instanceof Player player) {
-                        stopFlying(player);
-                    }
+            if ((wings == null || !wings.is(IcarusItemTags.FREE_FLIGHT)) && entity instanceof Player player && !player.isCreative()) {
+                player.getFoodData().addExhaustion(cfg.exhaustionAmount());
+                if (player.getFoodData().getFoodLevel() <= 6) {
+                    stopFlying(player);
                     return false;
                 }
+            }
 
-                if (!wings.is(IcarusItemTags.FREE_FLIGHT) && entity instanceof Player player && !player.isCreative()) {
-                    player.getFoodData().addExhaustion(cfg.exhaustionAmount());
-                    if (player.getFoodData().getFoodLevel() <= 6) {
-                        stopFlying(player);
-                        return false;
-                    }
+            if (wings != null && wings.getItem() instanceof WingItem wingItem && !wingItem.onFlightTick(entity, wings, entity.getFallFlyingTicks() + 1)) {
+                if (entity instanceof Player player) {
+                    stopFlying(player);
                 }
-
-                var ticks = entity.getFallFlyingTicks() + 1;
-                if (!wingItem.onFlightTick(entity, wings, ticks)) {
-                    if (entity instanceof Player player) {
-                        stopFlying(player);
-                    }
-                    return false;
-                }
+                return false;
             }
         }
 
