@@ -88,6 +88,6 @@ jobs:
         with:
           version: ${{ github.ref_name }}
           webhook-url: ${{ secrets.ANNOUNCEMENT_WEBHOOK_URL }}
-          curseforge-project-id: ${{ steps.publish_github.outputs.curseforge-id }}
-          modrinth-project-id: ${{ steps.publish_github.outputs.modrinth-id }}
+          curseforge-project-id: ${{ steps.publish_quilt.outputs.curseforge-id }}
+          modrinth-project-id: ${{ steps.publish_quilt.outputs.modrinth-id }}
           thumbnail-url: https://mod-assets.upcraft.dev/promo/icarus/icon_128x.png
