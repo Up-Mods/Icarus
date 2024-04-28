@@ -77,6 +77,12 @@ public class IcarusHelper {
                 player.getFoodData().addExhaustion(cfg.exhaustionAmount());
                 if (player.getFoodData().getFoodLevel() <= 6) {
                     stopFlying(player);
+                    Component message = Component.translatable("message.icarus.status.no_fly.hunger").withStyle(ChatFormatting.BLUE);
+                    if (entity instanceof ServerPlayer serverPlayer) {
+                        serverPlayer.sendSystemMessage(message, true);
+                    } else {
+                        IcarusClient.sendActionbarMessage(player, message);
+                    }
                     return false;
                 }
             }
