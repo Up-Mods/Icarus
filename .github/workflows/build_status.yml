@@ -2,10 +2,6 @@ name: Build Status
 
 on:
   push:
-    paths-ignore:
-      - '.github/**'
-    branches:
-      - '*'
   pull_request:
 
 jobs:
