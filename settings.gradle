@@ -42,10 +42,18 @@ dependencyResolutionManagement {
     }
 }
 
+def ENV = System.getenv()
+
 buildCache {
     remote(HttpBuildCache) {
         url = "https://ci-cache.uuid.gg/cache"
-        push = System.getenv().containsKey("CI")
+        if(ENV.CI && ENV.GRADLE_BUILD_CACHE_USER && ENV.GRADLE_BUILD_CACHE_TOKEN) {
+            push = true
+            credentials {
+                username = ENV.GRADLE_BUILD_CACHE_USER
+                password = ENV.GRADLE_BUILD_CACHE_TOKEN
+            }
+        }
     }
 }
 
