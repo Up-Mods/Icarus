@@ -42,6 +42,13 @@ dependencyResolutionManagement {
     }
 }
 
+buildCache {
+    remote(HttpBuildCache) {
+        url = "https://ci-cache.uuid.gg"
+        push = System.getenv().containsKey("CI")
+    }
+}
+
 rootProject.name = 'Icarus'
 
 include 'Common', 'NeoForge', 'Quilt', 'Fabric'
