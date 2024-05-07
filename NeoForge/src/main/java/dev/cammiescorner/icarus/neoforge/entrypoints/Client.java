@@ -7,6 +7,7 @@ import dev.cammiescorner.icarus.client.IcarusModels;
 import dev.cammiescorner.icarus.client.models.*;
 import dev.cammiescorner.icarus.client.renderers.WingsLayer;
 import dev.cammiescorner.icarus.item.WingItem;
+import dev.cammiescorner.icarus.neoforge.compat.CameraOverhaulCompat;
 import dev.cammiescorner.icarus.util.ColorHelper;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -16,6 +17,7 @@ import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -26,6 +28,11 @@ public class Client {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
+
+        if (ModList.get().isLoaded("cameraoverhaul")) {
+            CameraOverhaulCompat.load();
+        }
+
         event.enqueueWork(() -> ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> new ConfigScreenHandler.ConfigScreenFactory((minecraft, parent) -> new ConfigScreen(parent, null, Icarus.CONFIGURATOR.getConfig(IcarusConfig.class)))));
     }
 

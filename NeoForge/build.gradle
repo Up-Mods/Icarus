@@ -34,7 +34,6 @@ dependencies {
     implementation fg.deobf(neoforge.caelus.get())
 
     compileOnly fg.deobf(neoforge.cameraoverhaul.get())
-    // NOT UPDATED YET!
 //    runtimeOnly fg.deobf(neoforge.cameraoverhaul.get())
 
     compileOnly fg.deobf(libs.figura.forge.get())

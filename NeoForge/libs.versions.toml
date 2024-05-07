@@ -9,7 +9,7 @@ curios = "5.8.1+1.20.1"
 
 caelus = "3.2.0+1.20.1"
 
-cameraoverhaul = "4057605"
+cameraoverhaul = "5310618"
 
 [libraries]
 neoforge = { module = "net.neoforged:forge", version.ref = "neoforge" }
@@ -18,7 +18,7 @@ curios = { module = "top.theillusivec4.curios:curios-forge", version.ref = "curi
 
 caelus = { module = "top.theillusivec4.caelus:caelus-forge", version.ref = "caelus" }
 
-cameraoverhaul = { module = "curse.maven:camera-overhaul-forge-443034", version.ref = "cameraoverhaul" }
+cameraoverhaul = { module = "curse.maven:camera-overhaul-reforged-1011593", version.ref = "cameraoverhaul" }
 
 [plugins]
 neogradle = { id = "net.neoforged.gradle", version.ref = "neogradle" }
