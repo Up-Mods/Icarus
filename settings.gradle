@@ -44,7 +44,7 @@ dependencyResolutionManagement {
 
 buildCache {
     remote(HttpBuildCache) {
-        url = "https://ci-cache.uuid.gg"
+        url = "https://ci-cache.uuid.gg/cache"
         push = System.getenv().containsKey("CI")
     }
 }
