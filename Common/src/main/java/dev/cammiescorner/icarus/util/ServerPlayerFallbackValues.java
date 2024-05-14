@@ -52,4 +52,9 @@ public class ServerPlayerFallbackValues implements IcarusPlayerValues {
     public int maxHeightAboveWorld() {
         return IcarusConfig.maxHeightAboveWorld;
     }
+
+    @Override
+    public float requiredFoodAmount() {
+        return IcarusConfig.requiredFoodAmount;
+    }
 }
