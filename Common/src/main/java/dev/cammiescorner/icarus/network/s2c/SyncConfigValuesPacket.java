@@ -19,6 +19,7 @@ public record SyncConfigValuesPacket(float wingsSpeed, float maxSlowedMultiplier
 		buf.writeFloat(maxSlowedMultiplier());
 		buf.writeBoolean(armorSlows());
 		buf.writeBoolean(canLoopDeLoop());
+		buf.writeFloat(requiredFoodAmount());
 	}
 
 	public static void send(ServerPlayer player) {
