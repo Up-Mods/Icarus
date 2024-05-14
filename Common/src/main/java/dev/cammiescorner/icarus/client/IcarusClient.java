@@ -1,6 +1,7 @@
 package dev.cammiescorner.icarus.client;
 
 import com.google.common.base.MoreObjects;
+import dev.cammiescorner.icarus.init.IcarusItemTags;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
@@ -22,7 +23,14 @@ public class IcarusClient {
             var cfg = IcarusHelper.getConfigValues(player);
             var rotation = player.getLookAngle();
             var velocity = player.getDeltaMovement();
-            float modifier = cfg.armorSlows() ? Math.max(1F, (player.getArmorValue() / 30F) * cfg.maxSlowedMultiplier()) : 1F;
+            float modifier = 1.0F;
+            if (cfg.armorSlows()) {
+                ItemStack wings = IcarusHelper.getEquippedWings.apply(player);
+                if (wings != null && !wings.isEmpty() && !wings.is(IcarusItemTags.BYPASSES_ARMOR_SLOWDOWN)) {
+                    modifier = Math.max(1F, (player.getArmorValue() / 30F) * cfg.maxSlowedMultiplier());
+                }
+
+            }
             float speed = (cfg.wingsSpeed() * (player.getXRot() < -75 && player.getXRot() > -105 ? 2.75F : 1F)) / modifier;
 
             player.setDeltaMovement(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * speed,

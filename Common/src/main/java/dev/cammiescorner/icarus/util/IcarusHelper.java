@@ -102,6 +102,7 @@ public class IcarusHelper {
         return hasWings.test(entity);
     }
 
+    @Nullable
     public static ItemStack getEquippedWings(LivingEntity entity) {
         return getEquippedWings.apply(entity);
     }
