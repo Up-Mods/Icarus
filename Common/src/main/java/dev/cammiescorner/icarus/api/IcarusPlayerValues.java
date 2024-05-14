@@ -1,5 +1,6 @@
 package dev.cammiescorner.icarus.api;
 
+import dev.cammiescorner.icarus.IcarusConfig;
 import dev.cammiescorner.icarus.init.IcarusDimensionTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
@@ -24,5 +25,9 @@ public interface IcarusPlayerValues {
 
     default TagKey<Level> noFlyingAllowedInDimensions() {
         return IcarusDimensionTags.NO_FLYING_ALLOWED;
+    }
+
+    default float requiredFoodAmount() {
+        return IcarusConfig.requiredFoodAmount;
     }
 }

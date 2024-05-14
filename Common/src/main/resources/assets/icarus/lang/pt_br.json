@@ -97,6 +97,7 @@
   "config.icarus.wings_speed": "Quão rápido as asas voam.",
   "config.icarus.wings_durability": "Quanta durabilidade todas as asas tem.",
   "config.icarus.exhaustion_amount": "Custo de exaustão por vôo.",
+  "config.icarus.required_food_amount": "How much many (half) hunger bars are required to fly.",
   "config.icarus.roll_amount": "Quanto o jogador pode rodar enquanto voa. (Requires CameraOverhaul)",
   "config.icarus.max_height_enabled": "Whether or not to prevent flight above the maximum height allowed",
   "config.icarus.max_height_above_world": "Maximum height above the world build limit that players can fly to",
