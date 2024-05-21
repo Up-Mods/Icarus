@@ -1,5 +1,6 @@
 package dev.cammiescorner.icarus.client;
 
+import dev.cammiescorner.icarus.IcarusConfig;
 import dev.cammiescorner.icarus.api.IcarusPlayerValues;
 import dev.cammiescorner.icarus.util.ServerPlayerFallbackValues;
 

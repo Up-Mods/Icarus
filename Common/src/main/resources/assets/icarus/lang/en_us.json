@@ -90,7 +90,8 @@
   "item.icarus.discords_wings": "Discord's Wings",
   "item.icarus.zanzas_wings": "Zanza's Wings",
 
-  "config.icarus.can_loop_de_loop": "Can the player do loop-de-loops?",
+  "config.icarus.can_loop_de_loop_server": "Can players do loop-de-loops?",
+  "config.icarus.can_loop_de_loop_client": "Can you do loop-de-loops?",
   "config.icarus.armor_slows": "Does armor slow the player down?",
   "config.icarus.can_slow_fall": "Can the player slow-fall by Sneaking while flying?",
   "config.icarus.max_slowed_multiplier": "Maximum multiplier armor can slow you by.",
@@ -102,6 +103,7 @@
   "config.icarus.max_height_enabled": "Whether or not to prevent flight above the maximum height allowed",
   "config.icarus.max_height_above_world": "Maximum height above the world build limit that players can fly to",
   "config.icarus.flying_target_radius": "How much the targeting hitbox of a flying player is increased by",
+  "config_category.icarus.client": "Client Settings",
 
   "effect.icarus.flightless": "Flightless",
 

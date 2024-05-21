@@ -2,9 +2,11 @@ package dev.cammiescorner.icarus;
 
 import com.teamresourceful.resourcefulconfig.common.annotations.Config;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
+import com.teamresourceful.resourcefulconfig.common.annotations.InlineCategory;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
 import com.teamresourceful.resourcefulconfig.web.annotations.Link;
 import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
+import dev.cammiescorner.icarus.client.IcarusClientConfig;
 
 @WebInfo(
         title = "Icarus",
@@ -30,7 +32,7 @@ import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
 @Config(Icarus.MODID)
 public final class IcarusConfig {
 
-    @ConfigEntry(id = "can_loop_de_loop", type = EntryType.BOOLEAN, translation = "config.icarus.can_loop_de_loop")
+    @ConfigEntry(id = "can_loop_de_loop", type = EntryType.BOOLEAN, translation = "config.icarus.can_loop_de_loop_server")
     public static boolean canLoopDeLoop = true;
     @ConfigEntry(id = "armor_slows", type = EntryType.BOOLEAN, translation = "config.icarus.armor_slows")
     public static boolean armorSlows = true;
@@ -54,4 +56,7 @@ public final class IcarusConfig {
     public static int maxHeightAboveWorld = 64;
     @ConfigEntry(id = "flying_target_radius", type = EntryType.FLOAT, translation = "config.icarus.flying_target_radius")
     public static float flyingTargetRadius = 0.25f;
+
+    @InlineCategory
+    public static IcarusClientConfig client;
 }
