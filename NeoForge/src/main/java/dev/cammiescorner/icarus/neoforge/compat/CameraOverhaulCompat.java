@@ -24,10 +24,10 @@
 
 package dev.cammiescorner.icarus.neoforge.compat;
 
-import com.confusingfool.cameraoverhaulneoforge.core.callbacks.CameraUpdateCallback;
-import com.confusingfool.cameraoverhaulneoforge.core.callbacks.ModifyCameraTransformCallback;
-import com.confusingfool.cameraoverhaulneoforge.core.structures.Transform;
 import dev.cammiescorner.icarus.IcarusConfig;
+import mirsario.cameraoverhaul.core.callbacks.CameraUpdateCallback;
+import mirsario.cameraoverhaul.core.callbacks.ModifyCameraTransformCallback;
+import mirsario.cameraoverhaul.core.structures.Transform;
 import net.minecraft.client.Camera;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
