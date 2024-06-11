@@ -9,7 +9,7 @@ curios = "5.8.1+1.20.1"
 
 caelus = "3.2.0+1.20.1"
 
-cameraoverhaul = "5310618"
+cameraoverhaul = "5416786"
 
 [libraries]
 neoforge = { module = "net.neoforged:forge", version.ref = "neoforge" }

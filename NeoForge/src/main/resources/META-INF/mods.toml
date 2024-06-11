@@ -27,7 +27,8 @@ config = "${mod_id}.neoforge.mixins.json"
         { modId = "curios", mandatory = true, versionRange = "[5.8.0,)", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "309927", modrinth = "vvuO3ImH" } },
         { modId = "caelus", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "308989", modrinth = "40FYwb4z" } },
         { modId = "resourcefulconfig", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "714059", modrinth = "M1953qlQ" } },
-        { modId = "commonnetworking", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "806044", modrinth = "HIuqnQpi" } }
+        { modId = "commonnetworking", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "806044", modrinth = "HIuqnQpi" } },
+        { modId = "camera_overhaul_neoforge", mandatory = false, versionRange = "[1.1,)", ordering = "NONE", side = "CLIENT", mc-publish = { curseforge = "1011593", modrinth = "LwcpSm6L" } }
     ]
 
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares
@@ -44,6 +45,6 @@ config = "${mod_id}.neoforge.mixins.json"
         "forge"
     ]
     dependencies = [
-        "camera-overhaul-reforged(optional){modrinth:LwcpSm6L}{curseforge:1011593}",
+        "camera_overhaul_neoforge(optional){modrinth:LwcpSm6L}{curseforge:1011593}",
         "figura(optional){modrinth:s9gIPDom}{curseforge:901503}"
     ]

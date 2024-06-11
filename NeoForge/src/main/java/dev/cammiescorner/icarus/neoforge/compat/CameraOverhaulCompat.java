@@ -24,12 +24,13 @@
 
 package dev.cammiescorner.icarus.neoforge.compat;
 
+import com.confusingfool.cameraoverhaulneoforge.core.callbacks.CameraUpdateCallback;
+import com.confusingfool.cameraoverhaulneoforge.core.callbacks.ModifyCameraTransformCallback;
+import com.confusingfool.cameraoverhaulneoforge.core.structures.Transform;
 import dev.cammiescorner.icarus.IcarusConfig;
-import mirsario.cameraoverhaul.core.callbacks.CameraUpdateCallback;
-import mirsario.cameraoverhaul.core.callbacks.ModifyCameraTransformCallback;
-import mirsario.cameraoverhaul.core.structures.Transform;
 import net.minecraft.client.Camera;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 
@@ -43,7 +44,7 @@ public class CameraOverhaulCompat implements CameraUpdateCallback, ModifyCameraT
     }
 
     @Override
-    public void OnCameraUpdate(Camera camera, Transform cameraTransform, float deltaTime) {
+    public void OnCameraUpdate(Entity focusedEntrity, Camera camera, Transform cameraTransform, float deltaTime) {
         float pitch = camera.getXRot();
         float rollAmount = (pitch < -90 || pitch > 90) ? IcarusConfig.rollAmount : -IcarusConfig.rollAmount;
         Vec3 velocity = camera.getEntity().getDeltaMovement();
