@@ -16,9 +16,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.DyeColor;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
+import net.minecraft.util.*;
+import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 public class WingItem extends TrinketItem {
@@ -79,8 +79,19 @@ public class WingItem extends TrinketItem {
 		return ingredient.isOf(Items.PHANTOM_MEMBRANE);
 	}
 
-	@Nullable
 	@Override
+	public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+		var result = super.use(world, user, hand);
+
+		// dirty workaround because we cannot implement Equipment directly and trinkets is stupid, it seems
+		if(result.getResult().isAccepted()) {
+			user.emitGameEvent(GameEvent.EQUIP);
+			user.playSound(getEquipSound(), 1.0F, 1.0F);
+		}
+		return result;
+	}
+
+	@Nullable
 	public SoundEvent getEquipSound() {
 		return SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA;
 	}

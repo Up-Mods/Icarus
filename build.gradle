@@ -1,10 +1,9 @@
 plugins {
-    id 'fabric-loom' version '0.12-SNAPSHOT'
+    id 'fabric-loom' version '1.7-SNAPSHOT'
     id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+def javaVersion = 17
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
@@ -13,13 +12,12 @@ group = project.maven_group
 repositories {
     maven { url "https://maven.shedaniel.me" }
     maven { url "https://maven.terraformersmc.com" }
-    maven { url "https://ladysnake.jfrog.io/artifactory/mods" }
+    maven { url "https://maven.ladysnake.org/releases" }
     maven { url "https://api.modrinth.com/maven" }
     maven {
         url "https://maven.jamieswhiteshirt.com/libs-release"
         content { includeGroup "com.jamieswhiteshirt" }
     }
-    maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -30,7 +28,16 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-    modImplementation "com.github.apace100:origins-fabric:${project.origins_version}"
+    modImplementation ("com.github.apace100:origins-fabric:${project.origins_version}") {
+        exclude group: "com.github.DaFuqs", module: "AdditionalEntityAttributes"
+    }
+    modImplementation "maven.modrinth:6oFu5eHi:RAAaS6TR" // AdditionalEntityAttributes
+    modImplementation ("com.github.apace100:apoli:2.8.0") { // needed for AdditionalEntityAttributes
+        exclude group: "com.github.DaFuqs", module: "AdditionalEntityAttributes"
+    }
+    modImplementation "com.github.apace100:calio:1.10.0"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_components_version}"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cardinal_components_version}"
     modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
 }
 
@@ -49,14 +56,14 @@ processResources {
 // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
+    options.release.set(javaVersion)
 }
 
-// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-// if it is present.
-// If you remove this task, sources will not be generated.
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
-    from sourceSets.main.allSource
+java {
+    withSourcesJar()
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(javaVersion))
+    }
 }
 
 jar {
