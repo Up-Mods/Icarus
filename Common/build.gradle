@@ -1,3 +1,6 @@
+buildscript {
+	dependencies.add 'classpath', "org.spongepowered:vanillagradle:${libs.versions.vanilla.gradle.get()}"
+}
 plugins {
 	alias libs.plugins.vanilla.gradle
 }

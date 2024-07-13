@@ -8,7 +8,9 @@ mixin = "0.8.5"
 mixin_extras = "0.3.5"
 asm = "9.6"
 jetbrains_annotations = "24.1.0"
-vanilla_gradle = "0.2.1-SNAPSHOT"
+
+#vanilla_gradle = "0.2.1-SNAPSHOT" # TODO fix in 1.20.2+
+vanilla_gradle = "0.2.1-20240507.024226-82"
 
 commonnetworking = "1.0.3-1.20.1"
 resourcefulconfig = "2.1.2"
