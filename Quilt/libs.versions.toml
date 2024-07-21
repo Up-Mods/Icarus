@@ -4,10 +4,12 @@ quilt_loom = "1.7.+"
 
 quilt_loader = "0.26.4-beta.1"
 quilted_fabric_api = "11.0.0-alpha.3+0.100.7-1.21"
+qsl = "10.0.0-alpha.1+1.21"
 
 [libraries]
 quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
 
+qsl = { module = "org.quiltmc:qsl", version.ref = "qsl" }
 quilted_fabric_api = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api", version.ref = "quilted_fabric_api" }
 quilted_fabric_api_deprecated = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api-deprecated", version.ref = "quilted_fabric_api" }
 

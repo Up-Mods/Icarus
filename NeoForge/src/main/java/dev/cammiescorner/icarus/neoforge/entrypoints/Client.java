@@ -17,13 +17,13 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.ModLoadingContext;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.ConfigScreenHandler;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
-@Mod.EventBusSubscriber(modid = Icarus.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Icarus.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class Client {
 
     @SubscribeEvent
@@ -33,7 +33,7 @@ public class Client {
             CameraOverhaulCompat.load();
         }
 
-        event.enqueueWork(() -> ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> new ConfigScreenHandler.ConfigScreenFactory((minecraft, parent) -> new ConfigScreen(parent, Icarus.CONFIGURATOR.getConfig(IcarusConfig.class)))));
+        event.enqueueWork(() -> ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (modContainer, parentScreen) -> new ConfigScreen(parentScreen, Icarus.CONFIGURATOR.getConfig(IcarusConfig.class))));
     }
 
     @SubscribeEvent
@@ -42,7 +42,7 @@ public class Client {
             var item = entry.getValue();
             var key = entry.getKey();
             if(key.location().getNamespace().equals(Icarus.MODID) && item instanceof WingItem) {
-                event.register((itemStack, tintIndex) -> tintIndex == 0 ? ColorHelper.dyeToDecimal(((WingItem) itemStack.getItem()).getPrimaryColor(itemStack)) : ColorHelper.dyeToDecimal(((WingItem) itemStack.getItem()).getSecondaryColor(itemStack)), item);
+                event.register((itemStack, tintIndex) -> tintIndex == 0 ? ColorHelper.asARGB(((WingItem) itemStack.getItem()).getPrimaryColor(itemStack)) : ColorHelper.asARGB(((WingItem) itemStack.getItem()).getSecondaryColor(itemStack)), item);
             }
         });
     }

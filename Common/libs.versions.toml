@@ -5,7 +5,7 @@ minecraft = "1.21"
 parchment_minecraft = "1.21"
 parchment_mappings = "2024.07.07"
 
-mixin = "0.8.5"
+mixin = "0.14.0+mixin.0.8.6"
 mixin_extras = "0.3.5"
 asm = "9.6"
 jetbrains_annotations = "24.1.0"
@@ -22,9 +22,8 @@ nv_websocket = "2.14"
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 parchment_mappings = { module = "org.parchmentmc.data:parchment-1.21", version.ref = "parchment_mappings" }
-mixin = { module = "org.spongepowered:mixin", version.ref = "mixin" }
+mixin = { module = "net.fabricmc:sponge-mixin", version.ref = "mixin" }
 mixin_extras = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixin_extras" }
-mixin_extras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.ref = "mixin_extras" }
 asm = { module = "org.ow2.asm:asm", version.ref = "asm" }
 asm_analysis = { module = "org.ow2.asm:asm-analysis", version.ref = "asm" }
 asm_commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }

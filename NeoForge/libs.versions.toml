@@ -1,5 +1,5 @@
 [versions]
-neogradle = "7.0.155"
+neogradle = "7.0.154"
 
 neoforge = "21.0.113-beta"
 
@@ -14,7 +14,7 @@ neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 
 curios = { module = "top.theillusivec4.curios:curios-neoforge", version.ref = "curios" }
 
-caelus = { module = "top.theillusivec4.caelus:caelus-neoforge", version.ref = "caelus" }
+caelus = { module = "com.illusivesoulworks.caelus:caelus-neoforge", version.ref = "caelus" }
 
 cameraoverhaul = { module = "curse.maven:camera-overhaul-reforged-1011593", version.ref = "cameraoverhaul" }
 

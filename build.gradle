@@ -5,7 +5,7 @@ plugins {
     id 'maven-publish'
 }
 
-def javaVersion = 17
+def javaVersion = 21
 
 group = maven_group_id
 
@@ -181,7 +181,7 @@ subprojects {
 			"fabric_loader_version"         : fabric.versions.fabric.loader.get(),
 		]
 
-		filesMatching(['pack.mcmeta', '*.mod.json', 'META-INF/mods.toml', '*.mixins.json']) {
+		filesMatching(['pack.mcmeta', '*.mod.json', 'META-INF/neoforge.mods.toml', '*.mixins.json']) {
 			expand expandProps
 		}
 		inputs.properties(expandProps)

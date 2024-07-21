@@ -44,7 +44,7 @@ public class IcarusHelper {
             return false;
         }
 
-        if (entity.hasEffect(IcarusStatusEffects.FLIGHTLESS.get())) {
+        if (entity.hasEffect(IcarusStatusEffects.flightlessHolder())) {
             if (entity instanceof Player player) {
                 stopFlying(player);
                 Component message = Component.translatable("message.icarus.status.no_fly.status_effect").withStyle(ChatFormatting.BLUE);

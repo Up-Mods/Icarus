@@ -19,9 +19,6 @@ config = "${mod_id}.mixins.json"
 [[mixins]]
 config = "${mod_id}.neoforge.mixins.json"
 
-[[accessTransformers]]
-file = "META-INF/accesstransformer.cfg"
-
 # https://docs.neoforged.net/docs/gettingstarted/modfiles#dependency-configurations
 [dependencies]
 "${mod_id}" = [
@@ -39,6 +36,9 @@ file = "META-INF/accesstransformer.cfg"
 # stop your mod loading on the server for example.
 #[features.${mod_id}]
 #openGLVersion="[3.2,)"
+
+#[[accessTransformers]]
+#file = "META-INF/accesstransformer.cfg"
 
 [mc-publish]
 curseforge = "${curseforge_id}"

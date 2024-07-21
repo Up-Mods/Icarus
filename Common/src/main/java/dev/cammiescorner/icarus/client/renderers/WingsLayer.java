@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -41,18 +42,12 @@ public class WingsLayer<T extends LivingEntity, M extends EntityModel<T>> extend
     }
 
     @Override
-    public void render(PoseStack matrices, MultiBufferSource vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+    public void render(PoseStack pose, MultiBufferSource bufferSource, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         var stack = IcarusAPIClient.getWingsForRendering(entity);
 
         if (stack.getItem() instanceof WingItem wingItem && IcarusClient.shouldRenderWings(entity)) {
-            float[] primaryColour = wingItem.getPrimaryColor(stack).getTextureDiffuseColors();
-            float[] secondaryColour = wingItem.getSecondaryColor(stack).getTextureDiffuseColors();
-            float r1 = primaryColour[0];
-            float g1 = primaryColour[1];
-            float b1 = primaryColour[2];
-            float r2 = secondaryColour[0];
-            float g2 = secondaryColour[1];
-            float b2 = secondaryColour[2];
+            var primaryColor = FastColor.ARGB32.color(255, wingItem.getPrimaryColor(stack).getTextureDiffuseColor());
+            var secondaryColor = FastColor.ARGB32.color(255, wingItem.getSecondaryColor(stack).getTextureDiffuseColor());
 
             var wingModel = switch (wingItem.getWingType()) {
                 case FEATHERED, MECHANICAL_FEATHERED -> featheredWings;
@@ -79,18 +74,18 @@ public class WingsLayer<T extends LivingEntity, M extends EntityModel<T>> extend
             ResourceLocation layer1 = wingItem.getWingType().getTextureLayer1(stack);
             ResourceLocation layer2 = wingItem.getWingType().getTextureLayer2(stack);
 
-            matrices.pushPose();
-            matrices.translate(0.0D, 0.0D, 0.125D);
+            pose.pushPose();
+            pose.translate(0.0D, 0.0D, 0.125D);
             this.getParentModel().copyPropertiesTo(wingModel);
             wingModel.setupAnim(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
-            this.renderWings(wingModel, matrices, vertexConsumers, stack, RenderType.entityTranslucent(layer2), light, r2, g2, b2);
-            this.renderWings(wingModel, matrices, vertexConsumers, stack, RenderType.entityTranslucent(layer1), light, r1, g1, b1);
-            matrices.popPose();
+            this.renderWings(wingModel, pose, bufferSource, stack, RenderType.entityTranslucent(layer2), light, secondaryColor);
+            this.renderWings(wingModel, pose, bufferSource, stack, RenderType.entityTranslucent(layer1), light, primaryColor);
+            pose.popPose();
         }
     }
 
-    public void renderWings(WingEntityModel<T> model, PoseStack matrices, MultiBufferSource vertexConsumers, @Nullable ItemStack stack, RenderType renderLayer, int light, float r, float g, float b) {
-        VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(vertexConsumers, renderLayer, false, stack != null && stack.hasFoil());
-        model.renderToBuffer(matrices, vertexConsumer, light, OverlayTexture.NO_OVERLAY, r, g, b, 1F);
+    public void renderWings(WingEntityModel<T> model, PoseStack matrices, MultiBufferSource vertexConsumers, @Nullable ItemStack stack, RenderType renderLayer, int light, int color) {
+        VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(vertexConsumers, renderLayer, stack != null && stack.hasFoil());
+        model.renderToBuffer(matrices, vertexConsumer, light, OverlayTexture.NO_OVERLAY, color);
     }
 }

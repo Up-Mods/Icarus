@@ -1,56 +1,51 @@
 package dev.cammiescorner.icarus.neoforge;
 
+import com.illusivesoulworks.caelus.api.CaelusApi;
 import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.client.IcarusClient;
 import dev.cammiescorner.icarus.util.IcarusHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.event.TickEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import top.theillusivec4.caelus.api.CaelusApi;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
-import java.util.UUID;
-
-@Mod.EventBusSubscriber(modid = Icarus.MODID)
+@EventBusSubscriber(modid = Icarus.MODID)
 public class EventHandler {
 
-    public static final UUID WINGS_FLIGHT_MODIFIER_ID = UUID.fromString("4b6eac76-f013-4382-8b22-5d43bc37939c");
-    public static final AttributeModifier WINGS_FLIGHT = new AttributeModifier(WINGS_FLIGHT_MODIFIER_ID, "icarus_wings", 1.0D, AttributeModifier.Operation.ADDITION);
+    public static final ResourceLocation WINGS_FLIGHT_MODIFIER_ID = Icarus.id("wings");
+    public static final AttributeModifier WINGS_FLIGHT = new AttributeModifier(WINGS_FLIGHT_MODIFIER_ID, 1.0D, AttributeModifier.Operation.ADD_VALUE);
 
-    @SuppressWarnings("UnreachableCode")
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if(event.phase == TickEvent.Phase.START) {
-            var attributeInstance = event.player.getAttribute(CaelusApi.getInstance().getFlightAttribute());
+    public static void onPlayerTick(PlayerTickEvent.Pre event) {
+        var attributeInstance = event.getEntity().getAttribute(CaelusApi.getInstance().getFallFlyingAttribute());
 
-            if(attributeInstance != null) {
-                if (attributeInstance.hasModifier(WINGS_FLIGHT)) {
-                    if(event.player.isFallFlying()) {
-                        if (!IcarusHelper.onFallFlyingTick(event.player, IcarusHelper.getEquippedWings(event.player), true)) {
-                            attributeInstance.removeModifier(WINGS_FLIGHT_MODIFIER_ID);
-                        }
+        if (attributeInstance != null) {
+            if (attributeInstance.hasModifier(WINGS_FLIGHT.id())) {
+                if (event.getEntity().isFallFlying()) {
+                    if (!IcarusHelper.onFallFlyingTick(event.getEntity(), IcarusHelper.getEquippedWings(event.getEntity()), true)) {
+                        attributeInstance.removeModifier(WINGS_FLIGHT_MODIFIER_ID);
                     }
-                    else {
-                        if(!IcarusHelper.hasWings(event.player)) {
-                            attributeInstance.removeModifier(WINGS_FLIGHT_MODIFIER_ID);
-                        }
+                } else {
+                    if (!IcarusHelper.hasWings(event.getEntity())) {
+                        attributeInstance.removeModifier(WINGS_FLIGHT_MODIFIER_ID);
                     }
                 }
-                else {
-                    if (IcarusHelper.hasWings(event.player)) {
-                        attributeInstance.addTransientModifier(WINGS_FLIGHT);
-                    }
-                }
-            }
-
-            if (event.side.isServer()) {
-                IcarusHelper.onPlayerTick(event.player);
             } else {
-                IcarusClient.onPlayerTick(event.player);
+                if (IcarusHelper.hasWings(event.getEntity())) {
+                    attributeInstance.addTransientModifier(WINGS_FLIGHT);
+                }
             }
+        }
+
+        if (event.getEntity().level().isClientSide()) {
+            IcarusClient.onPlayerTick(event.getEntity());
+        }
+        else {
+            IcarusHelper.onPlayerTick(event.getEntity());
         }
     }
 

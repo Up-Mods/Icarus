@@ -57,14 +57,6 @@ subsystems {
     }
 }
 
-// Automatically enable neoforge AccessTransformers if the file exists
-// This location is hardcoded in FML and can not be changed.
-// https://github.com/neoforged/FancyModLoader/blob/a952595eaaddd571fbc53f43847680b00894e0c1/loader/src/main/java/net/neoforged/fml/loading/moddiscovery/ModFile.java#L118
-def at = file('src/main/resources/META-INF/accesstransformer.cfg')
-if (at.exists()) {
-    minecraft.accessTransformers.file at
-}
-
 runs {
     configureEach {
         // Recommended logging data for a userdev environment
@@ -82,7 +74,7 @@ runs {
         systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
         workingDirectory(project.file('run'))
 
-        modSource project(":Common").sourceSets.main
+//        mod?Source project(":Common").sourceSets.main
         modSource sourceSets.main
 
         if (rootProject.hasProperty('mc_java_agent_path')) {

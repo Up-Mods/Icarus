@@ -51,7 +51,7 @@ public class WingItem extends Item {
         if (IcarusConfig.wingsDurability > 0 && wings.is(IcarusItemTags.MELTS) && !(entity instanceof Player player && player.isCreative())) {
             var cfg = IcarusHelper.getConfigValues(entity);
             if (ticks % 20 == 0 || (cfg.maxHeightEnabled() && entity.getY() > entity.level().getHeight() + cfg.maxHeightAboveWorld() && ticks % 2 == 0)) {
-                wings.hurtAndBreak(1, entity, e -> e.broadcastBreakEvent(EquipmentSlot.CHEST));
+                wings.hurtAndBreak(1, entity, EquipmentSlot.CHEST);
             }
         }
 

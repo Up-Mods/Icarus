@@ -62,6 +62,6 @@ public class Client implements ClientModInitializer {
     }
 
     private static void registerColorProvider(Item item) {
-        ColorProviderRegistry.ITEM.register((itemStack, tintIndex) -> tintIndex == 0 ? ColorHelper.dyeToDecimal(((WingItem) itemStack.getItem()).getPrimaryColor(itemStack)) : ColorHelper.dyeToDecimal(((WingItem) itemStack.getItem()).getSecondaryColor(itemStack)), item);
+        ColorProviderRegistry.ITEM.register((itemStack, tintIndex) -> tintIndex == 0 ? ColorHelper.asARGB(((WingItem) itemStack.getItem()).getPrimaryColor(itemStack)) : ColorHelper.asARGB(((WingItem) itemStack.getItem()).getSecondaryColor(itemStack)), item);
     }
 }

@@ -68,10 +68,12 @@ public class Main implements ModInitializer {
                                     ItemStack newStack = stack.copy();
                                     newStack.setCount(1);
                                     inv.setItem(i, newStack);
-                                    SoundEvent soundEvent = stack.getItem() instanceof Equipable eq ? eq.getEquipSound() : null;
-                                    if (!stack.isEmpty() && soundEvent != null) {
+                                    var soundEvent = stack.getItem() instanceof Equipable eq ? eq.getEquipSound() : null;
+                                    if (!stack.isEmpty()) {
                                         user.gameEvent(GameEvent.EQUIP);
-                                        user.playSound(soundEvent, 1.0F, 1.0F);
+                                        if (soundEvent != null && !user.isSilent()) {
+                                            user.level().playSeededSound(null, user.getX(), user.getY(), user.getZ(), soundEvent, user.getSoundSource(), 1.0F, 1.0F, user.getRandom().nextLong());
+                                        }
                                     }
                                     stack.shrink(1);
                                     return true;

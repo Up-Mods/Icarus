@@ -16,8 +16,8 @@ dependencies {
     })
 
     modImplementation quilt.quilt.loader
-    modImplementation fabric.fabric.api
-//    modImplementation quilt.quilted.fabric.api
+    modImplementation quilt.qsl
+    modImplementation quilt.quilted.fabric.api
 //    modRuntimeOnly(quilt.quilted.fabric.api.deprecated) {
 //        transitive = false
 //    }
