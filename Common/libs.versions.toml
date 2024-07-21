@@ -1,8 +1,9 @@
 [versions]
-minecraft = "1.20.1"
+minecraft = "1.20.4"
 
 # The latest versions are available at https://parchmentmc.org/docs/getting-started
-parchment = "2023.09.03"
+parchment_minecraft = "1.20.4"
+parchment_mappings = "2024.04.14"
 
 mixin = "0.8.5"
 mixin_extras = "0.3.5"
@@ -10,17 +11,17 @@ asm = "9.6"
 jetbrains_annotations = "24.1.0"
 vanilla_gradle = "0.2.1-SNAPSHOT"
 
-commonnetworking = "1.0.3-1.20.1"
-resourcefulconfig = "2.1.2"
-emi = "1.1.4+1.20.1"
+commonnetworking = "1.0.11-beta.1-1.20.4"
+resourcefulconfig = "2.4.7"
+emi = "1.1.10+1.20.4"
 
-figura = "0.1.4+1.20.1"
+figura = "0.1.4+1.20.2"
 luaj = "3.0.8-figura"
 nv_websocket = "2.14"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
-parchment_mappings = { module = "org.parchmentmc.data:parchment-1.20.1", version.ref = "parchment" }
+parchment_mappings = { module = "org.parchmentmc.data:parchment-1.20.4", version.ref = "parchment_mappings" }
 mixin = { module = "org.spongepowered:mixin", version.ref = "mixin" }
 mixin_extras = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixin_extras" }
 mixin_extras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.ref = "mixin_extras" }
@@ -31,9 +32,9 @@ asm_tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
 asm_util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
 jetbrains_annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains_annotations" }
 
-resourcefulconfig = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-common-1.20.1", version.ref = "resourcefulconfig" }
-resourcefulconfig_fabric = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-1.20.1", version.ref = "resourcefulconfig" }
-resourcefulconfig_forge = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-1.20.1", version.ref = "resourcefulconfig" }
+resourcefulconfig = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-common-1.20.4", version.ref = "resourcefulconfig" }
+resourcefulconfig_fabric = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-1.20.4", version.ref = "resourcefulconfig" }
+resourcefulconfig_neoforge = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-neoforge-1.20.4", version.ref = "resourcefulconfig" }
 
 commonnetworking = { module = "mysticdrew:common-networking-common", version.ref = "commonnetworking" }
 commonnetworking_fabric = { module = "mysticdrew:common-networking-fabric", version.ref = "commonnetworking" }
@@ -44,7 +45,7 @@ emi_neoforge = { module = "dev.emi:emi-neoforge", version.ref = "emi" }
 emi_fabric = { module = "dev.emi:emi-fabric", version.ref = "emi" }
 
 figura = { module = "org.figuramc:figura-common-mojmap", version.ref = "figura" }
-figura_forge = { module = "org.figuramc:figura-forge", version.ref = "figura" }
+figura_neoforge = { module = "org.figuramc:figura-neoforge", version.ref = "figura" }
 figura_fabric = { module = "org.figuramc:figura-fabric", version.ref = "figura" }
 
 luaj_core = { module = "com.github.FiguraMC.luaj:luaj-core", version.ref = "luaj" }

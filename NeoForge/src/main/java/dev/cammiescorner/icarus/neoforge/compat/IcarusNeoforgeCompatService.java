@@ -3,8 +3,8 @@ package dev.cammiescorner.icarus.neoforge.compat;
 import dev.cammiescorner.icarus.util.IcarusCompatService;
 import it.unimi.dsi.fastutil.objects.Object2BooleanArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.loading.FMLLoader;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.loading.FMLLoader;
 
 public class IcarusNeoforgeCompatService implements IcarusCompatService {
 

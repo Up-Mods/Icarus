@@ -1,26 +1,22 @@
 [versions]
-neogradle = "6.+"
-mixingradle = "0.7.+"
-librarian = "1.+"
+neogradle = "7.0.120"
 
-neoforge = "1.20.1-47.1.104"
+neoforge = "20.4.237"
 
-curios = "5.8.1+1.20.1"
+curios = "7.4.3+1.20.4"
 
-caelus = "3.2.0+1.20.1"
+caelus = "5.1.0+1.20.4"
 
-cameraoverhaul = "5359800"
+cameraoverhaul = "5416786"
 
 [libraries]
-neoforge = { module = "net.neoforged:forge", version.ref = "neoforge" }
+neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 
-curios = { module = "top.theillusivec4.curios:curios-forge", version.ref = "curios" }
+curios = { module = "top.theillusivec4.curios:curios-neoforge", version.ref = "curios" }
 
-caelus = { module = "top.theillusivec4.caelus:caelus-forge", version.ref = "caelus" }
+caelus = { module = "top.theillusivec4.caelus:caelus-neoforge", version.ref = "caelus" }
 
 cameraoverhaul = { module = "curse.maven:camera-overhaul-reforged-1011593", version.ref = "cameraoverhaul" }
 
 [plugins]
-neogradle = { id = "net.neoforged.gradle", version.ref = "neogradle" }
-mixingradle = { id = "org.spongepowered.mixin", version.ref = "mixingradle" }
-librarian = { id = "org.parchmentmc.librarian.forgegradle", version.ref = "librarian" }
+neogradle = { id = "net.neoforged.gradle.userdev", version.ref = "neogradle" }

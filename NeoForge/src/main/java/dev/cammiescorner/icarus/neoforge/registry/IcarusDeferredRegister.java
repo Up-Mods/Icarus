@@ -4,9 +4,8 @@ import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.util.Registrar;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
@@ -14,7 +13,7 @@ public class IcarusDeferredRegister<T> implements Registrar<T> {
 
     private final DeferredRegister<T> delegate;
 
-    public static <T> IcarusDeferredRegister<T> create(IForgeRegistry<T> registry) {
+    public static <T> IcarusDeferredRegister<T> create(Registry<T> registry) {
         return new IcarusDeferredRegister<>(DeferredRegister.create(registry, Icarus.MODID));
     }
 

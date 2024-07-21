@@ -19,16 +19,19 @@ config = "${mod_id}.mixins.json"
 [[mixins]]
 config = "${mod_id}.neoforge.mixins.json"
 
+[[accessTransformers]]
+file = "META-INF/accesstransformer.cfg"
+
 # https://docs.neoforged.net/docs/gettingstarted/modfiles#dependency-configurations
 [dependencies]
     "${mod_id}" = [
-        { modId = "forge", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { ignore = true } },
-        { modId = "minecraft", mandatory = true, versionRange = "[${minecraft_version}]", ordering = "NONE", side = "BOTH" },
-        { modId = "curios", mandatory = true, versionRange = "[5.8.0,)", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "309927", modrinth = "vvuO3ImH" } },
-        { modId = "caelus", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "308989", modrinth = "40FYwb4z" } },
-        { modId = "resourcefulconfig", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "714059", modrinth = "M1953qlQ" } },
-        { modId = "commonnetworking", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "806044", modrinth = "HIuqnQpi" } },
-        { modId = "camera_overhaul_neoforge", mandatory = false, versionRange = "[1.1,)", ordering = "NONE", side = "CLIENT", mc-publish = { curseforge = "1011593", modrinth = "LwcpSm6L" } }
+        { modId = "neoforge", type = 'required', versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { ignore = true } },
+        { modId = "minecraft", type = 'required', versionRange = "[${minecraft_version}]", ordering = "NONE", side = "BOTH" },
+        { modId = "curios", type = 'required', versionRange = "[5.8.0,)", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "309927", modrinth = "vvuO3ImH" } },
+        { modId = "caelus", type = 'required', versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "308989", modrinth = "40FYwb4z" } },
+        { modId = "resourcefulconfig", type = 'required', versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "714059", modrinth = "M1953qlQ" } },
+        { modId = "commonnetworking", type = 'required', versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "806044", modrinth = "HIuqnQpi" } },
+        { modId = "camera_overhaul_neoforge", type = 'optional', versionRange = "[1.1,)", ordering = "NONE", side = "CLIENT", mc-publish = { curseforge = "1011593", modrinth = "LwcpSm6L" } }
     ]
 
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares

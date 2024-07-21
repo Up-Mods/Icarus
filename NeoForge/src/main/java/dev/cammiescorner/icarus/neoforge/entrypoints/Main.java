@@ -6,23 +6,23 @@ import dev.cammiescorner.icarus.init.IcarusStatusEffects;
 import dev.cammiescorner.icarus.item.WingItem;
 import dev.cammiescorner.icarus.neoforge.registry.IcarusDeferredRegister;
 import dev.cammiescorner.icarus.util.IcarusHelper;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import top.theillusivec4.curios.api.CuriosApi;
 
 @Mod(Icarus.MODID)
 public class Main {
 
-    public Main() {
+    public Main(IEventBus bus) {
         Icarus.init();
 
         IcarusHelper.getEquippedWings = entity -> {
-            var component = CuriosApi.getCuriosInventory(entity).resolve();
+            var component = CuriosApi.getCuriosInventory(entity);
             if (component.isPresent()) {
                 var slot = component.orElseThrow().findFirstCurio(stack -> stack.getItem() instanceof WingItem);
                 if (slot.isPresent()) {
@@ -34,7 +34,7 @@ public class Main {
         };
 
         IcarusHelper.hasWings = entity -> {
-            var component = CuriosApi.getCuriosInventory(entity).resolve();
+            var component = CuriosApi.getCuriosInventory(entity);
             return component.isPresent() && component.orElseThrow().isEquipped(stack -> stack.getItem() instanceof WingItem);
         };
 
@@ -42,12 +42,11 @@ public class Main {
 //            //TODO equip curio
 //        }
 
-        var bus = FMLJavaModLoadingContext.get().getModEventBus();
-        var itemRegister = IcarusDeferredRegister.create(ForgeRegistries.ITEMS);
+        var itemRegister = IcarusDeferredRegister.create(BuiltInRegistries.ITEM);
         IcarusItems.register(itemRegister);
         itemRegister.subscribe(bus);
 
-        var statusEffectsRegister = IcarusDeferredRegister.create(ForgeRegistries.MOB_EFFECTS);
+        var statusEffectsRegister = IcarusDeferredRegister.create(BuiltInRegistries.MOB_EFFECT);
         IcarusStatusEffects.register(statusEffectsRegister);
         statusEffectsRegister.subscribe(bus);
 

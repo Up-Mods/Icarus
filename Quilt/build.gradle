@@ -25,18 +25,22 @@ dependencies {
 
     modImplementation libs.resourcefulconfig.fabric
     modImplementation libs.commonnetworking.fabric
-    modImplementation quilt.trinkets
+    modImplementation fabric.trinkets
 
-    modCompileOnly quilt.modmenu
-    modLocalRuntime quilt.modmenu
+    modCompileOnly(fabric.modmenu) {
+        transitive = false
+    }
+    modLocalRuntime(fabric.modmenu) {
+        transitive = false
+    }
 
-    modCompileOnly quilt.cameraoverhaul
-//    modLocalRuntime quilt.cameraoverhaul
-//    modLocalRuntime quilt.cloth
+    modCompileOnly fabric.cameraoverhaul
+//    modLocalRuntime fabric.cameraoverhaul
+//    modLocalRuntime fabric.cloth
 
     modCompileOnly libs.figura.fabric
-    modLocalRuntime libs.figura.fabric
-    localRuntime libs.bundles.figura.runtime
+//    modLocalRuntime libs.figura.fabric
+//    localRuntime libs.bundles.figura.runtime
 
     // modCompileOnly "${libs.emi.fabric.get()}:api"
 }

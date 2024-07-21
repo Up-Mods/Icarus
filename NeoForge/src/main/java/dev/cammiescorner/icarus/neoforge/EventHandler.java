@@ -5,11 +5,11 @@ import dev.cammiescorner.icarus.client.IcarusClient;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.TickEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import top.theillusivec4.caelus.api.CaelusApi;
 
 import java.util.UUID;
@@ -30,12 +30,12 @@ public class EventHandler {
                 if (attributeInstance.hasModifier(WINGS_FLIGHT)) {
                     if(event.player.isFallFlying()) {
                         if (!IcarusHelper.onFallFlyingTick(event.player, IcarusHelper.getEquippedWings(event.player), true)) {
-                            attributeInstance.removeModifier(WINGS_FLIGHT);
+                            attributeInstance.removeModifier(WINGS_FLIGHT_MODIFIER_ID);
                         }
                     }
                     else {
                         if(!IcarusHelper.hasWings(event.player)) {
-                            attributeInstance.removeModifier(WINGS_FLIGHT);
+                            attributeInstance.removeModifier(WINGS_FLIGHT_MODIFIER_ID);
                         }
                     }
                 }
