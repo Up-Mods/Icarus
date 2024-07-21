@@ -3,14 +3,14 @@ plugins {
 }
 
 project.configurations.runtimeClasspath {
-    exclude(group: "loom_mappings_1_20_4_layered_hash_919249853_v2.net.fabricmc", module: "fabric-loader")
+    exclude(group: "loom_mappings_1_20_4_layered_hash_1137964741_v2.net.fabricmc", module: "fabric-loader")
 }
 
 dependencies {
     minecraft libs.minecraft
     mappings(loom.layered {
-        it.parchment("${libs.parchment.mappings.get()}@zip")
         it.officialMojangMappings()
+        it.parchment("${libs.parchment.mappings.get()}@zip")
     })
 
     modImplementation fabric.fabric.loader
@@ -40,8 +40,8 @@ dependencies {
 //    modLocalRuntime fabric.cloth
 
     modCompileOnly libs.figura.fabric
-    modLocalRuntime libs.figura.fabric
-    localRuntime libs.bundles.figura.runtime
+//    modLocalRuntime libs.figura.fabric
+//    localRuntime libs.bundles.figura.runtime
 
     // modCompileOnly "${libs.emi.fabric.get()}:api"
 }

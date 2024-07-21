@@ -10,6 +10,6 @@ public class Modmenu implements ModMenuApi {
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return parent -> new ConfigScreen(parent, null, Icarus.CONFIGURATOR.getConfig(IcarusConfig.class));
+        return parent -> new ConfigScreen(parent, Icarus.CONFIGURATOR.getConfig(IcarusConfig.class));
     }
 }

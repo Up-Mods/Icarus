@@ -11,8 +11,8 @@ project.configurations.configureEach {
 dependencies {
     minecraft libs.minecraft
     mappings(loom.layered {
-        it.parchment("${libs.parchment.mappings.get()}@zip")
         it.officialMojangMappings()
+        it.parchment("${libs.parchment.mappings.get()}@zip")
     })
 
     modImplementation quilt.quilt.loader
