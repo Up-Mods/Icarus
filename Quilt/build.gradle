@@ -16,10 +16,11 @@ dependencies {
     })
 
     modImplementation quilt.quilt.loader
-    modImplementation quilt.quilted.fabric.api
-    modRuntimeOnly(quilt.quilted.fabric.api.deprecated) {
-        transitive = false
-    }
+    modImplementation fabric.fabric.api
+//    modImplementation quilt.quilted.fabric.api
+//    modRuntimeOnly(quilt.quilted.fabric.api.deprecated) {
+//        transitive = false
+//    }
 
     compileOnly project(":Common")
 

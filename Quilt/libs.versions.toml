@@ -3,7 +3,7 @@
 quilt_loom = "1.7.+"
 
 quilt_loader = "0.26.4-beta.1"
-quilted_fabric_api = "9.0.0-alpha.8+0.97.0-1.20.4"
+quilted_fabric_api = "11.0.0-alpha.3+0.100.7-1.21"
 
 [libraries]
 quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }

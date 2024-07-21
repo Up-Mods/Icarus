@@ -11,6 +11,10 @@ if(usingJarJar) {
 
 repositories {
     maven {
+        name = "OctoStudios"
+        url = "https://maven.octo-studios.com/releases"
+    }
+    maven {
         name = "TheIllusiveC4"
         url = "https://maven.theillusivec4.top"
     }

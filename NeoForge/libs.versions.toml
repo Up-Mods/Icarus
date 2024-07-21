@@ -1,13 +1,13 @@
 [versions]
-neogradle = "7.0.120"
+neogradle = "7.0.155"
 
-neoforge = "20.4.237"
+neoforge = "21.0.113-beta"
 
-curios = "7.4.3+1.20.4"
+curios = "9.0.5+1.21"
 
-caelus = "5.1.0+1.20.4"
+caelus = "7.0.0+1.21"
 
-cameraoverhaul = "5416786"
+cameraoverhaul = "5517123" # 1.1
 
 [libraries]
 neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
