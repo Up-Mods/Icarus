@@ -44,8 +44,7 @@ file = "META-INF/accesstransformer.cfg"
     curseforge = "${curseforge_id}"
     modrinth = "${modrinth_id}"
     loaders = [
-        "neoforge",
-        "forge"
+        "neoforge"
     ]
     dependencies = [
         "camera_overhaul_neoforge(optional){modrinth:LwcpSm6L}{curseforge:1011593}",
