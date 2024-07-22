@@ -1,29 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern":
-  [
+  "pattern": [
     "WWW",
     "FEF",
     "F F"
   ],
-  "key":
-  {
-    "E":
-    {
-      "item": "minecraft:elytra"
+  "key": {
+    "E": {
+      "tag": "icarus:wings_base"
     },
-    "F":
-    {
-      "item": "minecraft:glowstone_dust"
+    "F": {
+      "tag": "c:dusts/glowstone"
     },
-    "W":
-    {
+    "W": {
       "item": "minecraft:honeycomb"
     }
   },
-  "result":
-  {
-    "item": "icarus:yellow_light_wings"
+  "result": {
+    "id": "icarus:yellow_light_wings"
   }
 }
-

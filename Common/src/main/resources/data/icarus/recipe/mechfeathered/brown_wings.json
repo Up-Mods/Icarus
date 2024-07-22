@@ -1,7 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "ingredients":
-  [
+  "ingredients": [
     {
       "tag": "icarus:mechanical_feathered_wings"
     },
@@ -9,8 +8,7 @@
       "tag": "c:dyes/brown"
     }
   ],
-  "result":
-  {
-    "item": "icarus:brown_mechanical_feathered_wings"
+  "result": {
+    "id": "icarus:brown_mechanical_feathered_wings"
   }
 }

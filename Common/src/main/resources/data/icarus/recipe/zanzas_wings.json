@@ -1,33 +1,25 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern":
-  [
+  "pattern": [
     "WWW",
     "NEN",
     "F F"
   ],
-  "key":
-  {
-    "E":
-    {
-      "item": "minecraft:elytra"
+  "key": {
+    "E": {
+      "tag": "icarus:wings_base"
     },
-    "F":
-    {
-      "item": "minecraft:glowstone_dust"
+    "F": {
+      "tag": "c:dusts/glowstone"
     },
-    "N":
-    {
+    "N": {
       "item": "minecraft:nether_star"
     },
-    "W":
-    {
+    "W": {
       "item": "minecraft:honeycomb"
     }
   },
-  "result":
-  {
-    "item": "icarus:zanzas_wings"
+  "result": {
+    "id": "icarus:zanzas_wings"
   }
 }
-

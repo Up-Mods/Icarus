@@ -1,9 +1,8 @@
 {
   "replace": false,
-  "values":
-  [
+  "values": [
     {
-      "id": "#c:feathers",
+      "id": "#c:leathers",
       "required": false
     }
   ]

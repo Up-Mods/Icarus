@@ -109,5 +109,24 @@
 
   "message.icarus.status.no_fly.dimension": "Flying is not allowed in this dimension!",
   "message.icarus.status.no_fly.hunger": "You cannot fly with an empty stomach!",
-  "message.icarus.status.no_fly.status_effect": "You cannot fly right now!"
+  "message.icarus.status.no_fly.status_effect": "You cannot fly right now!",
+
+  "tag.item.c.feathers": "Feathers",
+  "tag.item.c.elytra": "Elytra",
+
+  "tag.item.icarus.mechanical_leather_wings": "Mechanical Leather Wings",
+  "tag.item.icarus.feathered_wings": "Feathered Wings",
+  "tag.item.icarus.bypasses_armor_slowdown": "Bypasses Icarus Armor Slowdown",
+  "tag.item.icarus.dragon_wings": "Dragon Wings",
+  "tag.item.icarus.free_flight": "Free Flight",
+  "tag.item.icarus.animal_hides": "Animal Hides",
+  "tag.item.icarus.mechanical_feathered_wings": "Mechanical Feathered Wings",
+  "tag.item.icarus.light_wings": "Light Wings",
+  "tag.item.icarus.diamonds_and_emeralds": "Diamonds and Emeralds",
+  "tag.item.icarus.leathers": "Leathers",
+  "tag.item.icarus.wings": "Wings",
+  "tag.item.icarus.melts": "Wings that Melt",
+  "tag.item.icarus.feathers": "Feathers",
+  "tag.item.icarus.wings_base": "Wing Bases",
+  "tag.item.icarus.wing_repair_items": "Wing Repair Items"
 }

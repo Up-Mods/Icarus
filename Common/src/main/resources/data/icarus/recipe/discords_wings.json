@@ -1,36 +1,28 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern":
-  [
+  "pattern": [
     "WWW",
     "NEN",
     "L F"
   ],
-  "key":
-  {
-    "E":
-    {
-      "item": "minecraft:elytra"
+  "key": {
+    "E": {
+      "tag": "icarus:wings_base"
     },
-    "F":
-    {
+    "F": {
       "tag": "icarus:feathers"
     },
-    "L":
-    {
-      "tag": "icarus:leather"
+    "L": {
+      "tag": "icarus:leathers"
     },
-    "N":
-    {
+    "N": {
       "item": "minecraft:nether_star"
     },
-    "W":
-    {
+    "W": {
       "item": "minecraft:honeycomb"
     }
   },
-  "result":
-  {
-    "item": "icarus:discords_wings"
+  "result": {
+    "id": "icarus:discords_wings"
   }
 }

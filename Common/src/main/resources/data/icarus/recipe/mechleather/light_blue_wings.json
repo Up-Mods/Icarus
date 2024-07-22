@@ -1,7 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "ingredients":
-  [
+  "ingredients": [
     {
       "tag": "icarus:mechanical_leather_wings"
     },
@@ -9,8 +8,7 @@
       "tag": "c:dyes/light_blue"
     }
   ],
-  "result":
-  {
-    "item": "icarus:light_blue_mechanical_leather_wings"
+  "result": {
+    "id": "icarus:light_blue_mechanical_leather_wings"
   }
 }

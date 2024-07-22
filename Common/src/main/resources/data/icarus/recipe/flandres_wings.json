@@ -1,37 +1,28 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern":
-  [
+  "pattern": [
     "WWW",
     "NEN",
     "F G"
   ],
-  "key":
-  {
-    "E":
-    {
-      "item": "minecraft:elytra"
+  "key": {
+    "E": {
+      "tag": "icarus:wings_base"
     },
-    "F":
-    {
-      "item": "minecraft:diamond"
+    "F": {
+      "tag": "c:gems/diamond"
     },
-    "G":
-    {
-      "item": "minecraft:emerald"
+    "G": {
+      "tag": "c:gems/emerald"
     },
-    "N":
-    {
+    "N": {
       "item": "minecraft:nether_star"
     },
-    "W":
-    {
+    "W": {
       "item": "minecraft:honeycomb"
     }
   },
-  "result":
-  {
-    "item": "icarus:flandres_wings"
+  "result": {
+    "id": "icarus:flandres_wings"
   }
 }
-

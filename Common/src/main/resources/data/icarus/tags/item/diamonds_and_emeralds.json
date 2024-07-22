@@ -3,11 +3,7 @@
   "values":
   [
     {
-      "id": "#c:gems",
-      "required": false
-    },
-    {
-      "id": "#forge:gems/diamond",
+      "id": "#c:gems/diamond",
       "required": false
     },
     {

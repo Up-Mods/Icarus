@@ -1,7 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "ingredients":
-  [
+  "ingredients": [
     {
       "tag": "icarus:dragon_wings"
     },
@@ -9,8 +8,7 @@
       "tag": "c:dyes/red"
     }
   ],
-  "result":
-  {
-    "item": "icarus:red_dragon_wings"
+  "result": {
+    "id": "icarus:red_dragon_wings"
   }
 }
