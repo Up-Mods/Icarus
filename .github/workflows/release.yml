@@ -44,7 +44,7 @@ jobs:
         run: ./gradlew publish
       - name: Publish (GitHub Releases)
         id: publish_github
-        uses: Kir-Antipov/mc-publish@423b200ec84e6eefad726549c72513d7a9b4c2c0 # (new) v3.3
+        uses: Kir-Antipov/mc-publish@995edadc13559a8b28d0b7e6571229f067ec7659
         with:
           github-token: ${{ github.token }}
           files: |
@@ -53,7 +53,7 @@ jobs:
       - name: Publish (NeoForge)
         id: publish_neoforge
         continue-on-error: true
-        uses: Kir-Antipov/mc-publish@423b200ec84e6eefad726549c72513d7a9b4c2c0 # (new) v3.3
+        uses: Kir-Antipov/mc-publish@995edadc13559a8b28d0b7e6571229f067ec7659
         with:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
@@ -64,7 +64,7 @@ jobs:
       - name: Publish (Quilt)
         id: publish_quilt
         continue-on-error: true
-        uses: Kir-Antipov/mc-publish@423b200ec84e6eefad726549c72513d7a9b4c2c0 # (new) v3.3
+        uses: Kir-Antipov/mc-publish@995edadc13559a8b28d0b7e6571229f067ec7659
         with:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
@@ -75,7 +75,7 @@ jobs:
       - name: Publish (Fabric)
         id: publish_fabric
         continue-on-error: true
-        uses: Kir-Antipov/mc-publish@423b200ec84e6eefad726549c72513d7a9b4c2c0 # (new) v3.3
+        uses: Kir-Antipov/mc-publish@995edadc13559a8b28d0b7e6571229f067ec7659
         with:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
