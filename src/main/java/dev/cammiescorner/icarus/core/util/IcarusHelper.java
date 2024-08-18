@@ -22,6 +22,10 @@ public class IcarusHelper {
 	private static final TagKey<Item> FREE_FLIGHT = TagKey.of(Registry.ITEM.getKey(), new Identifier(Icarus.MOD_ID, "free_flight"));
 
 	public static float getAdjustedPitch(Entity entity, float value) {
+		if(!entity.getWorld().isClient()) {
+			return value;
+		}
+
 		var aaa = new Object() {
 			float pitch = value;
 		};
@@ -52,6 +56,10 @@ public class IcarusHelper {
 	}
 
 	public static void applySpeed(PlayerEntity player, ItemStack stack) {
+		if (!player.getWorld().isClient()) {
+			return;
+		}
+
 		((SlowFallEntity) player).setSlowFalling(false);
 		Vec3d rotation = player.getRotationVector();
 		Vec3d velocity = player.getVelocity();
