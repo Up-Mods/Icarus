@@ -84,20 +84,20 @@ runs {
 
     client {
         if (rootProject.hasProperty('mc_uuid')) {
-            programArguments.addAll("--uuid", rootProject.mc_uuid)
+            arguments.addAll("--uuid", rootProject.mc_uuid)
         }
 
         if (rootProject.hasProperty('mc_username')) {
-            programArguments.addAll("--username", rootProject.mc_username)
+            arguments.addAll("--username", rootProject.mc_username)
         }
     }
 
     server {
-        programArgument '--nogui'
+        arguments.add('--nogui')
     }
 
     data {
-        programArguments.addAll('--mod', mod_id, '--all', '--output', file('src/generated/resources/').absolutePath, '--existing', file('src/main/resources/').absolutePath)
+        arguments.addAll('--mod', mod_id, '--all', '--output', file('src/generated/resources/').absolutePath, '--existing', file('src/main/resources/').absolutePath)
     }
 }
 
