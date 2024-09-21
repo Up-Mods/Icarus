@@ -1,9 +1,11 @@
 package dev.cammiescorner.icarus.api;
 
 import dev.cammiescorner.icarus.IcarusConfig;
-import dev.cammiescorner.icarus.init.IcarusDimensionTags;
+import dev.cammiescorner.icarus.init.IcarusDimensionTypeTags;
+import dev.cammiescorner.icarus.init.IcarusLevelTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraft.world.level.dimension.LevelStem;
 
 public interface IcarusPlayerValues {
 
@@ -23,8 +25,12 @@ public interface IcarusPlayerValues {
 
     boolean maxHeightEnabled();
 
-    default TagKey<Level> noFlyingAllowedInDimensions() {
-        return IcarusDimensionTags.NO_FLYING_ALLOWED;
+    default TagKey<LevelStem> noFlyingAllowedInLevels() {
+        return IcarusLevelTags.NO_FLYING_ALLOWED;
+    }
+
+    default TagKey<DimensionType> noFlyingAllowedInDimensions() {
+        return IcarusDimensionTypeTags.NO_FLYING_ALLOWED;
     }
 
     default float requiredFoodAmount() {
