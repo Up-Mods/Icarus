@@ -16,7 +16,7 @@ public class Icarus {
     public static void init() {
         CONFIGURATOR.register(IcarusConfig.class);
 
-        Network.registerPacket(SyncConfigValuesPacket.ID, SyncConfigValuesPacket.class, SyncConfigValuesPacket::encode, SyncConfigValuesPacket::decode, SyncConfigValuesPacket::handle);
+        Network.registerPacket(SyncConfigValuesPacket.TYPE, SyncConfigValuesPacket.class, SyncConfigValuesPacket.STREAM_CODEC, SyncConfigValuesPacket::handle);
     }
 
     public static ResourceLocation id(String path) {
