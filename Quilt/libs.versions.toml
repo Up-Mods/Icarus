@@ -2,7 +2,7 @@
 # The latest versions are available at https://lambdaurora.dev/tools/import_quilt.html
 quilt_loom = "1.7.+"
 
-quilt_loader = "0.26.4-beta.1"
+quilt_loader = "0.26.4"
 quilted_fabric_api = "9.0.0-alpha.8+0.97.0-1.20.4"
 
 [libraries]
