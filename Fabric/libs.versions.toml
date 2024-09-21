@@ -1,8 +1,8 @@
 [versions]
 # The latest versions are available at https://fabricmc.net/develop/
 
-fabric_loader = "0.15.9"
-fabric_api = "0.92.1+1.20.1"
+fabric_loader = "0.16.5"
+fabric_api = "0.92.2+1.20.1"
 
 trinkets = "3.7.1"
 cca = "5.2.2"
