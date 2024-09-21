@@ -3,6 +3,7 @@ package dev.cammiescorner.icarus.util;
 import dev.cammiescorner.icarus.api.IcarusPlayerValues;
 import dev.cammiescorner.icarus.api.SlowFallingEntity;
 import dev.cammiescorner.icarus.client.IcarusClient;
+import dev.cammiescorner.icarus.init.IcarusDimensionTypeTags;
 import dev.cammiescorner.icarus.init.IcarusItemTags;
 import dev.cammiescorner.icarus.init.IcarusStatusEffects;
 import dev.cammiescorner.icarus.item.WingItem;
@@ -36,12 +37,20 @@ public class IcarusHelper {
 
     public static boolean onFallFlyingTick(LivingEntity entity, @Nullable ItemStack wings, boolean tick) {
         IcarusPlayerValues cfg = IcarusHelper.getConfigValues(entity);
-        if (!entity.level().isClientSide() && entity.level().registryAccess().registryOrThrow(Registries.DIMENSION).getHolderOrThrow(entity.level().dimension()).is(cfg.noFlyingAllowedInDimensions())) {
-            if (entity instanceof ServerPlayer player) {
-                stopFlying(player);
-                player.sendSystemMessage(Component.translatable("message.icarus.status.no_fly.dimension").withStyle(ChatFormatting.RED), true);
+        var level = entity.level();
+
+        if(!level.isClientSide()) {
+            // level stem -> the actual level instance
+            // dimension type -> all levels of a given type
+            // some level stems (namely, AE2's spatial storage dimension) may not be registered properly
+            // first check the dimension type, then check the level itself; if either one is in the no fly tag, cancel flying and send a message
+            if(level.dimensionTypeRegistration().is(IcarusDimensionTypeTags.NO_FLYING_ALLOWED) || level.registryAccess().registryOrThrow(Registries.LEVEL_STEM).getHolder(Registries.levelToLevelStem(level.dimension())).map(stemHolder -> stemHolder.is(cfg.noFlyingAllowedInLevels())).orElse(false)) {
+                if (entity instanceof ServerPlayer player) {
+                    stopFlying(player);
+                    player.sendSystemMessage(Component.translatable("message.icarus.status.no_fly.dimension").withStyle(ChatFormatting.RED), true);
+                }
+                return false;
             }
-            return false;
         }
 
         if (entity.hasEffect(IcarusStatusEffects.flightlessHolder())) {
