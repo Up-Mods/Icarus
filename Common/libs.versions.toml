@@ -3,7 +3,7 @@ minecraft = "1.21.1"
 
 # The latest versions are available at https://parchmentmc.org/docs/getting-started
 parchment_minecraft = "1.21"
-parchment_mappings = "2024.07.07"
+parchment_mappings = "2024.07.28"
 
 mixin = "0.14.0+mixin.0.8.6"
 mixin_extras = "0.3.5"
@@ -11,7 +11,7 @@ asm = "9.6"
 jetbrains_annotations = "24.1.0"
 vanilla_gradle = "0.2.1-SNAPSHOT"
 
-commonnetworking = "1.0.11-1.21"
+commonnetworking = "1.0.16-1.21"
 resourcefulconfig = "3.0.3"
 emi = "1.1.10+1.21"
 

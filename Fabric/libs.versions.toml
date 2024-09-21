@@ -1,8 +1,8 @@
 [versions]
 # The latest versions are available at https://fabricmc.net/develop/
 
-fabric_loader = "0.15.11"
-fabric_api = "0.102.1+1.21.1"
+fabric_loader = "0.16.5"
+fabric_api = "0.104.0+1.21.1"
 
 trinkets = "3.10.0"
 cca = "6.1.1"
@@ -10,7 +10,7 @@ cca = "6.1.1"
 cameraoverhaul = "5441071" # 1.4.1
 cloth = "15.0.127"
 
-modmenu = "11.0.1"
+modmenu = "11.0.2"
 
 [libraries]
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
