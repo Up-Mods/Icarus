@@ -1,7 +1,7 @@
 [versions]
 neogradle = "7.0.163"
 
-neoforge = "21.1.57"
+neoforge = "21.1.47"
 
 curios = "9.0.10+1.21"
 

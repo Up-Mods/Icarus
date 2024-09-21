@@ -5,9 +5,9 @@ minecraft = "1.21.1"
 parchment_minecraft = "1.21"
 parchment_mappings = "2024.07.28"
 
-mixin = "0.14.0+mixin.0.8.6"
-mixin_extras = "0.3.5"
-asm = "9.6"
+mixin = "0.15.2+mixin.0.8.7"
+mixin_extras = "0.4.1"
+asm = "9.7"
 jetbrains_annotations = "24.1.0"
 vanilla_gradle = "0.2.1-SNAPSHOT"
 
