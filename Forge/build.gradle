@@ -1,0 +1,135 @@
+plugins {
+    alias libs.plugins.moddevgradle.legacy
+}
+
+repositories {
+    maven {
+        name = "TheIllusiveC4"
+        url = "https://maven.theillusivec4.top"
+    }
+}
+
+// Sets up a dependency configuration called 'localRuntime' and a deobfuscating one called 'modLocalRuntime'
+// These configurations should be used instead of 'runtimeOnly' to declare
+// a dependency that will be present for runtime testing but that is
+// "optional", meaning it will not be pulled by dependents of this mod.
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+obfuscation {
+    createRemappingConfiguration(configurations.localRuntime)
+}
+
+dependencies {
+    compileOnly project(":Common")
+    annotationProcessor variantOf(libs.mixin) { classifier 'processor' }
+    annotationProcessor libs.mixinextras.common
+
+    modImplementation libs.resourcefulconfig.forge
+    modImplementation libs.commonnetworking.forge
+
+    modImplementation forge.curios
+
+    modImplementation forge.caelus
+
+    modCompileOnly forge.cameraoverhaul
+    modLocalRuntime forge.cameraoverhaul
+
+    modCompileOnly libs.figura.forge
+//    modLocalRuntime libs.figura.forge
+
+    modCompileOnly variantOf(libs.emi.forge) { classifier 'api' }
+    modLocalRuntime libs.emi.forge
+
+    compileOnly libs.mixinextras.common
+    modImplementation libs.mixinextras.forge
+    jarJar libs.mixinextras.forge
+}
+
+legacyForge {
+    version = "${libs.versions.minecraft.get()}-${forge.versions.forge.get()}"
+
+    parchment {
+        minecraftVersion = libs.versions.parchment.minecraft.get()
+        mappingsVersion = libs.versions.parchment.mappings.get()
+    }
+
+    runs {
+        configureEach {
+            logLevel = org.slf4j.event.Level.DEBUG
+            systemProperty 'forge.logging.console.level', 'debug'
+
+            // Recommended logging data for a userdev environment
+            // The markers can be added/remove as needed separated by commas.
+            // "SCAN": For mods scan.
+            // "REGISTRIES": For firing of registry events.
+            // "REGISTRYDUMP": For getting the contents of all registries.
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+
+            gameDirectory = project.file('run')
+        }
+
+        client {
+            client()
+
+            if (rootProject.hasProperty('mc_uuid')) {
+                programArgument "--uuid=${rootProject.mc_uuid}"
+            }
+
+            if (rootProject.hasProperty('mc_username')) {
+                programArgument "--username=${rootProject.mc_username}"
+            }
+
+            if (rootProject.hasProperty('mc_java_agent_path')) {
+                jvmArgument "-javaagent:${rootProject.mc_java_agent_path}"
+            }
+        }
+
+        server {
+            server()
+            programArgument '--nogui'
+        }
+    }
+
+    mods {
+        // define mod <-> source bindings
+        // these are used to tell the game which sources are for which mod
+        // mostly optional in a single mod project
+        // but multi mod projects should define one per mod
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+            sourceSet(project(":Common").sourceSets.main)
+        }
+    }
+}
+
+mixin {
+    add(sourceSets.main, "${mod_id}.refmap.json")
+
+    config("${mod_id}.mixins.json")
+    config("${mod_id}.forge.mixins.json")
+}
+
+jar {
+    manifest.attributes([
+            "MixinConfigs": ["${mod_id}.mixins.json", "${mod_id}.forge.mixins.json"].join(',')
+    ])
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+tasks.named("compileJava", JavaCompile) {
+    source(project(":Common").sourceSets.main.allJava)
+}
+
+tasks.named("javadoc", Javadoc) {
+    source(project(":Common").sourceSets.main.allJava)
+}
+
+tasks.named("sourcesJar", Jar) {
+    from(project(":Common").sourceSets.main.allSource)
+}
+
+processResources {
+    from project(":Common").sourceSets.main.resources
+}

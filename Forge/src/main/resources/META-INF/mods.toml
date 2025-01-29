@@ -17,7 +17,7 @@ description = '''${mod_description}''' #mandatory (Supports multiline text)
 config = "${mod_id}.mixins.json"
 
 [[mixins]]
-config = "${mod_id}.neoforge.mixins.json"
+config = "${mod_id}.forge.mixins.json"
 
 # https://docs.neoforged.net/docs/gettingstarted/modfiles#dependency-configurations
 [dependencies]
@@ -28,7 +28,7 @@ config = "${mod_id}.neoforge.mixins.json"
         { modId = "caelus", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "308989", modrinth = "40FYwb4z" } },
         { modId = "resourcefulconfig", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "714059", modrinth = "M1953qlQ" } },
         { modId = "commonnetworking", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "806044", modrinth = "HIuqnQpi" } },
-        { modId = "camera_overhaul_neoforge", mandatory = false, versionRange = "[1.1,)", ordering = "NONE", side = "CLIENT", mc-publish = { curseforge = "1011593", modrinth = "LwcpSm6L" } }
+        { modId = "cameraoverhaul", mandatory = false, versionRange = "[2.0.0-0,)", ordering = "NONE", side = "CLIENT", mc-publish = { ignore = true } }
     ]
 
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares
@@ -45,6 +45,6 @@ config = "${mod_id}.neoforge.mixins.json"
         "forge"
     ]
     dependencies = [
-        "camera_overhaul_neoforge(optional){modrinth:LwcpSm6L}{curseforge:1011593}",
+        "cameraoverhaul(optional){modrinth:m0oRwcZx}{curseforge:423602}",
         "figura(optional){modrinth:s9gIPDom}{curseforge:901503}"
     ]

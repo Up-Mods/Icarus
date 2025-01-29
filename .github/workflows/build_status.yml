@@ -4,16 +4,19 @@ on:
   push:
   pull_request:
 
+env:
+  JAVA_VERSION: 21
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 17
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v4
         with:
+          java-version: ${{ env.JAVA_VERSION }}
           distribution: 'microsoft'
-          java-version: 17
           cache: 'gradle'
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
@@ -34,18 +37,10 @@ jobs:
         continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ github.event.repository.name }}-NeoForge-${{ github.sha }}
+          name: ${{ github.event.repository.name }}-Forge-${{ github.sha }}
           path: |
-            NeoForge/build/libs/*.jar
-            !NeoForge/build/libs/*-dev.jar
-      - name: Upload build artifacts (Quilt)
-        continue-on-error: true
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ github.event.repository.name }}-Quilt-${{ github.sha }}
-          path: |
-            Quilt/build/libs/*.jar
-            !Quilt/build/libs/*-dev.jar
+            Forge/build/libs/*.jar
+            !Forge/build/libs/*-dev.jar
       - name: Upload build artifacts (Fabric)
         continue-on-error: true
         uses: actions/upload-artifact@v4

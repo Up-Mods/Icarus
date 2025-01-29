@@ -1,19 +1,11 @@
-buildscript {
-	dependencies.add 'classpath', "org.spongepowered:vanillagradle:${libs.versions.vanilla.gradle.get()}"
-}
 plugins {
-	alias libs.plugins.vanilla.gradle
-}
-
-minecraft {
-	version(libs.versions.minecraft.get())
-	if (file("src/main/resources/${mod_id}.accesswidener").exists()) {
-		accessWideners(file("src/main/resources/${mod_id}.accesswidener"))
-	}
+	alias libs.plugins.moddevgradle.legacy
 }
 
 dependencies {
-	annotationProcessor libs.mixin.extras
+	annotationProcessor variantOf(libs.mixin) { classifier 'processor' }
+	annotationProcessor libs.mixinextras.common
+
 	compileOnly libs.bundles.mixin
     compileOnly libs.jetbrains.annotations
 
@@ -21,7 +13,21 @@ dependencies {
 	implementation libs.commonnetworking
 
 	compileOnly libs.figura
-	compileOnly libs.bundles.figura.runtime
 
-	// compileOnly "${libs.emi.asProvider().get()}:api"
+	 compileOnly variantOf(libs.emi) { classifier 'api' }
+}
+
+legacyForge {
+	mcpVersion = libs.versions.minecraft.get()
+
+	parchment {
+		minecraftVersion = libs.versions.parchment.minecraft.get()
+		mappingsVersion = libs.versions.parchment.mappings.get()
+	}
+}
+
+mixin {
+	add(sourceSets.main, "${mod_id}.refmap.json")
+
+	config("${mod_id}.mixins.json")
 }

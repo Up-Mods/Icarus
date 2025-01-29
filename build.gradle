@@ -1,7 +1,5 @@
 plugins {
     id 'idea'
-	// Required for NeoGradle
-	id "org.jetbrains.gradle.plugin.idea-ext" version "1.1.7"
     id 'maven-publish'
 }
 
@@ -83,23 +81,13 @@ subprojects {
 			name = "ParchmentMC"
 			url = "https://maven.parchmentmc.org"
 			content {
-				includeGroupByRegex "org\\.parchmentmc(\\..*)?"
+				includeGroupAndSubgroups "org.parchmentmc"
 			}
-		}
-
-		maven {
-			name = "Quilt"
-			url = "https://maven.quiltmc.org/repository/release"
 		}
 
 		maven {
 			name = "Fabric"
 			url = "https://maven.fabricmc.net"
-		}
-
-		maven {
-			name = "NeoForge"
-			url = "https://maven.neoforged.net/releases"
 		}
 
 		maven {
@@ -137,21 +125,31 @@ subprojects {
 			url = "https://maven.figuramc.org/releases"
 		}
 
-		maven {
-			name = "Modrinth"
-			url = "https://api.modrinth.com/maven"
-			content {
+		exclusiveContent {
+			forRepository {
+				maven {
+					name = "Modrinth"
+					url = "https://api.modrinth.com/maven"
+				}
+			}
+
+			filter {
 				includeGroup "maven.modrinth"
 			}
 		}
 
-        maven {
-            name = "CurseMaven"
-            url = "https://www.cursemaven.com"
-            content {
-                includeGroup "curse.maven"
-            }
-        }
+		exclusiveContent {
+			forRepository {
+				maven {
+					name = "CurseMaven"
+					url = "https://www.cursemaven.com"
+				}
+			}
+
+			filter {
+				includeGroup "curse.maven"
+			}
+		}
 	}
 
 	tasks.withType(JavaCompile).configureEach {
@@ -177,7 +175,6 @@ subprojects {
 			"curseforge_id"					: curseforge_id,
 			"modrinth_id"					: modrinth_id,
 
-			"quilt_loader_version"          : quilt.versions.quilt.loader.get(),
 			"fabric_loader_version"         : fabric.versions.fabric.loader.get(),
 		]
 
@@ -216,4 +213,12 @@ publishing {
             }
         }
     }
+}
+
+// IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
+idea {
+	module {
+		downloadSources = true
+		downloadJavadoc = true
+	}
 }

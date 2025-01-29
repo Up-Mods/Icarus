@@ -1,16 +1,17 @@
 [versions]
 minecraft = "1.20.1"
 
+# https://projects.neoforged.net/neoforged/moddevgradle
+moddevgradle_legacy = "2.0.76"
+
 # The latest versions are available at https://parchmentmc.org/docs/getting-started
-parchment = "2023.09.03"
+parchment_minecraft = "1.20.1"
+parchment_mappings = "2023.09.03"
 
 mixin = "0.8.5"
-mixin_extras = "0.3.5"
+mixinextras = "0.4.1"
 asm = "9.6"
-jetbrains_annotations = "24.1.0"
-
-#vanilla_gradle = "0.2.1-SNAPSHOT" # TODO fix in 1.20.2+
-vanilla_gradle = "0.2.1-20240507.024226-82"
+jetbrains_annotations = "26.0.2"
 
 commonnetworking = "1.0.3-1.20.1"
 resourcefulconfig = "2.1.2"
@@ -22,10 +23,9 @@ nv_websocket = "2.14"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
-parchment_mappings = { module = "org.parchmentmc.data:parchment-1.20.1", version.ref = "parchment" }
 mixin = { module = "org.spongepowered:mixin", version.ref = "mixin" }
-mixin_extras = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixin_extras" }
-mixin_extras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.ref = "mixin_extras" }
+mixinextras_common = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixinextras" }
+mixinextras_forge = { module = "io.github.llamalad7:mixinextras-forge", version.ref = "mixinextras" }
 asm = { module = "org.ow2.asm:asm", version.ref = "asm" }
 asm_analysis = { module = "org.ow2.asm:asm-analysis", version.ref = "asm" }
 asm_commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }
@@ -39,10 +39,10 @@ resourcefulconfig_forge = { module = "com.teamresourceful.resourcefulconfig:reso
 
 commonnetworking = { module = "mysticdrew:common-networking-common", version.ref = "commonnetworking" }
 commonnetworking_fabric = { module = "mysticdrew:common-networking-fabric", version.ref = "commonnetworking" }
-commonnetworking_neoforge = { module = "mysticdrew:common-networking-neoforge", version.ref = "commonnetworking" }
+commonnetworking_forge = { module = "mysticdrew:common-networking-forge", version.ref = "commonnetworking" }
 
 emi = { module = "dev.emi:emi-xplat-mojmap", version.ref = "emi" }
-emi_neoforge = { module = "dev.emi:emi-neoforge", version.ref = "emi" }
+emi_forge = { module = "dev.emi:emi-forge", version.ref = "emi" }
 emi_fabric = { module = "dev.emi:emi-fabric", version.ref = "emi" }
 
 figura = { module = "org.figuramc:figura-common-mojmap", version.ref = "figura" }
@@ -54,8 +54,8 @@ luaj_jse = { module = "com.github.FiguraMC.luaj:luaj-jse", version.ref = "luaj" 
 nv_websocket = { module = "com.neovisionaries:nv-websocket-client", version.ref = "nv_websocket" }
 
 [bundles]
-mixin = ["mixin", "mixin_extras", "asm", "asm_analysis", "asm_commons", "asm_tree", "asm_util"]
+mixin = ["mixin", "mixinextras_common", "asm", "asm_analysis", "asm_commons", "asm_tree", "asm_util"]
 figura_runtime = ["luaj_core", "luaj_jse", "nv_websocket"]
 
 [plugins]
-vanilla_gradle = { id = "org.spongepowered.gradle.vanilla", version.ref = "vanilla_gradle" }
+moddevgradle_legacy = { id = "net.neoforged.moddev.legacyforge", version.ref = "moddevgradle_legacy" }
