@@ -15,6 +15,7 @@ dependencies {
     }
 
     compileOnly project(":Common")
+    compileOnly libs.jetbrains.annotations
 
     modImplementation (libs.resourcefulconfig.fabric) {
         exclude group: "net.fabricmc", module: "fabric-loader"
@@ -30,9 +31,6 @@ dependencies {
     modLocalRuntime (fabric.modmenu) {
         exclude group: "net.fabricmc"
     }
-
-    modCompileOnly fabric.cameraoverhaul
-    modLocalRuntime fabric.bundles.cameraoverhaul.runtime
 
     modCompileOnly libs.figura.fabric
     modLocalRuntime libs.figura.fabric

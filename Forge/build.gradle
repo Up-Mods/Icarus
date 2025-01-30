@@ -22,6 +22,8 @@ obfuscation {
 
 dependencies {
     compileOnly project(":Common")
+    compileOnly libs.jetbrains.annotations
+
     annotationProcessor variantOf(libs.mixin) { classifier 'processor' }
     annotationProcessor libs.mixinextras.common
 
@@ -31,9 +33,6 @@ dependencies {
     modImplementation forge.curios
 
     modImplementation forge.caelus
-
-    modCompileOnly forge.cameraoverhaul
-    modLocalRuntime forge.cameraoverhaul
 
     modCompileOnly libs.figura.forge
 //    modLocalRuntime libs.figura.forge

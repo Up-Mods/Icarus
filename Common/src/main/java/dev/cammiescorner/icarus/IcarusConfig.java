@@ -48,8 +48,6 @@ public final class IcarusConfig {
     public static float exhaustionAmount = 0.03F;
     @ConfigEntry(id = "required_food_amount", type = EntryType.FLOAT, translation = "config.icarus.required_food_amount")
     public static float requiredFoodAmount = 6.001F;
-    @ConfigEntry(id = "roll_amount", type = EntryType.FLOAT, translation = "config.icarus.roll_amount")
-    public static float rollAmount = 1.0F;
     @ConfigEntry(id = "max_height_enabled", type = EntryType.BOOLEAN, translation = "config.icarus.max_height_enabled")
     public static boolean maxHeightEnabled = true;
     @ConfigEntry(id = "max_height_above_world", type = EntryType.INTEGER, translation = "config.icarus.max_height_above_world")

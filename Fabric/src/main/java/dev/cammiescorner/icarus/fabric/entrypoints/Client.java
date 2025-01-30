@@ -4,7 +4,6 @@ import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.client.IcarusModels;
 import dev.cammiescorner.icarus.client.models.*;
 import dev.cammiescorner.icarus.client.renderers.WingsLayer;
-import dev.cammiescorner.icarus.fabric.compat.CameraOverhaulCompat;
 import dev.cammiescorner.icarus.item.WingItem;
 import dev.cammiescorner.icarus.util.ColorHelper;
 import net.fabricmc.api.ClientModInitializer;
@@ -12,7 +11,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -44,10 +42,6 @@ public class Client implements ClientModInitializer {
                 registerColorProvider(object);
             }
         });
-
-        if (FabricLoader.getInstance().isModLoaded("cameraoverhaul")) {
-            CameraOverhaulCompat.load();
-        }
     }
 
     private static void registerColorProvider(Item item) {

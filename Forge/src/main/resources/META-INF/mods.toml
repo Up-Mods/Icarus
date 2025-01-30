@@ -28,7 +28,6 @@ config = "${mod_id}.forge.mixins.json"
         { modId = "caelus", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "308989", modrinth = "40FYwb4z" } },
         { modId = "resourcefulconfig", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "714059", modrinth = "M1953qlQ" } },
         { modId = "commonnetworking", mandatory = true, versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "806044", modrinth = "HIuqnQpi" } },
-        { modId = "cameraoverhaul", mandatory = false, versionRange = "[2.0.0-0,)", ordering = "NONE", side = "CLIENT", mc-publish = { ignore = true } }
     ]
 
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares
@@ -45,6 +44,5 @@ config = "${mod_id}.forge.mixins.json"
         "forge"
     ]
     dependencies = [
-        "cameraoverhaul(optional){modrinth:m0oRwcZx}{curseforge:423602}",
         "figura(optional){modrinth:s9gIPDom}{curseforge:901503}"
     ]
