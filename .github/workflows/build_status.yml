@@ -2,6 +2,8 @@ name: Build Status
 
 on:
   push:
+    tags-ignore:
+      - '*'
   pull_request:
 
 env:
