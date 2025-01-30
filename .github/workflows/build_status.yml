@@ -33,7 +33,7 @@ jobs:
           path: |
             Common/build/libs/*.jar
             !Common/build/libs/*-dev.jar
-      - name: Upload build artifacts (NeoForge)
+      - name: Upload build artifacts (Forge)
         continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
