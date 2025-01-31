@@ -55,7 +55,7 @@ public final class IcarusConfig {
     @ConfigEntry(id = "max_height_above_world", translation = "config.icarus.max_height_above_world")
     public static int maxHeightAboveWorld = 64;
     @ConfigEntry(id = "flying_target_radius", translation = "config.icarus.flying_target_radius")
-    public static float flyingTargetRadius = 0.25f;
+    public static float flyingTargetRadius = 0.25F;
 
     public static IcarusClientConfig client;
 }

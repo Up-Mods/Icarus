@@ -5,6 +5,7 @@ import dev.cammiescorner.icarus.init.IcarusItemTags;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,19 +24,18 @@ public class IcarusClient {
             var cfg = IcarusHelper.getConfigValues(player);
             var rotation = player.getLookAngle();
             var velocity = player.getDeltaMovement();
-            float modifier = 1.0F;
+
+            float upwardsAngleOfAttack = Mth.degreesDifferenceAbs(player.getXRot(), -90.0F);
+            float speed = cfg.wingsSpeed() * (upwardsAngleOfAttack <= 15.0F ? 2.75F :1.0F);
+
             if (cfg.armorSlows()) {
                 ItemStack wings = IcarusHelper.getEquippedWings.apply(player);
                 if (wings != null && !wings.isEmpty() && !wings.is(IcarusItemTags.BYPASSES_ARMOR_SLOWDOWN)) {
-                    modifier = Math.max(1F, (player.getArmorValue() / 30F) * cfg.maxSlowedMultiplier());
+                    speed = speed / Math.max(1F, player.getArmorValue() / 30F * cfg.maxSlowedMultiplier());
                 }
-
             }
-            float speed = (cfg.wingsSpeed() * (player.getXRot() < -75 && player.getXRot() > -105 ? 2.75F : 1F)) / modifier;
 
-            player.setDeltaMovement(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * speed,
-                    rotation.y * speed + (rotation.y * 1.5D - velocity.y) * speed,
-                    rotation.z * speed + (rotation.z * 1.5D - velocity.z) * speed));
+            player.setDeltaMovement(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * speed, rotation.y * speed + (rotation.y * 1.5D - velocity.y) * speed, rotation.z * speed + (rotation.z * 1.5D - velocity.z) * speed));
         }
     }
 
@@ -61,7 +61,7 @@ public class IcarusClient {
     }
 
     public static void sendActionbarMessage(Player player, Component message) {
-        if(player instanceof LocalPlayer localPlayer) {
+        if (player instanceof LocalPlayer localPlayer) {
             localPlayer.displayClientMessage(message, true);
         }
     }
