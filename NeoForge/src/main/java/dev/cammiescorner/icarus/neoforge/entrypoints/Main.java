@@ -28,9 +28,5 @@ public class Main {
             var component = CuriosApi.getCuriosInventory(entity);
             return component.isPresent() && component.orElseThrow().isEquipped(stack -> stack.getItem() instanceof WingItem);
         };
-
-//        IcarusHelper.equipFunc = (entity, stack) -> {
-//            //TODO equip curio
-//        }
     }
 }
