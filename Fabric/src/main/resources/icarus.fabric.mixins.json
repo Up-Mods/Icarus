@@ -3,11 +3,10 @@
   "minVersion": "0.8",
   "package": "dev.cammiescorner.icarus.fabric.mixin",
   "plugin": "dev.cammiescorner.icarus.IcarusMixinPlugin",
-  "refmap": "${mod_id}.refmap.json",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_${java_version}",
   "mixins": [
-    "MixinPlayer",
-    "MixinWingItem"
+    "PlayerMixin",
+    "WingItemMixin"
   ],
   "client": [
     "client.compat.FiguraCompatWingsLayerMixin"

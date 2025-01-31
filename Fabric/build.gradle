@@ -51,6 +51,10 @@ loom {
     }
 
     runs {
+        configureEach {
+            it.property('mixin.debug', 'true')
+        }
+
         client {
             client()
             setConfigName("Fabric Client")
