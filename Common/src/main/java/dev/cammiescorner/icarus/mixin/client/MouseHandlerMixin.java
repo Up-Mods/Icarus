@@ -1,6 +1,5 @@
 package dev.cammiescorner.icarus.mixin.client;
 
-import dev.cammiescorner.icarus.IcarusConfig;
 import dev.cammiescorner.icarus.client.IcarusClientConfig;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import net.minecraft.client.Minecraft;

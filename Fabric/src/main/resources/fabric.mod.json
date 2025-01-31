@@ -23,9 +23,6 @@
     "main": [
       "dev.cammiescorner.icarus.fabric.entrypoints.Main"
     ],
-    "modmenu": [
-      "dev.cammiescorner.icarus.fabric.entrypoints.Modmenu"
-    ],
     "figura_api": [
       "dev.cammiescorner.icarus.integration.figura.IcarusFiguraPlugin"
     ],
@@ -57,7 +54,6 @@
         "trinkets(required){modrinth:5aaWibi9}{curseforge:341284}",
         "resourcefulconfig(required){modrinth:M1953qlQ}{curseforge:714059}",
         "commonnetworking(required){modrinth:HIuqnQpi}{curseforge:806044}",
-        "cameraoverhaul(optional){modrinth:m0oRwcZx}{curseforge:423602}",
         "figura(optional){modrinth:s9gIPDom}{curseforge:901503}"
       ]
     }

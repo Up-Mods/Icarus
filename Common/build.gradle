@@ -1,12 +1,5 @@
 plugins {
-	alias libs.plugins.vanilla.gradle
-}
-
-minecraft {
-	version(libs.versions.minecraft.get())
-	if (file("src/main/resources/${mod_id}.accesswidener").exists()) {
-		accessWideners(file("src/main/resources/${mod_id}.accesswidener"))
-	}
+	alias libs.plugins.moddevgradle
 }
 
 dependencies {
@@ -18,7 +11,15 @@ dependencies {
 	implementation libs.commonnetworking
 
 	compileOnly libs.figura
-	compileOnly libs.bundles.figura.runtime
 
-	// compileOnly "${libs.emi.asProvider().get()}:api"
+	compileOnly variantOf(libs.emi) { classifier 'api' }
+}
+
+neoForge {
+	neoFormVersion = libs.versions.neoform.get()
+
+	parchment {
+		minecraftVersion = libs.versions.parchment.minecraft.get()
+		mappingsVersion = libs.versions.parchment.mappings.get()
+	}
 }

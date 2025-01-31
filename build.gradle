@@ -1,7 +1,5 @@
 plugins {
     id 'idea'
-	// Required for NeoGradle
-	id "org.jetbrains.gradle.plugin.idea-ext" version "1.1.7"
     id 'maven-publish'
 }
 
@@ -32,7 +30,6 @@ subprojects {
             vendor = JvmVendorSpec.MICROSOFT
         }
         withSourcesJar()
-//        withJavadocJar()
     }
 
 	javadoc {
@@ -177,21 +174,13 @@ subprojects {
 			"curseforge_id"					: curseforge_id,
 			"modrinth_id"					: modrinth_id,
 
-			"quilt_loader_version"          : quilt.versions.quilt.loader.get(),
 			"fabric_loader_version"         : fabric.versions.fabric.loader.get(),
 		]
 
-		filesMatching(['pack.mcmeta', '*.mod.json', 'META-INF/neoforge.mods.toml', '*.mixins.json']) {
+		filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/neoforge.mods.toml', '*.mixins.json']) {
 			expand expandProps
 		}
 		inputs.properties(expandProps)
-	}
-
-	// Disables Gradle's custom module metadata from being published to maven. The
-	// metadata includes mapped dependencies which are not reasonably consumable by
-	// other mod developers.
-	tasks.withType(GenerateModuleMetadata).configureEach {
-		enabled = false
 	}
 
     publishing {
@@ -216,4 +205,12 @@ publishing {
             }
         }
     }
+}
+
+// IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
+idea {
+	module {
+		downloadSources = true
+		downloadJavadoc = true
+	}
 }

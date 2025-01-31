@@ -99,7 +99,6 @@
   "config.icarus.wings_durability": "Hoeveel Levensduur all de vleugels hebben.",
   "config.icarus.exhaustion_amount": "Uitputtingskost om te vliegen.",
   "config.icarus.required_food_amount": "Hoeveel (halve) honger eenheden je nodig hebt om te vliegen.",
-  "config.icarus.roll_amount": "Hoeveel de speler can rollen terwijl hij vliegt. (Heeft CameraOverhaul nodig)",
   "config.icarus.max_height_enabled": "Of vliegen boven de maximale hoogte toegestaan is.",
   "config.icarus.max_height_above_world": "Maximale hoogte boven the bouwlimit spelers kunnen vliegen",
   "config.icarus.flying_target_radius": "Hoeveel de grootte van de Contactvelden vergroot is voor een vliegende speler.",

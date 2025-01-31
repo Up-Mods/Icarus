@@ -1,7 +1,8 @@
 package dev.cammiescorner.icarus;
 
-import com.teamresourceful.resourcefulconfig.api.annotations.*;
-import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
+import com.teamresourceful.resourcefulconfig.api.annotations.Config;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo;
 import dev.cammiescorner.icarus.client.IcarusClientConfig;
 
 @ConfigInfo(
@@ -33,29 +34,27 @@ import dev.cammiescorner.icarus.client.IcarusClientConfig;
 @Config(value = Icarus.MODID, categories = IcarusClientConfig.class)
 public final class IcarusConfig {
 
-    @ConfigEntry(id = "can_loop_de_loop", type = EntryType.BOOLEAN, translation = "config.icarus.can_loop_de_loop_server")
+    @ConfigEntry(id = "can_loop_de_loop", translation = "config.icarus.can_loop_de_loop_server")
     public static boolean canLoopDeLoop = true;
-    @ConfigEntry(id = "armor_slows", type = EntryType.BOOLEAN, translation = "config.icarus.armor_slows")
+    @ConfigEntry(id = "armor_slows", translation = "config.icarus.armor_slows")
     public static boolean armorSlows = true;
-    @ConfigEntry(id = "can_slow_fall", type = EntryType.BOOLEAN, translation = "config.icarus.can_slow_fall")
+    @ConfigEntry(id = "can_slow_fall", translation = "config.icarus.can_slow_fall")
     public static boolean canSlowFall = true;
-    @ConfigEntry(id = "max_slowed_multiplier", type = EntryType.FLOAT, translation = "config.icarus.max_slowed_multiplier")
+    @ConfigEntry(id = "max_slowed_multiplier", translation = "config.icarus.max_slowed_multiplier")
     public static float maxSlowedMultiplier = 3F;
-    @ConfigEntry(id = "wings_speed", type = EntryType.FLOAT, translation = "config.icarus.wings_speed")
+    @ConfigEntry(id = "wings_speed", translation = "config.icarus.wings_speed")
     public static float wingsSpeed = 0.0125F;
-    @ConfigEntry(id = "wings_durability", type = EntryType.INTEGER, translation = "config.icarus.wings_durability")
+    @ConfigEntry(id = "wings_durability", translation = "config.icarus.wings_durability")
     public static int wingsDurability = 0;
-    @ConfigEntry(id = "exhaustion_amount", type = EntryType.FLOAT, translation = "config.icarus.exhaustion_amount")
+    @ConfigEntry(id = "exhaustion_amount", translation = "config.icarus.exhaustion_amount")
     public static float exhaustionAmount = 0.03F;
-    @ConfigEntry(id = "required_food_amount", type = EntryType.FLOAT, translation = "config.icarus.required_food_amount")
+    @ConfigEntry(id = "required_food_amount", translation = "config.icarus.required_food_amount")
     public static float requiredFoodAmount = 6.001F;
-    @ConfigEntry(id = "roll_amount", type = EntryType.FLOAT, translation = "config.icarus.roll_amount")
-    public static float rollAmount = 1.0F;
-    @ConfigEntry(id = "max_height_enabled", type = EntryType.BOOLEAN, translation = "config.icarus.max_height_enabled")
+    @ConfigEntry(id = "max_height_enabled", translation = "config.icarus.max_height_enabled")
     public static boolean maxHeightEnabled = true;
-    @ConfigEntry(id = "max_height_above_world", type = EntryType.INTEGER, translation = "config.icarus.max_height_above_world")
+    @ConfigEntry(id = "max_height_above_world", translation = "config.icarus.max_height_above_world")
     public static int maxHeightAboveWorld = 64;
-    @ConfigEntry(id = "flying_target_radius", type = EntryType.FLOAT, translation = "config.icarus.flying_target_radius")
+    @ConfigEntry(id = "flying_target_radius", translation = "config.icarus.flying_target_radius")
     public static float flyingTargetRadius = 0.25f;
 
     public static IcarusClientConfig client;

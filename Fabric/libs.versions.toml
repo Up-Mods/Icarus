@@ -1,16 +1,14 @@
 [versions]
 # The latest versions are available at https://fabricmc.net/develop/
+loom = "1.9.2"
 
-fabric_loader = "0.16.5"
-fabric_api = "0.104.0+1.21.1"
+fabric_loader = "0.16.10"
+fabric_api = "0.115.0+1.21.1"
 
 trinkets = "3.10.0"
 cca = "6.1.1"
 
-cameraoverhaul = "5441071" # 1.4.1
-cloth = "15.0.127"
-
-modmenu = "11.0.2"
+modmenu = "11.0.3"
 
 [libraries]
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
@@ -21,13 +19,11 @@ trinkets = { module = "dev.emi:trinkets", version.ref = "trinkets" }
 cca-base = { module = "dev.onyxstudios.cardinal-components-api:cardinal-components-base", version.ref = "cca" }
 cca-entity = { module = "dev.onyxstudios.cardinal-components-api:cardinal-components-entity", version.ref = "cca" }
 
-cameraoverhaul = { module = "curse.maven:cameraoverhaul-423602", version.ref = "cameraoverhaul" }
-cloth = { module = "me.shedaniel.cloth:cloth-config-fabric", version.ref = "cloth" }
-
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 
 # If you have multiple similar dependencies, you can declare a dependency bundle and reference it on the build script with "libs.bundles.example".
 [bundles]
 cca = ["cca-base", "cca-entity"]
 
-# [plugins]
+[plugins]
+loom = { id = "fabric-loom", version.ref = "loom" }

@@ -99,7 +99,6 @@
   "config.icarus.wings_durability": "Cuánta durabilidad tienen todas las alas.",
   "config.icarus.exhaustion_amount": "Coste de cansancio por volar.",
   "config.icarus.required_food_amount": "Cuántos (medio) muslitos de hambre hacen falta para volar.",
-  "config.icarus.roll_amount": "Cuánto puede voltearse el jugador al volar. (Requiere CameraOverhaul)",
   "config.icarus.max_height_enabled": "Si se debería restringir el vuelo por encima de la altura máxima",
   "config.icarus.max_height_above_world": "Altura máxima por encima del límite del mundo por la cual un jugador puede volar.",
   "config.icarus.flying_target_radius": "Cuan grande se incrementa la caja de colisión de un jugador que vuela.",

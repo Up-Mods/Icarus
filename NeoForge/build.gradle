@@ -1,19 +1,8 @@
 plugins {
-    id 'idea'
-    alias neoforge.plugins.neogradle
-}
-
-def usingJarJar = true
-
-if(usingJarJar) {
-    jarJar.enable()
+    alias libs.plugins.moddevgradle
 }
 
 repositories {
-    maven {
-        name = "OctoStudios"
-        url = "https://maven.octo-studios.com/releases"
-    }
     maven {
         name = "TheIllusiveC4"
         url = "https://maven.theillusivec4.top"
@@ -21,7 +10,6 @@ repositories {
 }
 
 dependencies {
-    implementation neoforge.neoforge
     compileOnly project(":Common")
 
     implementation libs.resourcefulconfig.neoforge
@@ -31,73 +19,88 @@ dependencies {
 
     implementation neoforge.caelus
 
-    compileOnly neoforge.cameraoverhaul
-//    runtimeOnly fg.deobf(neoforge.cameraoverhaul.get())
-
     compileOnly libs.figura.neoforge
 //    runtimeOnly libs.figura.neoforge
 
-    // compileOnly "${libs.emi.neoforge.get()}:api"
+    compileOnly variantOf(libs.emi.neoforge) { classifier 'api' }
 }
 
-if(usingJarJar) {
-    jar {
-        archiveClassifier.set("slim")
-    }
+test {
+    useJUnitPlatform()
 
-    tasks.jarJar.configure {
-        archiveClassifier.set('')
-    }
+    workingDir(project.file("run"))
 }
 
-subsystems {
+neoForge {
+    version = neoforge.versions.neoforge.get()
+
     parchment {
         minecraftVersion = libs.versions.parchment.minecraft.get()
         mappingsVersion = libs.versions.parchment.mappings.get()
     }
-}
 
-runs {
-    configureEach {
-        // Recommended logging data for a userdev environment
-        // The markers can be added/remove as needed separated by commas.
-        // "SCAN": For mods scan.
-        // "REGISTRIES": For firing of registry events.
-        // "REGISTRYDUMP": For getting the contents of all registries.
-        systemProperty 'forge.logging.markers', 'REGISTRIES'
-
-        // Recommended logging level for the console
-        // You can set various levels here.
-        // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
-        systemProperty 'forge.logging.console.level', 'debug'
-
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-        workingDirectory(project.file('run'))
-
-//        mod?Source project(":Common").sourceSets.main
-        modSource sourceSets.main
-
-        if (rootProject.hasProperty('mc_java_agent_path')) {
-            jvmArg("-javaagent:${rootProject.mc_java_agent_path}")
+    mods {
+        // define mod <-> source bindings
+        // these are used to tell the game which sources are for which mod
+        // mostly optional in a single mod project
+        // but multi mod projects should define one per mod
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+            sourceSet(project(":Common").sourceSets.main)
         }
     }
 
-    client {
-        if (rootProject.hasProperty('mc_uuid')) {
-            arguments.addAll("--uuid", rootProject.mc_uuid)
-        }
+    unitTest {
+        enable()
 
-        if (rootProject.hasProperty('mc_username')) {
-            arguments.addAll("--username", rootProject.mc_username)
-        }
+        testedMod = mods."${mod_id}"
+        loadedMods.set([mods."${mod_id}"])
     }
 
-    server {
-        arguments.add('--nogui')
-    }
+    runs {
+        configureEach {
+            logLevel = org.slf4j.event.Level.DEBUG
+            // Recommended logging data for a userdev environment
+            // The markers can be added/remove as needed separated by commas.
+            // "SCAN": For mods scan.
+            // "REGISTRIES": For firing of registry events.
+            // "REGISTRYDUMP": For getting the contents of all registries.
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            systemProperty 'sparkweave.debug', 'true'
 
-    data {
-        arguments.addAll('--mod', mod_id, '--all', '--output', file('src/generated/resources/').absolutePath, '--existing', file('src/main/resources/').absolutePath)
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+
+            gameDirectory = project.file('run')
+
+            if (rootProject.hasProperty('mc_java_agent_path')) {
+                jvmArgument("-javaagent:${rootProject.mc_java_agent_path}")
+            }
+
+            sourceSet = sourceSets.main
+            loadedMods.set([mods."${mod_id}"])
+        }
+
+        client {
+            client()
+            if (project.hasProperty('mc_uuid')) {
+                programArguments.add("--uuid=${project.findProperty('mc_uuid')}")
+            }
+
+            if (project.hasProperty('mc_username')) {
+                programArguments.add("--username=${project.findProperty('mc_username')}")
+            }
+        }
+
+        server {
+            server()
+            programArguments.add('--nogui')
+        }
+
+        data {
+            data()
+            // this must be strings ONLY, or neogradle will not generate run configs at all!
+            programArguments.addAll('--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').absolutePath, '--existing', file('src/main/resources/').absolutePath)
+        }
     }
 }
 
@@ -108,7 +111,7 @@ tasks.named("compileJava", JavaCompile) {
 }
 
 tasks.named("javadoc", Javadoc) {
-    source(project(":Common").sourceSets.main.allJava)
+    source(project(":Common").sourceSets.main.allSource)
 }
 
 tasks.named("sourcesJar", Jar) {

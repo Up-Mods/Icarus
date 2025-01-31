@@ -1,13 +1,10 @@
 [versions]
-neogradle = "7.0.163"
+# https://projects.neoforged.net/neoforged/neoforge
+neoforge = "21.1.115"
 
-neoforge = "21.1.47"
-
-curios = "9.0.10+1.21"
+curios = "9.2.2+1.21.1"
 
 caelus = "7.0.1+1.21.1"
-
-cameraoverhaul = "5517123" # 1.1
 
 [libraries]
 neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
@@ -15,8 +12,3 @@ neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 curios = { module = "top.theillusivec4.curios:curios-neoforge", version.ref = "curios" }
 
 caelus = { module = "com.illusivesoulworks.caelus:caelus-neoforge", version.ref = "caelus" }
-
-cameraoverhaul = { module = "curse.maven:camera-overhaul-reforged-1011593", version.ref = "cameraoverhaul" }
-
-[plugins]
-neogradle = { id = "net.neoforged.gradle.userdev", version.ref = "neogradle" }

@@ -1,16 +1,12 @@
 plugins {
-    alias quilt.plugins.quilt.loom
-}
-
-project.configurations.runtimeClasspath {
-    exclude(group: "loom_mappings_1_21_1_layered_hash_653365834_v2.net.fabricmc", module: "fabric-loader")
+    alias fabric.plugins.loom
 }
 
 dependencies {
     minecraft libs.minecraft
     mappings(loom.layered {
         it.officialMojangMappings()
-        it.parchment("${libs.parchment.mappings.get()}@zip")
+        it.parchment("org.parchmentmc.data:parchment-${libs.versions.parchment.minecraft.get()}:${libs.versions.parchment.mappings.get()}@zip")
     })
 
     modImplementation fabric.fabric.loader
@@ -19,6 +15,7 @@ dependencies {
     }
 
     compileOnly project(":Common")
+    compileOnly libs.jetbrains.annotations
 
     modImplementation (libs.resourcefulconfig.fabric) {
         exclude group: "net.fabricmc", module: "fabric-loader"
@@ -35,15 +32,11 @@ dependencies {
         transitive = false
     }
 
-    modCompileOnly fabric.cameraoverhaul
-//    modLocalRuntime fabric.cameraoverhaul
-//    modLocalRuntime fabric.cloth
-
     modCompileOnly libs.figura.fabric
 //    modLocalRuntime libs.figura.fabric
 //    localRuntime libs.bundles.figura.runtime
 
-    // modCompileOnly "${libs.emi.fabric.get()}:api"
+    modCompileOnly variantOf(libs.emi.fabric) { classifier 'api' }
 }
 
 loom {
@@ -53,11 +46,8 @@ loom {
             sourceSet("main")
         }
     }
-    if (project(":Common").file("src/main/resources/${mod_id}.accesswidener").exists()) {
-        accessWidenerPath.set(project(":Common").file("src/main/resources/${mod_id}.accesswidener"))
-    }
     mixin {
-        defaultRefmapName.set("${mod_id}.refmap.json")
+        useLegacyMixinAp = false
     }
 
     runs {
