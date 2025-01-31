@@ -1,4 +1,4 @@
-package dev.cammiescorner.icarus.fabric.compat;
+package dev.cammiescorner.icarus.fabric.service;
 
 import dev.cammiescorner.icarus.util.IcarusPlatformBootstrapService;
 import net.fabricmc.loader.api.FabricLoader;

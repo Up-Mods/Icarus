@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Unique;
 public abstract class PlayerMixin extends LivingEntity implements SlowFallingEntity {
 
     @Unique
-    private boolean slowFalling;
+    private boolean icarus$slowFalling;
 
     private PlayerMixin(EntityType<? extends LivingEntity> $$0, Level $$1) {
         super($$0, $$1);
@@ -21,11 +21,11 @@ public abstract class PlayerMixin extends LivingEntity implements SlowFallingEnt
 
     @Override
     public void icarus$setSlowFalling(boolean slowFalling) {
-        this.slowFalling = slowFalling;
+        this.icarus$slowFalling = slowFalling;
     }
 
     @Override
     public boolean icarus$isSlowFalling() {
-        return slowFalling;
+        return icarus$slowFalling;
     }
 }

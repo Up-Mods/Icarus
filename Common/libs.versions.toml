@@ -16,6 +16,7 @@ mixin_extras = "0.4.1"
 asm = "9.7.1"
 jetbrains_annotations = "26.0.2"
 
+sparkweave = "0.507.0"
 commonnetworking = "1.0.18-1.21.1"
 resourcefulconfig = "3.0.9"
 emi = "1.1.19+1.21.1"
@@ -37,6 +38,10 @@ asm_commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }
 asm_tree = { module = "org.ow2.asm:asm-tree", version.ref = "asm" }
 asm_util = { module = "org.ow2.asm:asm-util", version.ref = "asm" }
 jetbrains_annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains_annotations" }
+
+sparkweave = { module = "dev.upcraft.sparkweave:Sparkweave-Common", version.ref = "sparkweave" }
+sparkweave_fabric = { module = "dev.upcraft.sparkweave:Sparkweave-Fabric", version.ref = "sparkweave" }
+sparkweave_neoforge = { module = "dev.upcraft.sparkweave:Sparkweave-NeoForge", version.ref = "sparkweave" }
 
 resourcefulconfig = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-common-1.21", version.ref = "resourcefulconfig" }
 resourcefulconfig_fabric = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-1.21", version.ref = "resourcefulconfig" }

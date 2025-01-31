@@ -35,13 +35,14 @@
     "${mod_id}.fabric.mixins.json"
   ],
   "depends": {
-    "java": ">=${java_version}",
     "fabricloader": ">=${fabric_loader_version}",
     "fabric-api": "*",
     "minecraft": "=${minecraft_version}",
-    "trinkets": "*",
+    "java": ">=${java_version}",
+    "commonnetworking": "*",
     "resourcefulconfig": "*",
-    "commonnetworking": "*"
+    "sparkweave": "*",
+    "trinkets": "*"
   },
   "custom": {
     "mc-publish": {
@@ -52,9 +53,10 @@
       ],
       "dependencies": [
         "fabric-api(required){modrinth:P7dR8mSH}{curseforge:306612}",
-        "trinkets(required){modrinth:5aaWibi9}{curseforge:341284}",
-        "resourcefulconfig(required){modrinth:M1953qlQ}{curseforge:714059}",
         "commonnetworking(required){modrinth:HIuqnQpi}{curseforge:806044}",
+        "resourcefulconfig(required){modrinth:M1953qlQ}{curseforge:714059}",
+        "sparkweave(required){modrinth:nf68xfAw}{curseforge:911456}",
+        "trinkets(required){modrinth:5aaWibi9}{curseforge:341284}",
         "figura(optional){modrinth:s9gIPDom}{curseforge:901503}"
       ]
     }

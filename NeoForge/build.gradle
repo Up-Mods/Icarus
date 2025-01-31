@@ -12,7 +12,10 @@ repositories {
 dependencies {
     compileOnly project(":Common")
 
+    implementation libs.sparkweave.neoforge
+
     implementation libs.resourcefulconfig.neoforge
+
     implementation libs.commonnetworking.neoforge
 
     implementation neoforge.curios

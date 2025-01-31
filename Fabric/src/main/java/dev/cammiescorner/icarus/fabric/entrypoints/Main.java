@@ -1,11 +1,7 @@
 package dev.cammiescorner.icarus.fabric.entrypoints;
 
-import dev.cammiescorner.icarus.Icarus;
-import dev.cammiescorner.icarus.init.IcarusItems;
-import dev.cammiescorner.icarus.init.IcarusStatusEffects;
 import dev.cammiescorner.icarus.item.WingItem;
 import dev.cammiescorner.icarus.util.IcarusHelper;
-import dev.cammiescorner.icarus.util.Registrar;
 import dev.emi.trinkets.TrinketSlot;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketComponent;
@@ -13,25 +9,15 @@ import dev.emi.trinkets.api.TrinketInventory;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Equipable;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.gameevent.GameEvent;
-
-import java.util.function.Supplier;
 
 public class Main implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        Icarus.init();
-
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> IcarusHelper.onServerPlayerJoin(handler.getPlayer()));
 
         IcarusHelper.getEquippedWings = entity -> {
@@ -83,26 +69,5 @@ public class Main implements ModInitializer {
         };
 
         EntityElytraEvents.CUSTOM.register((entity, tickElytra) -> IcarusHelper.onFallFlyingTick(entity, IcarusHelper.getEquippedWings(entity), tickElytra));
-
-        ServerLifecycleEvents.SERVER_STARTING.register(Icarus::onServerStart);
-
-        IcarusItems.register(new Registrar<>() {
-            @Override
-            public <T extends Item> Supplier<T> register(String name, Supplier<? extends T> factory) {
-                var value = Registry.register(BuiltInRegistries.ITEM, Icarus.id(name), factory.get());
-                return () -> value;
-            }
-        });
-
-        IcarusStatusEffects.register(new Registrar<>() {
-            @Override
-            public <T extends MobEffect> Supplier<T> register(String name, Supplier<? extends T> factory) {
-                var value = Registry.register(BuiltInRegistries.MOB_EFFECT, Icarus.id(name), factory.get());
-                return () -> value;
-            }
-        });
-
-        var group = IcarusItems.makeTab(FabricItemGroup.builder());
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Icarus.id("icarus"), group);
     }
 }

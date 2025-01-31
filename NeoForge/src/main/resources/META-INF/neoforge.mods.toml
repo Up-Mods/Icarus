@@ -25,10 +25,11 @@ config = "${mod_id}.neoforge.mixins.json"
 "${mod_id}" = [
     { modId = "neoforge", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { ignore = true } },
     { modId = "minecraft", type = "required", versionRange = "[${minecraft_version}]", ordering = "NONE", side = "BOTH" },
-    { modId = "curios", type = "required", versionRange = "[9.0.0,)", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "1037991", modrinth = "BaqCltvf" } },
     { modId = "caelus", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "308989", modrinth = "40FYwb4z" } },
+    { modId = "commonnetworking", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "806044", modrinth = "HIuqnQpi" } },
+    { modId = "curios", type = "required", versionRange = "[9.0.0,)", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "1037991", modrinth = "BaqCltvf" } },
     { modId = "resourcefulconfig", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "714059", modrinth = "M1953qlQ" } },
-    { modId = "commonnetworking", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "806044", modrinth = "HIuqnQpi" } }
+    { modId = "sparkweave", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "911456", modrinth = "nf68xfAw" } }
 ]
 
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares

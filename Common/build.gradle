@@ -7,8 +7,9 @@ dependencies {
 	compileOnly libs.bundles.mixin
     compileOnly libs.jetbrains.annotations
 
-	implementation libs.resourcefulconfig
-	implementation libs.commonnetworking
+	compileOnly libs.sparkweave
+	compileOnly libs.resourcefulconfig
+	compileOnly libs.commonnetworking
 
 	compileOnly libs.figura
 

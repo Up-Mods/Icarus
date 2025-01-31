@@ -15,6 +15,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
@@ -120,7 +121,7 @@ public class IcarusHelper {
         return fallbackValues;
     }
 
-    public static void onPlayerTick(Player player) {
+    public static boolean onPlayerTick(ServerPlayer player, Level level) {
         if (((SlowFallingEntity) player).icarus$isSlowFalling()) {
             player.fallDistance = 0F;
 
@@ -131,6 +132,8 @@ public class IcarusHelper {
                 player.setDeltaMovement(move.x(), -0.4, move.z());
             }
         }
+
+        return false;
     }
 
     public static void stopFlying(Player player) {

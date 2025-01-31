@@ -20,6 +20,7 @@ public abstract class EntityMixin {
 
     @Shadow public float xRotO;
 
+    @SuppressWarnings("ConstantValue")
     @ModifyReturnValue(method = "getPickRadius", at = @At("RETURN"))
     private float icarus$targetRadius(float original) {
         if(((Object) this) instanceof Player player && player.isFallFlying())

@@ -8,8 +8,8 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 @Mixin(WingItem.class)
 public abstract class WingItemMixin extends Item implements ICurioItem {
 
-    private WingItemMixin(Properties pProperties) {
-        super(pProperties);
+    private WingItemMixin(Properties properties) {
+        super(properties);
         throw new UnsupportedOperationException();
     }
 }

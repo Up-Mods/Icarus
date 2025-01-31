@@ -2,7 +2,6 @@ package dev.cammiescorner.icarus.neoforge;
 
 import com.illusivesoulworks.caelus.api.CaelusApi;
 import dev.cammiescorner.icarus.Icarus;
-import dev.cammiescorner.icarus.client.IcarusClient;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -10,7 +9,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 @EventBusSubscriber(modid = Icarus.MODID)
@@ -40,22 +38,10 @@ public class EventHandler {
                 }
             }
         }
-
-        if (event.getEntity().level().isClientSide()) {
-            IcarusClient.onPlayerTick(event.getEntity());
-        }
-        else {
-            IcarusHelper.onPlayerTick(event.getEntity());
-        }
     }
 
     @SubscribeEvent
     public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         IcarusHelper.onServerPlayerJoin((ServerPlayer) event.getEntity());
-    }
-
-    @SubscribeEvent
-    public static void onServerStart(ServerStartingEvent event) {
-        Icarus.onServerStart(event.getServer());
     }
 }

@@ -1,25 +1,45 @@
 package dev.cammiescorner.icarus.client;
 
 import com.google.common.base.MoreObjects;
+import dev.cammiescorner.icarus.client.models.*;
 import dev.cammiescorner.icarus.init.IcarusItemTags;
 import dev.cammiescorner.icarus.util.IcarusHelper;
+import dev.upcraft.sparkweave.api.client.event.RegisterLayerDefinitionsEvent;
+import dev.upcraft.sparkweave.api.entrypoint.ClientEntryPoint;
+import dev.upcraft.sparkweave.api.event.EntityTickEvents;
+import dev.upcraft.sparkweave.api.platform.ModContainer;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class IcarusClient {
+public class IcarusClient implements ClientEntryPoint {
 
     private static final List<Predicate<LivingEntity>> renderPredicates = new ArrayList<>();
 
-    public static void onPlayerTick(Player player) {
+    @Override
+    public void onInitializeClient(ModContainer mod) {
+        EntityTickEvents.startTick(AbstractClientPlayer.class).register(IcarusClient::onPlayerTick);
+        RegisterLayerDefinitionsEvent.EVENT.register(event -> {
+            event.registerModelLayers(IcarusModels.FEATHERED, FeatheredWingsModel::getLayerDefinition);
+            event.registerModelLayers(IcarusModels.LEATHER, LeatherWingsModel::getLayerDefinition);
+            event.registerModelLayers(IcarusModels.LIGHT, LightWingsModel::getLayerDefinition);
+            event.registerModelLayers(IcarusModels.FLANDRE, FlandresWingsModel::getLayerDefinition);
+            event.registerModelLayers(IcarusModels.DISCORD, DiscordsWingsModel::getLayerDefinition);
+            event.registerModelLayers(IcarusModels.ZANZA, ZanzasWingsModel::getLayerDefinition);
+        });
+    }
+
+    public static boolean onPlayerTick(AbstractClientPlayer player, Level level) {
         if (player.isFallFlying() && IcarusHelper.hasWings(player) && player.zza > 0) {
             var cfg = IcarusHelper.getConfigValues(player);
             var rotation = player.getLookAngle();
@@ -37,6 +57,8 @@ public class IcarusClient {
 
             player.setDeltaMovement(velocity.add(rotation.x * speed + (rotation.x * 1.5D - velocity.x) * speed, rotation.y * speed + (rotation.y * 1.5D - velocity.y) * speed, rotation.z * speed + (rotation.z * 1.5D - velocity.z) * speed));
         }
+
+        return false;
     }
 
     @ApiStatus.Internal

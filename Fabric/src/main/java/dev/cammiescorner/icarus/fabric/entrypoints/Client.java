@@ -1,14 +1,11 @@
 package dev.cammiescorner.icarus.fabric.entrypoints;
 
 import dev.cammiescorner.icarus.Icarus;
-import dev.cammiescorner.icarus.client.IcarusModels;
-import dev.cammiescorner.icarus.client.models.*;
 import dev.cammiescorner.icarus.client.renderers.WingsLayer;
 import dev.cammiescorner.icarus.item.WingItem;
 import dev.cammiescorner.icarus.util.ColorHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,12 +15,6 @@ import net.minecraft.world.item.Item;
 public class Client implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        EntityModelLayerRegistry.registerModelLayer(IcarusModels.FEATHERED, FeatheredWingsModel::getLayerDefinition);
-        EntityModelLayerRegistry.registerModelLayer(IcarusModels.LEATHER, LeatherWingsModel::getLayerDefinition);
-        EntityModelLayerRegistry.registerModelLayer(IcarusModels.LIGHT, LightWingsModel::getLayerDefinition);
-        EntityModelLayerRegistry.registerModelLayer(IcarusModels.FLANDRE, FlandresWingsModel::getLayerDefinition);
-        EntityModelLayerRegistry.registerModelLayer(IcarusModels.DISCORD, DiscordsWingsModel::getLayerDefinition);
-        EntityModelLayerRegistry.registerModelLayer(IcarusModels.ZANZA, ZanzasWingsModel::getLayerDefinition);
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> {
             if (entityType == EntityType.PLAYER) {
                 registrationHelper.register(new WingsLayer<>(entityRenderer, context.getModelSet()));

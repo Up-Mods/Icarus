@@ -1,4 +1,4 @@
-package dev.cammiescorner.icarus.neoforge.compat;
+package dev.cammiescorner.icarus.neoforge.service;
 
 import dev.cammiescorner.icarus.util.IcarusPlatformBootstrapService;
 import net.neoforged.fml.loading.FMLLoader;

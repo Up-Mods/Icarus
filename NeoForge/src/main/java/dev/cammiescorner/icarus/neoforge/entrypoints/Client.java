@@ -1,8 +1,6 @@
 package dev.cammiescorner.icarus.neoforge.entrypoints;
 
 import dev.cammiescorner.icarus.Icarus;
-import dev.cammiescorner.icarus.client.IcarusModels;
-import dev.cammiescorner.icarus.client.models.*;
 import dev.cammiescorner.icarus.client.renderers.WingsLayer;
 import dev.cammiescorner.icarus.item.WingItem;
 import dev.cammiescorner.icarus.util.ColorHelper;
@@ -38,15 +36,5 @@ public class Client {
                 renderer.addLayer(new WingsLayer<>(renderer, event.getEntityModels()));
             }
         }
-    }
-
-    @SubscribeEvent
-    public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(IcarusModels.FEATHERED, FeatheredWingsModel::getLayerDefinition);
-        event.registerLayerDefinition(IcarusModels.LEATHER, LeatherWingsModel::getLayerDefinition);
-        event.registerLayerDefinition(IcarusModels.LIGHT, LightWingsModel::getLayerDefinition);
-        event.registerLayerDefinition(IcarusModels.FLANDRE, FlandresWingsModel::getLayerDefinition);
-        event.registerLayerDefinition(IcarusModels.DISCORD, DiscordsWingsModel::getLayerDefinition);
-        event.registerLayerDefinition(IcarusModels.ZANZA, ZanzasWingsModel::getLayerDefinition);
     }
 }
