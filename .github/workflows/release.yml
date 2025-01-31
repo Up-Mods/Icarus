@@ -2,51 +2,49 @@ name: Upload Release Artifacts
 
 on:
   push:
-    tags:
-      - '*'
+    tags: [ '*' ]
+
+env:
+  BUILD_NUMBER: ${{ github.run_number }}
+  JAVA_VERSION: 21
+  MAVEN_UPLOAD_URL: ${{ secrets.MAVEN_UPLOAD_URL }}
+  MAVEN_UPLOAD_USERNAME: ${{ secrets.MAVEN_UPLOAD_USERNAME }}
+  MAVEN_UPLOAD_PASSWORD: ${{ secrets.MAVEN_UPLOAD_PASSWORD }}
+  TAG: ${{ github.ref_name }}
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'microsoft'
-          java-version: 21
-          cache: 'gradle'
       - name: Get current time
         uses: srfrnk/current-time@master
         id: current-time
         with:
           format: YYYYMMDDHHmmss
-      - name: Setup ENV
-        run: echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
-      - name: Copy Maven Upload URL
-        id: extract_maven_upload_url
-        run: echo "maven_upload_url=${{secrets.MAVEN_UPLOAD_URL}}" >> $GITHUB_OUTPUT
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'microsoft'
+          cache: 'gradle'
+      - name: Validate Gradle Wrapper
+        uses: gradle/actions/wrapper-validation@v4
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
       - name: Build with Gradle
-        env:
-          BUILD_TIME: ${{ steps.current-time.outputs.formattedTime }}
-          BUILD_NUMBER: ${{ github.run_number }}
         run: ./gradlew assemble --rerun-tasks
-      - name: Maven Release
-        if: steps.extract_maven_upload_url.outputs.maven_upload_url
         env:
           BUILD_TIME: ${{ steps.current-time.outputs.formattedTime }}
-          BUILD_NUMBER: ${{ github.run_number }}
-          MAVEN_UPLOAD_URL: ${{ secrets.MAVEN_UPLOAD_URL }}
-          MAVEN_UPLOAD_USERNAME: ${{ secrets.MAVEN_UPLOAD_USERNAME }}
-          MAVEN_UPLOAD_PASSWORD: ${{ secrets.MAVEN_UPLOAD_PASSWORD }}
+      - name: Maven Release
+        if: ${{ env.MAVEN_UPLOAD_URL }}
         run: ./gradlew publish
       - name: Publish (GitHub Releases)
         id: publish_github
         uses: Kir-Antipov/mc-publish@995edadc13559a8b28d0b7e6571229f067ec7659
         with:
           github-token: ${{ github.token }}
+          version: ${{ env.TAG }}
           files: |
             **/build/libs/!(*-@(dev|sources|javadoc|slim)).jar
             **/build/libs/*-@(sources|javadoc).jar
@@ -57,21 +55,10 @@ jobs:
         with:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          version: ${{ github.ref_name }}+NeoForge
+          version: ${{ env.TAG }}+NeoForge
           files: |
             NeoForge/build/libs/!(*-@(dev|sources|javadoc|slim)).jar
             NeoForge/build/libs/*-@(sources|javadoc).jar
-      - name: Publish (Quilt)
-        id: publish_quilt
-        continue-on-error: true
-        uses: Kir-Antipov/mc-publish@995edadc13559a8b28d0b7e6571229f067ec7659
-        with:
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          version: ${{ github.ref_name }}+Quilt
-          files: |
-            Quilt/build/libs/!(*-@(dev|sources|javadoc|slim)).jar
-            Quilt/build/libs/*-@(sources|javadoc).jar
       - name: Publish (Fabric)
         id: publish_fabric
         continue-on-error: true
@@ -79,15 +66,15 @@ jobs:
         with:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          version: ${{ github.ref_name }}+Fabric
+          version: ${{ env.TAG }}+Fabric
           files: |
             Fabric/build/libs/!(*-@(dev|sources|javadoc|slim)).jar
             Fabric/build/libs/*-@(sources|javadoc).jar
       - name: Notify Discord
         uses: Up-Mods/action-discord-release@main
         with:
-          version: ${{ github.ref_name }}
+          version: ${{ env.TAG }}
           webhook-url: ${{ secrets.ANNOUNCEMENT_WEBHOOK_URL }}
-          curseforge-project-id: ${{ steps.publish_quilt.outputs.curseforge-id }}
-          modrinth-project-id: ${{ steps.publish_quilt.outputs.modrinth-id }}
+          curseforge-project-id: ${{ steps.publish_fabric.outputs.curseforge-id }}
+          modrinth-project-id: ${{ steps.publish_fabric.outputs.modrinth-id }}
           thumbnail-url: https://mod-assets.upcraft.dev/promo/icarus/icon_128x.png
